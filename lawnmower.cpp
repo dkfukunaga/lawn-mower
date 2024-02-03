@@ -35,7 +35,8 @@ Square peek(Field&);
 void forward(Field&);
 void turnLeft(Field&);
 void turnRight(Field&);
-
+void hideCursor();
+void showCursor();
 
 
 int main() {
@@ -58,7 +59,8 @@ int main() {
     initLawn(lawn);
 
     // make cursor invisible
-    cout << "\033[?25l";
+    // cout << "\033[?25l";
+    hideCursor();
     
     // clear screen and add 2 lines of top padding
     system("cls");
@@ -109,7 +111,8 @@ int main() {
     // move cursor to bottom
     cout << "\033[" << LAWN_HEIGHT + 5 << ";1H";
     // make cursor visible
-    cout << "\033[?25h";
+    // cout << "\033[?25h";
+    showCursor();
 
     return 0;
 }
@@ -218,16 +221,16 @@ string squareString(Square &square) {
 
     switch (square) {
         case Square::red:
-            str = "\033[37;41m# \033[0m";
+            str = "\033[37;41m  \033[0m";
             break;
         case Square::green:
-            str = "\033[32m\",\033[0m";
+            str = "\033[92;42m\",\033[0m";
             break;
         case Square::visited:
-            str = "\033[92m .\033[0m";
+            str = "\033[92;42m .\033[0m";
             break;
         default: // should never happen, but just in case
-            str = "\033[33m? \033[0m";
+            str = "\033[33;42m? \033[0m";
             break;
         }
 
@@ -240,19 +243,19 @@ string mowerString(Field &lawn) {
 
     switch (lawn.mower.facing) {
         case Direction::north:
-            str = "\033[34m^\033[1C\033[0m";
+            str = "\033[30;42m^\033[1C\033[0m";
             break;
         case Direction::east:
-            str = "\033[34m>\033[1C\033[0m";
+            str = "\033[30;42m>\033[1C\033[0m";
             break;
         case Direction::south:
-            str = "\033[34mv\033[1C\033[0m";
+            str = "\033[30;42mv\033[1C\033[0m";
             break;
         case Direction::west:
-            str = "\033[34m<\033[1C\033[0m";
+            str = "\033[30;42m<\033[1C\033[0m";
             break;
         default: // should never happen, but just in case
-            str = "\033[33m@\033[1C\033[0m";
+            str = "\033[33;42m@\033[1C\033[0m";
             break;
     }
 
@@ -365,4 +368,20 @@ void turnRight(Field &lawn) {
 
     // update mower position
     updateMowerPos(lawn);
+}
+
+void hideCursor() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+    cursorInfo.bVisible = false; // Set cursor visibility to false
+    SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+}
+
+void showCursor() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+    cursorInfo.bVisible = true; // Set cursor visibility to true
+    SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
