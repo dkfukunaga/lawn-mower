@@ -22,11 +22,17 @@ struct Field {
 };
 
 void initLawn(Field&);
-char squareChar(Square&);
-char mowerChar(Field&);
+string squareString(Square&);
+string mowerString(Field&);
 void printLawn(Field&);
+void moveTo(Field&, int, int);
+void savePos();
+void restorePos();
+void updateMowerPos(Field&);
+string getFacing(Field&);
+string getPos(Field&);
 Square peek(Field&);
-int forward(Field&);
+void forward(Field&);
 void turnLeft(Field&);
 void turnRight(Field&);
 
@@ -40,53 +46,69 @@ int main() {
     Direction initial_facing = static_cast<Direction>(rand() % 4);
     Mower mower = {initial_facing, 1, 1};
     
-    // randomize lawn size of 5 - 20 squares, plus a 1 Square border of walls
+    // randomize lawn height and width of 5 - 20 Squares, plus a 1 Square border of walls
     srand(time(0));
     const int LAWN_HEIGHT = rand() % 15 + 7;
     const int LAWN_WIDTH = rand() % 15 + 7;
 
-    // const int LAWN_HEIGHT = 7;
-    // const int LAWN_WIDTH = 7;
-
-    // declare lawn array
+    // declare lawn
     Field lawn = {LAWN_HEIGHT, LAWN_WIDTH, mower};
 
     // initialize lawn with walls all along the border and grass in the interior
     initLawn(lawn);
 
+    // make cursor invisible
     cout << "\033[?25l";
     
+    // clear screen and add 2 lines of top padding
     system("cls");
     cout << "\n" << endl;
     printLawn(lawn);
 
     /*
      * TODO :
-     *   - add mower position and facing below field
-     *   - implement delay for forward function
      *   - implement lawn mower algorithm
      *   - implement keyboard controls and menu select
      */
     
 
+    forward(lawn);
+    forward(lawn);
+    turnLeft(lawn);
+    forward(lawn);
+    forward(lawn);
+    turnLeft(lawn);
+    forward(lawn);
+    forward(lawn);
+    turnLeft(lawn);
+    forward(lawn);
+    forward(lawn);
+    turnLeft(lawn);
+    forward(lawn);
+    forward(lawn);
+    turnLeft(lawn);
+    forward(lawn);
+    forward(lawn);
 
     forward(lawn);
     forward(lawn);
+    turnRight(lawn);
     forward(lawn);
     forward(lawn);
+    turnRight(lawn);
     forward(lawn);
     forward(lawn);
-
-    // cout << endl << endl << endl;
-    // system("CLS");
-    // printLawn(lawn);
-    
-    // cout << "\033[2;3H" << "@";
-    // int n = LAWN_HEIGHT - 1;
-    // cout << "\033[" << n << "E";
+    turnRight(lawn);
+    forward(lawn);
+    forward(lawn);
+    turnRight(lawn);
+    forward(lawn);
+    forward(lawn);
+    turnRight(lawn);
 
     // move cursor to bottom
     cout << "\033[" << LAWN_HEIGHT + 5 << ";1H";
+    // make cursor visible
     cout << "\033[?25h";
 
     return 0;
@@ -101,7 +123,7 @@ void initLawn(Field &lawn) {
         lawn.field[i][0] = Square::red;
         for (int j = 1; j < lawn.width - 1; j++) {
             if ((i == 0) || (i == (lawn.height - 1))) {
-                // set Direction::north:and south walls as red
+                // set north and south walls as red
                 lawn.field[i][j] = Square::red;
             } else {
                 // grassy interior
@@ -119,77 +141,122 @@ void initLawn(Field &lawn) {
 
 void printLawn(Field &lawn) {
 
-    char sq;
+    string str;
 
-    for (int i =  lawn.height - 1; i >= 0; i--) {
-
+    for (int i = lawn.height - 1; i >= 0; i--) {
+        // left padding
         cout << "    ";
 
         for (int j = 0; j < lawn.width; j++) {
             Square current_square = lawn.field[i][j];
             if ((i == lawn.mower.y) && (j == lawn.mower.x)) {
-                sq = mowerChar(lawn);
+                str = mowerString(lawn);
             } else {
-                sq = squareChar(current_square);
+                str = squareString(current_square);
             }
             
-            cout << sq << " ";
+            cout << str;
         }
         cout << endl;
     }
-    cout << endl;
 
+    // print mower position info
+    moveTo(lawn, -2, 0);
+    cout << "Lawn Mower is facing " << getFacing(lawn) << " at " << getPos(lawn) << ".";
     
     // set initial cursor position to lower left
-    cout << "\033[3A" << "\033[6C";
+    moveTo(lawn, 1, 1);
 
 }
 
-char squareChar(Square &square) {
+void moveTo(Field &lawn, int y, int x) {
+    
+    cout << "\033[" << to_string(lawn.height - y + 2) << ";" << to_string(((x + 2) * 2) + 1) << "H";
 
-    char ch;
-
-    switch (square) {
-        case Square::red:
-            ch = '#';
-            break;
-        case Square::green:
-            ch = '"';
-            break;
-        case Square::visited:
-            ch = '.';
-            break;
-        default: // should never happen, but just in case
-            ch = '?';
-            break;
-        }
-
-    return ch;
 }
 
-char mowerChar(Field &lawn) {
+void savePos() { cout << "\033[s"; }
 
-    char ch;
+void restorePos() { cout << "\033[u"; }
+
+void updateMowerPos(Field &lawn) {
+    savePos();
+
+    moveTo(lawn, -2, 11);
+    // note: extra space at end due to variance in facing text length
+    cout << "\b" << getFacing(lawn) << " at " << getPos(lawn) << ". ";
+
+    restorePos();
+}
+
+string getFacing(Field &lawn) {
+    string facing;
 
     switch (lawn.mower.facing) {
         case Direction::north:
-            ch = '^';
+            facing = "north";
             break;
         case Direction::east:
-            ch = '>';
+            facing = "east";
             break;
         case Direction::south:
-            ch = 'v';
+            facing = "south";
             break;
         case Direction::west:
-            ch = '<';
-            break;
-        default: // should never happen, but just in case
-            ch = '@';
+            facing = "west";
             break;
     }
 
-    return ch;
+    return facing;
+}
+
+string getPos(Field &lawn) { return "(" + to_string(lawn.mower.x) + ", " + to_string(lawn.mower.y) + ")"; }
+
+string squareString(Square &square) {
+
+    string str;
+
+    switch (square) {
+        case Square::red:
+            str = "\033[37;41m# \033[0m";
+            break;
+        case Square::green:
+            str = "\033[32m\",\033[0m";
+            break;
+        case Square::visited:
+            str = "\033[92m .\033[0m";
+            break;
+        default: // should never happen, but just in case
+            str = "\033[33m? \033[0m";
+            break;
+        }
+
+    return str;
+}
+
+string mowerString(Field &lawn) {
+
+    string str;
+
+    switch (lawn.mower.facing) {
+        case Direction::north:
+            str = "\033[34m^\033[1C\033[0m";
+            break;
+        case Direction::east:
+            str = "\033[34m>\033[1C\033[0m";
+            break;
+        case Direction::south:
+            str = "\033[34mv\033[1C\033[0m";
+            break;
+        case Direction::west:
+            str = "\033[34m<\033[1C\033[0m";
+            break;
+        default: // should never happen, but just in case
+            str = "\033[33m@\033[1C\033[0m";
+            break;
+    }
+
+    return str;
 }
 
 Square peek(Field &lawn) {
@@ -214,62 +281,88 @@ Square peek(Field &lawn) {
     return next;
 }
 
-// return 1 if successful,
-// return 0 if unsuccessful
-int forward(Field &lawn) {
+void forward(Field &lawn) {
 
     if (peek(lawn) == Square::red) {
         // cannot move onto wall Square
-        return 0;
+        return;
     }
 
     Sleep(250);
 
-    // print lawn square on old mower position
-    cout << squareChar(lawn.field[lawn.mower.y][lawn.mower.x]) << "\b";
+    // print lawn square on old mower position and move cursor back
+    cout << squareString(lawn.field[lawn.mower.y][lawn.mower.x]) << "\b\b";
 
     switch (lawn.mower.facing) {
         case Direction::north:
             lawn.mower.y++;
-            cout << "\033[1A";
+            cout << "\033[1A"; // cursor up 1 line
             break;
         case Direction::east:
             lawn.mower.x++;
-            cout << "\033[2C";
+            cout << "\033[2C"; // cursor forward 2 spaces
             break;
         case Direction::south:
             lawn.mower.y--;
-            cout << "\033[1B";
+            cout << "\033[1B"; // cursor down 1 line
             break;
         case Direction::west:
             lawn.mower.x--;
-            cout << "\033[2D";
+            cout << "\033[2D"; // cursor back 2 spaces
             break;
         default: // should never happen, but just in case
-            return 0;
+            return;
     }
 
     // mark new Square as visited
     lawn.field[lawn.mower.y][lawn.mower.x] = Square::visited;
 
     // print new mower position
-    cout << mowerChar(lawn) << "\b";
+    cout << mowerString(lawn) << "\b\b";
+
+    // update mower position
+    updateMowerPos(lawn);
 
     // return 1 for success
-    return 1;
+    return;
 }
 
 void turnLeft(Field &lawn) {
+
+    Sleep(250);
+
+    /* 
+     * Modulo* on a negative number gives a negative (e.g. (-1) % 4 = (-1)).
+     * Therefore, instead of (temp - 1) to rotate ccw, I am using (temp + 3)
+     * to avoid negative numbers by rotating (4 - 1) cw.
+     * 
+     * in C/C++, % is actually remainder, not modulo.
+     */
+
+    int temp = static_cast<int>(lawn.mower.facing);
+    temp = (temp + 3) % 4;
+
+    lawn.mower.facing = static_cast<Direction>(temp);
+    
+    // print new mower position
+    cout << mowerString(lawn) << "\b\b";
+
+    // update mower position
+    updateMowerPos(lawn);
+}
+
+void turnRight(Field &lawn) {
+
+    Sleep(250);
 
     int temp = static_cast<int>(lawn.mower.facing);
     temp = (temp + 1) % 4;
 
     lawn.mower.facing = static_cast<Direction>(temp);
-}
-void turnRight(Field &lawn) {
+    
+    // print new mower position
+    cout << mowerString(lawn) << "\b\b";
 
-    int temp = static_cast<int>(lawn.mower.facing);
-    temp = (temp - 1) % 4;
-
-    lawn.mower.facing = static_cast<Direction>(temp);
+    // update mower position
+    updateMowerPos(lawn);
 }
