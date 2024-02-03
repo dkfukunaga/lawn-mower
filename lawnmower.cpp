@@ -165,7 +165,7 @@ void printLawn(Field &lawn) {
 
     // print mower position info
     moveTo(lawn, -2, 0);
-    cout << "Lawn Mower is facing " << getFacing(lawn) << " at " << getPos(lawn) << ".";
+    cout << "Lawnmower is facing " << getFacing(lawn) << " at " << getPos(lawn) << ".";
     
     // set initial cursor position to lower left
     moveTo(lawn, 1, 1);
@@ -185,9 +185,9 @@ void restorePos() { cout << "\033[u"; }
 void updateMowerPos(Field &lawn) {
     savePos();
 
-    moveTo(lawn, -2, 11);
+    moveTo(lawn, -2, 10);
     // note: extra space at end due to variance in facing text length
-    cout << "\b" << getFacing(lawn) << " at " << getPos(lawn) << ". ";
+    cout << getFacing(lawn) << " at " << getPos(lawn) << ". ";
 
     restorePos();
 }
@@ -224,7 +224,14 @@ string squareString(Square &square) {
             str = "\033[37;41m  \033[0m";
             break;
         case Square::green:
-            str = "\033[92;42m\",\033[0m";
+            switch (rand() %2) {
+                case 0:
+                    str = "\033[92;42m\",\033[0m";
+                    break;
+                default:
+                    str = "\033[92;42m,\"\033[0m";
+                    break;
+            }
             break;
         case Square::visited:
             str = "\033[92;42m .\033[0m";
