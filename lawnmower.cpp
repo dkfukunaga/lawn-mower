@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <windows.h>
 
 using namespace std;
 
@@ -52,6 +53,8 @@ int main() {
 
     // initialize lawn with walls all along the border and grass in the interior
     initLawn(lawn);
+
+    cout << "\033[?25l";
     
     system("cls");
     cout << "\n" << endl;
@@ -84,6 +87,7 @@ int main() {
 
     // move cursor to bottom
     cout << "\033[" << LAWN_HEIGHT + 5 << ";1H";
+    cout << "\033[?25h";
 
     return 0;
 }
@@ -218,6 +222,8 @@ int forward(Field &lawn) {
         // cannot move onto wall Square
         return 0;
     }
+
+    Sleep(250);
 
     // print lawn square on old mower position
     cout << squareChar(lawn.field[lawn.mower.y][lawn.mower.x]) << "\b";
