@@ -12,6 +12,9 @@ struct Mower {
     Direction facing;
     int x;
     int y;
+    int peeks = 0;
+    int turns = 0;
+    int steps = 0;
 };
 
 struct Field {
@@ -32,7 +35,7 @@ void updateMowerPos(Field&);
 string getFacing(Field&);
 string getPos(Field&);
 Square peek(Field&);
-void forward(Field&);
+int forward(Field&);
 void turnLeft(Field&);
 void turnRight(Field&);
 void hideCursor();
@@ -47,7 +50,7 @@ int main() {
     Direction initial_facing = static_cast<Direction>(rand() % 4);
     Mower mower = {initial_facing, 1, 1};
     
-    // randomize lawn height and width of 5 - 20 Squares, plus a 1 Square border of walls
+    // randomize lawn height and width to 5 - 20 Squares, plus a 1 Square border of walls
     srand(time(0));
     const int LAWN_HEIGHT = rand() % 15 + 7;
     const int LAWN_WIDTH = rand() % 15 + 7;
@@ -67,51 +70,67 @@ int main() {
     cout << "\n" << endl;
     printLawn(lawn);
 
-    /*
-     * TODO :
-     *   - implement lawn mower algorithm
-     *   - implement keyboard controls and menu select
-     */
+    // move cursor to bottom
+    moveTo(lawn, -5, 0);
+    // wait for keypress
+    system("pause");
+    // delete line
+    cout << "\033[" << LAWN_HEIGHT + 6 << ";1H";
+    cout << "\033[J";
+    // move cursor to bottom left square
+    moveTo(lawn, 1, 1);
     
 
-    forward(lawn);
-    forward(lawn);
-    turnLeft(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnLeft(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnLeft(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnLeft(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnLeft(lawn);
-    forward(lawn);
-    forward(lawn);
+    // orient mower west from bottom left corner
+    if (peek(lawn) == Square::green) {
+        turnRight(lawn);
+        if (peek(lawn) != Square::green) {
+            turnLeft(lawn);
+        }
+    } else {
+        do {
+            turnLeft(lawn);
+        } while (peek(lawn) != Square::green);
+    }
 
-    forward(lawn);
-    forward(lawn);
-    turnRight(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnRight(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnRight(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnRight(lawn);
-    forward(lawn);
-    forward(lawn);
-    turnRight(lawn);
+    // move to bottom right corner and find width
+    int counter = 0;
+    while (forward(lawn)) {
+        counter++;
+    }
+    // orient north
+    turnLeft(lawn);
 
+    // main loop
+    while (forward(lawn)) {
+        turnLeft(lawn);
+        for (int i = 0; i < counter; i++) {
+            forward(lawn);
+        }
+        turnRight(lawn);
+        if (forward(lawn)) {
+            turnRight(lawn);
+            for (int i = 0; i < counter; i++) {
+                forward(lawn);
+            }
+            turnLeft(lawn);
+        } else {
+            break;
+        }
+
+    }
+
+
+
+    
     // move cursor to bottom
-    cout << "\033[" << LAWN_HEIGHT + 5 << ";1H";
-    // make cursor visible
-    // cout << "\033[?25h";
+    moveTo(lawn, -5, 0);
+    // wait for keypress
+    system("pause");
+    // delete line
+    moveTo(lawn, -5, 0);
+    cout << "\033[J";
+
     showCursor();
 
     return 0;
@@ -151,24 +170,24 @@ void printLawn(Field &lawn) {
         cout << "    ";
 
         for (int j = 0; j < lawn.width; j++) {
-            Square current_square = lawn.field[i][j];
-            if ((i == lawn.mower.y) && (j == lawn.mower.x)) {
-                str = mowerString(lawn);
-            } else {
-                str = squareString(current_square);
-            }
-            
-            cout << str;
+            cout << squareString(lawn.field[i][j]);
         }
         cout << endl;
     }
 
     // print mower position info
     moveTo(lawn, -2, 0);
-    cout << "Lawnmower is facing " << getFacing(lawn) << " at " << getPos(lawn) << ".";
+    cout << "Lawnmower is facing " << getFacing(lawn) << " at " << getPos(lawn);
+
+    // print step counter
+    moveTo(lawn, -3, 0);
+    cout << "Peeks: " << lawn.mower.peeks << "    Turns: " << lawn.mower.turns << "    Steps: " << lawn.mower.steps;
     
     // set initial cursor position to lower left
     moveTo(lawn, 1, 1);
+
+    // print mower
+    cout << mowerString(lawn) << "\b\b";
 
 }
 
@@ -187,7 +206,21 @@ void updateMowerPos(Field &lawn) {
 
     moveTo(lawn, -2, 10);
     // note: extra space at end due to variance in facing text length
-    cout << getFacing(lawn) << " at " << getPos(lawn) << ". ";
+    cout << getFacing(lawn) << " at " << getPos(lawn) << "  ";
+
+    // print step counter
+    moveTo(lawn, -3, 0);
+    cout << "Peeks: " << lawn.mower.peeks << "  Turns: " << lawn.mower.turns << "  Steps: " << lawn.mower.steps;
+
+    restorePos();
+}
+
+void updateMowerSteps(Field &lawn) {
+    savePos();
+
+    // print step counter
+    moveTo(lawn, -3, 4);
+    cout << lawn.mower.peeks << "\b    Turns: " << lawn.mower.turns << "    Steps: " << lawn.mower.steps;
 
     restorePos();
 }
@@ -226,15 +259,15 @@ string squareString(Square &square) {
         case Square::green:
             switch (rand() %2) {
                 case 0:
-                    str = "\033[92;42m\",\033[0m";
+                    str = "\033[37;42m\",\033[0m";
                     break;
                 default:
-                    str = "\033[92;42m,\"\033[0m";
+                    str = "\033[37;42m,\"\033[0m";
                     break;
             }
             break;
         case Square::visited:
-            str = "\033[92;42m .\033[0m";
+            str = "\033[37;42m .\033[0m";
             break;
         default: // should never happen, but just in case
             str = "\033[33;42m? \033[0m";
@@ -271,8 +304,11 @@ string mowerString(Field &lawn) {
 
 Square peek(Field &lawn) {
 
+    lawn.mower.peeks++;
+
     Square next;
 
+    // no bounds checking because lawnmower will never be on a wall square
     switch (lawn.mower.facing) {
         case Direction::north:
             next = lawn.field[lawn.mower.y + 1][lawn.mower.x];
@@ -288,17 +324,26 @@ Square peek(Field &lawn) {
             break;
     }
 
+    updateMowerSteps(lawn);
+
     return next;
 }
 
-void forward(Field &lawn) {
+int forward(Field &lawn) {
+
+    Sleep(100);
+    lawn.mower.steps++;
 
     if (peek(lawn) == Square::red) {
+        // shouldn't count towards peek actions
+        lawn.mower.peeks--;
         // cannot move onto wall Square
-        return;
+        updateMowerSteps(lawn);
+        return 0;
+    } else {
+        // shouldn't count towards peek actions
+        lawn.mower.peeks--;
     }
-
-    Sleep(250);
 
     // print lawn square on old mower position and move cursor back
     cout << squareString(lawn.field[lawn.mower.y][lawn.mower.x]) << "\b\b";
@@ -321,25 +366,30 @@ void forward(Field &lawn) {
             cout << "\033[2D"; // cursor back 2 spaces
             break;
         default: // should never happen, but just in case
-            return;
+            return 0;
     }
 
     // mark new Square as visited
     lawn.field[lawn.mower.y][lawn.mower.x] = Square::visited;
+
+    // print new visited lawn square
+    cout << squareString(lawn.field[lawn.mower.y][lawn.mower.x]) << "\b\b";
 
     // print new mower position
     cout << mowerString(lawn) << "\b\b";
 
     // update mower position
     updateMowerPos(lawn);
+    // update mower steps
+    updateMowerSteps(lawn);
 
-    // return 1 for success
-    return;
+    return 1;
 }
 
 void turnLeft(Field &lawn) {
 
-    Sleep(250);
+    Sleep(100);
+    lawn.mower.turns++;
 
     /* 
      * Modulo* on a negative number gives a negative (e.g. (-1) % 4 = (-1)).
@@ -359,11 +409,14 @@ void turnLeft(Field &lawn) {
 
     // update mower position
     updateMowerPos(lawn);
+    // update mower steps
+    updateMowerSteps(lawn);
 }
 
 void turnRight(Field &lawn) {
 
-    Sleep(250);
+    Sleep(100);
+    lawn.mower.turns++;
 
     int temp = static_cast<int>(lawn.mower.facing);
     temp = (temp + 1) % 4;
@@ -375,7 +428,11 @@ void turnRight(Field &lawn) {
 
     // update mower position
     updateMowerPos(lawn);
+    // update mower steps
+    updateMowerSteps(lawn);
 }
+
+// got code to hide/show cursor in cmd.exe on Windows from chatGPT
 
 void hideCursor() {
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
