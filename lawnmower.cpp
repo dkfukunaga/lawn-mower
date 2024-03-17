@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// update
+
 enum class Direction { north, east, south, west };
 
 enum class Square { red, green, visited };
