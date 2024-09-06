@@ -2,13 +2,19 @@
 
 #include "lawn.h"
 
+Lawn::Lawn() {
+    srand(time(NULL));
+
+    Lawn(rand() % 15 + 7, rand() % 15 + 7);
+}
+
 Square Lawn::getSquare(int x, int y) {
     return _field[(y * _width) + x - 2];
 }
 
-bool Lawn::mowSquare(int x, int y) {
-    if (_field[(y * _width) + x - 2] != Square::wall) {
-        _field[(y * _width) + x - 2] = Square::mowed;
+bool Lawn::mowSquare(Position position) {
+    if (_field[(position.y * _width) + position.x - 2] != Square::wall) {
+        _field[(position.y * _width) + position.x - 2] = Square::mowed;
         return true;
     }
     return false;       // can't mow the wall

@@ -1,12 +1,9 @@
 #ifndef LAWN_H
 #define LAWN_H
 
-
-enum class Square {
-    wall,       // red
-    unmowed,    // green
-    mowed       // green
-};
+#include "common.h"
+#include <random>
+#include <time.h>
 
 
 class Lawn {
@@ -18,11 +15,12 @@ public:
         _field = new Square[width*height];
         initField();
     };
+    Lawn();
     // destructor
     ~Lawn() { delete _field; };
     // public functions
     Square  getSquare(int x, int y);
-    bool    mowSquare(int x, int y);
+    bool    mowSquare(Position position);
 private:
     // private data
     int     _width;
