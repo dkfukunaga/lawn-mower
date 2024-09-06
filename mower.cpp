@@ -4,9 +4,9 @@
 #include "mower.h"
 
 
-Mower::Mower() {
-    // create a new lawn
-    _lawn = new Lawn();
+Mower::Mower(Lawn *lawn) {
+    // set pointer to lawn
+    _lawn = lawn;
 
     // set a random facing
     srand(time(NULL));
@@ -18,8 +18,8 @@ Mower::Mower() {
     // set stats to 0
     _peeks = 0;
     _turns = 0;
-    _steps = 0;}
-
+    _steps = 0;
+}
 
 Direction Mower::getFacing() { return _facing; }
 
@@ -30,6 +30,8 @@ int Mower::getPeeks() { return _peeks; }
 int Mower::getTurns() { return _turns; }
 
 int Mower::getSteps() { return _steps; }
+
+Lawn* Mower::getLawn() { return _lawn; }
 
 char Mower::getMowerChar() {
     switch (_facing) {
@@ -52,6 +54,8 @@ char Mower::getMowerChar() {
     }
 }
 
+void Mower::setLawn(Lawn *lawn) { _lawn = lawn; }
+
 void Mower::turnLeft() {
     int temp = static_cast<int>(_facing);
     temp = (temp + 3) % 4;
@@ -71,39 +75,48 @@ void Mower::turnRight() {
 }
 
 Square Mower::peek() {
-
+    _peeks++;
+    return checkSquare();
 }
 
 bool Mower::forward() {
 
-}
+    _steps++;
 
-
-bool Mower::canMove() {
+    if (checkSquare() == Square::wall)
+        return false;
+    
     switch (_facing) {
     case Direction::north:
-        if (_lawn->getSquare(_position.x, _position.y + 1) == Square::wall)
-            return false;
-        return true;
+        _position = {_position.x, _position.y + 1};
         break;
     case Direction::west:
-        if (_lawn->getSquare(_position.x - 1, _position.y) == Square::wall)
-            return false;
-        return true;
+        _position = {_position.x - 1, _position.y};
         break;
     case Direction::south:
-        if (_lawn->getSquare(_position.x, _position.y - 1) == Square::wall)
-            return false;
-        return true;
+        _position = {_position.x, _position.y - 1};
         break;
     case Direction::east:
-        if (_lawn->getSquare(_position.x + 1, _position.y) == Square::wall)
-            return false;
-        return true;
+        _position = {_position.x + 1, _position.y};
         break;
-    
-    default:
-        return false;
+    }
+    return true;
+}
+
+// return the square in front of the mower
+Square Mower::checkSquare() {
+    switch (_facing) {
+    case Direction::north:
+        return _lawn->getSquare(_position.x, _position.y + 1);
+        break;
+    case Direction::west:
+        return _lawn->getSquare(_position.x - 1, _position.y);
+        break;
+    case Direction::south:
+        return _lawn->getSquare(_position.x, _position.y - 1);
+        break;
+    case Direction::east:
+        return _lawn->getSquare(_position.x + 1, _position.y);
         break;
     }
 }

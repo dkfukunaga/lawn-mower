@@ -12,14 +12,22 @@
 
 class Mower {
 public:
-    Mower();
+    // constructor
+    Mower(Lawn *lawn);
 
+    // getters
     Direction getFacing();
     Position getPosition();
     int getPeeks();
     int getTurns();
     int getSteps();
+    Lawn* getLawn();
     char getMowerChar();
+
+    // setter
+    void setLawn(Lawn *lawn);
+
+    // mower actions
     void turnLeft();
     void turnRight();
     Square peek();
@@ -32,7 +40,7 @@ private:
     int _turns;
     int _steps;
 
-    bool canMove();
+    Square checkSquare();
 };
 
 
