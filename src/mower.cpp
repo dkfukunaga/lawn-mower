@@ -119,5 +119,6 @@ Square Mower::checkSquare() {
         return _lawn->getSquare(_position.x + 1, _position.y);
         break;
     }
+    return Square::error;
 }
 
