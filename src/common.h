@@ -13,6 +13,7 @@ enum class Direction {
 
 
 enum class Square {
+    error,      // invalid square
     wall,       // red
     unmowed,    // green
     mowed       // green
