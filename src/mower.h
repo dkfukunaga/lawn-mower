@@ -18,11 +18,11 @@ public:
     // getters
     Direction getFacing();
     Position getPosition();
+    Lawn* getLawn();
+    char getMowerChar();
     int getPeeks();
     int getTurns();
     int getSteps();
-    Lawn* getLawn();
-    char getMowerChar();
 
     // setter
     void setLawn(Lawn *lawn);
