@@ -40,7 +40,7 @@ private:
     int _turns;
     int _steps;
 
-    Square checkSquare();
+    Square checkNextSquare();
 };
 
 

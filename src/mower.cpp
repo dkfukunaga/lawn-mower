@@ -76,14 +76,14 @@ void Mower::turnRight() {
 
 Square Mower::peek() {
     _peeks++;
-    return checkSquare();
+    return checkNextSquare();
 }
 
 bool Mower::forward() {
 
     _steps++;
 
-    if (checkSquare() == Square::wall)
+    if (checkNextSquare() == Square::wall)
         return false;
     
     switch (_facing) {
@@ -104,7 +104,7 @@ bool Mower::forward() {
 }
 
 // return the square in front of the mower
-Square Mower::checkSquare() {
+Square Mower::checkNextSquare() {
     switch (_facing) {
     case Direction::north:
         return _lawn->getSquare(_position.north());
