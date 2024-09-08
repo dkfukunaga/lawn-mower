@@ -8,8 +8,8 @@ Lawn::Lawn() {
     Lawn(rand() % 15 + 7, rand() % 15 + 7);
 }
 
-Square Lawn::getSquare(int x, int y) {
-    return _field[(y * _width) + x - 2];
+Square Lawn::getSquare(Position position) {
+    return _field[(position.y * _width) + position.x - 2];
 }
 
 bool Lawn::mowSquare(Position position) {

@@ -23,6 +23,14 @@ enum class Square {
 struct Position {
     int     x;
     int     y;
+<<<<<<< HEAD
+=======
+
+    Position north() { return Position{x, y + 1}; }
+    Position west() { return Position{x - 1, y}; }
+    Position south() { return Position{x, y + 1}; }
+    Position east() { return Position{x + 1, y}; }
+>>>>>>> refactor/lawn
 };
 
 

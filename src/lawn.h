@@ -19,7 +19,7 @@ public:
     // destructor
     ~Lawn() { delete _field; };
     // public functions
-    Square  getSquare(int x, int y);
+    Square  getSquare(Position position);
     bool    mowSquare(Position position);
 private:
     // private data
