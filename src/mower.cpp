@@ -25,12 +25,6 @@ Direction Mower::getFacing() { return _facing; }
 
 Position Mower::getPosition() { return _position; }
 
-int Mower::getPeeks() { return _peeks; }
-
-int Mower::getTurns() { return _turns; }
-
-int Mower::getSteps() { return _steps; }
-
 Lawn* Mower::getLawn() { return _lawn; }
 
 char Mower::getMowerChar() {
@@ -53,6 +47,12 @@ char Mower::getMowerChar() {
         break;
     }
 }
+
+int Mower::getPeeks() { return _peeks; }
+
+int Mower::getTurns() { return _turns; }
+
+int Mower::getSteps() { return _steps; }
 
 void Mower::setLawn(Lawn *lawn) { _lawn = lawn; }
 
