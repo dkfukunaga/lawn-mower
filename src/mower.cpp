@@ -88,16 +88,16 @@ bool Mower::forward() {
     
     switch (_facing) {
     case Direction::north:
-        _position = {_position.x, _position.y + 1};
+        _position = _position.north();
         break;
     case Direction::west:
-        _position = {_position.x - 1, _position.y};
+        _position = _position.west();
         break;
     case Direction::south:
-        _position = {_position.x, _position.y - 1};
+        _position = _position.south();
         break;
     case Direction::east:
-        _position = {_position.x + 1, _position.y};
+        _position = _position.east();
         break;
     }
     return true;
@@ -107,16 +107,16 @@ bool Mower::forward() {
 Square Mower::checkSquare() {
     switch (_facing) {
     case Direction::north:
-        return _lawn->getSquare(_position.x, _position.y + 1);
+        return _lawn->getSquare(_position.north());
         break;
     case Direction::west:
-        return _lawn->getSquare(_position.x - 1, _position.y);
+        return _lawn->getSquare(_position.west());
         break;
     case Direction::south:
-        return _lawn->getSquare(_position.x, _position.y - 1);
+        return _lawn->getSquare(_position.south());
         break;
     case Direction::east:
-        return _lawn->getSquare(_position.x + 1, _position.y);
+        return _lawn->getSquare(_position.east());
         break;
     }
     return Square::error;
