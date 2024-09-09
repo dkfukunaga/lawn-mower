@@ -2,16 +2,21 @@
 
 #include "lawn.h"
 
+// Construct new Lawn object with randomized width and height
+// currently set to 15 ~ 22.
 Lawn::Lawn() {
     srand(time(NULL));
 
     Lawn(rand() % 15 + 7, rand() % 15 + 7);
 }
 
+// Return Square at position
 Square Lawn::getSquare(Position position) {
     return _field[(position.y * _width) + position.x - 2];
 }
 
+// Cause an unmowed Square at position to become mowed
+// Ignores wall Squares
 bool Lawn::mowSquare(Position position) {
     if (_field[(position.y * _width) + position.x - 2] != Square::wall) {
         _field[(position.y * _width) + position.x - 2] = Square::mowed;
@@ -20,6 +25,8 @@ bool Lawn::mowSquare(Position position) {
     return false;       // can't mow the wall
 }
 
+// Initialize Lawn with a wall all around the border and
+// unmowed Squares everywhere else
 void Lawn::initField() {
     // int x = 0;
     // int y = 0;
@@ -34,3 +41,9 @@ void Lawn::initField() {
         }
     }
 }
+
+
+// TODO:
+// add support for specific lawn size,
+//   and/or min/max range for randomization
+// override bracket operators
