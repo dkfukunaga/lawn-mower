@@ -4,11 +4,18 @@
 #include <random>
 #include <time.h>
 
+// Construct new Lawn object with width and height specified
+Lawn::Lawn(int width, int height) {
+        // create a field matrix as an array
+        _field = new Square[width*height];
+        // initialize field
+        initField();
+    };
+
 // Construct new Lawn object with randomized width and height
-// currently set to 15 ~ 22.
+// currently set to 7 ~ 22.
 Lawn::Lawn() {
     srand(time(NULL));
-
     Lawn(rand() % 15 + 7, rand() % 15 + 7);
 }
 
@@ -30,8 +37,6 @@ bool Lawn::mowSquare(Position position) {
 // Initialize Lawn with a wall all around the border and
 // unmowed Squares everywhere else
 void Lawn::initField() {
-    // int x = 0;
-    // int y = 0;
 
     // loop through rows
     for (int y = 0; y < _height; y++) {
@@ -43,8 +48,8 @@ void Lawn::initField() {
                 _field[(y * _width) + x] == Square::wall;
             else
                 _field[(y * _width) + x] == Square::unmowed;
-        }
-    }
+        } // end column loop
+    } // end row loop
 }
 
 

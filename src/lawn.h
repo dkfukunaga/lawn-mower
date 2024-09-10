@@ -10,10 +10,7 @@ class Lawn {
 public:
     Lawn(int width, int height):
         _width(width),
-        _height(height) {
-        _field = new Square[width*height];
-        initField();
-    };
+        _height(height) { };
     Lawn();
     ~Lawn() { delete _field; };
 
