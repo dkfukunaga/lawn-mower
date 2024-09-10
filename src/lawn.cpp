@@ -1,6 +1,8 @@
 
 
 #include "lawn.h"
+#include <random>
+#include <time.h>
 
 // Construct new Lawn object with randomized width and height
 // currently set to 15 ~ 22.
@@ -31,8 +33,11 @@ void Lawn::initField() {
     // int x = 0;
     // int y = 0;
 
+    // loop through rows
     for (int y = 0; y < _height; y++) {
+        // loop through columns
         for (int x = 0; x < _width; x++) {
+            // calculate index from x,y
             if ((y == 0 || y == _height - 1) || 
                 (x == 0 || x == _width - 1))
                 _field[(y * _width) + x] == Square::wall;
