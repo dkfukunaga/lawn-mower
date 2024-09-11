@@ -41,3 +41,20 @@ TEST_CASE("Test Lawn object") {
         CHECK_FALSE(test_lawn.getSquare(Position{9,9}) == Square::mowed);
     }
 }
+
+TEST_CASE("Test lawn with random size") {
+    // Lawn *test_lawn = new Lawn();
+    Lawn test_lawn;
+    int width = test_lawn.getWidth() - 1;
+    int height = test_lawn.getHeight() - 1;
+
+    CHECK(test_lawn.getSquare(Position{0, 0}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{0, height / 2}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{0, height}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{width / 2, 0}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{width / 2, height / 2}) == Square::unmowed);
+    CHECK(test_lawn.getSquare(Position{width / 2, height}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{width,0}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{width, height / 2}) == Square::wall);
+    CHECK(test_lawn.getSquare(Position{width, height}) == Square::wall);
+}

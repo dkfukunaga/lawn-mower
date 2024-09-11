@@ -9,7 +9,7 @@ Lawn::Lawn(int width, int height):
     _width(width),
     _height(height)  {
     // create a field matrix as an array
-    _field = new Square[width * height];
+    _field = new Square[_width * _height];
     // initialize field
     initField();
 };
@@ -17,9 +17,22 @@ Lawn::Lawn(int width, int height):
 // Construct new Lawn object with randomized width and height
 // currently set to 7 ~ 22.
 Lawn::Lawn() {
+    // set width and height to random values from 7 ~ 22
     srand(time(NULL));
-    Lawn(rand() % 15 + 7, rand() % 15 + 7);
+    _width = rand() % 15 + 7;
+    _height = rand() % 15 + 7;
+
+    // create a field matrix as an array
+    _field = new Square[_width * _height];
+    // initialize field
+    initField();
 }
+
+// Return lawn width
+int Lawn::getWidth() { return _width; }
+
+// Return lawn height
+int Lawn::getHeight() { return _height; }
 
 // Return Square at position
 Square Lawn::getSquare(Position position) {
