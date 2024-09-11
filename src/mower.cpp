@@ -15,6 +15,9 @@ Mower::Mower(Lawn *lawn) {
     // set initial position lower left corner of grass
     _position = {1,1};
 
+    // mow current position
+    _lawn->mowSquare(_position);
+
     // set stats to 0
     _peeks = 0;
     _turns = 0;
@@ -32,6 +35,9 @@ Mower::Mower() {
 
     // set initial position lower left corner of grass
     _position = {1,1};
+
+    // mow current position
+    _lawn->mowSquare(_position);
 
     // set stats to 0
     _peeks = 0;
@@ -127,6 +133,7 @@ bool Mower::forward() {
     if (checkNextSquare() == Square::wall)
         return false;
     
+    // change position
     switch (_facing) {
     case Direction::north:
         _position = _position.north();
@@ -141,6 +148,10 @@ bool Mower::forward() {
         _position = _position.east();
         break;
     }
+
+    // mow new position
+    _lawn->mowSquare(_position);
+    
     return true;
 }
 
