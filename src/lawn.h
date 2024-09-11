@@ -8,9 +8,7 @@
 // inside the border
 class Lawn {
 public:
-    Lawn(int width, int height):
-        _width(width),
-        _height(height) { };
+    Lawn(int width, int height);
     Lawn();
     ~Lawn() { delete _field; };
 
