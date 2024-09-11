@@ -3,12 +3,6 @@
 
 #include "common.h"
 
-enum class Square {
-    wall,       // red
-    unmowed,    // green
-    mowed       // green
-};
-
 // A rectangle of Squares with a one square wide border
 // of wall Squares and either unmowed or mowed Squares
 // inside the border

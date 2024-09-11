@@ -13,7 +13,7 @@ Mower::Mower(Lawn *lawn) {
     _facing = static_cast<Direction>(rand() % 4);
 
     // set initial position lower left corner of grass
-    _position = {1,1};
+    _position = Position(1, 1);
 
     // mow current position
     _lawn->mowSquare(_position);
@@ -34,7 +34,7 @@ Mower::Mower() {
     _facing = static_cast<Direction>(rand() % 4);
 
     // set initial position lower left corner of grass
-    _position = {1,1};
+    _position = Position(1, 1);
 
     // mow current position
     _lawn->mowSquare(_position);

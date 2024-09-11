@@ -1,5 +1,5 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+
+#include "tester.h"
 #include "..\src\lawn.h"
 
 
