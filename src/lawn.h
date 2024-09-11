@@ -1,35 +1,24 @@
 #ifndef LAWN_H
 #define LAWN_H
 
+#include "common.h"
 
-enum class Square {
-    wall,       // red
-    unmowed,    // green
-    mowed       // green
-};
-
-
+// A rectangle of Squares with a one square wide border
+// of wall Squares and either unmowed or mowed Squares
+// inside the border
 class Lawn {
 public:
-    // constructor
-    Lawn(int width, int height):
-        _width(width),
-        _height(height) {
-        _field = new Square[width*height];
-        initField();
-    };
-    // destructor
+    Lawn(int width, int height);
+    Lawn();
     ~Lawn() { delete _field; };
-    // public functions
-    Square  getSquare(int x, int y);
-    bool    mowSquare(int x, int y);
+    
+    Square  getSquare(Position position);
+    bool    mowSquare(Position position);
 private:
-    // private data
     int     _width;
     int     _height;
     Square* _field;
 
-    // helper functions
     void    initField();
 };
 
