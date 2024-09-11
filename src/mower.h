@@ -12,10 +12,9 @@
 
 class Mower {
 public:
-    // constructor
     Mower(Lawn *lawn);
+    Mower();
 
-    // getters
     Direction getFacing();
     Position getPosition();
     Lawn* getLawn();
@@ -24,10 +23,8 @@ public:
     int getTurns();
     int getSteps();
 
-    // setter
     void setLawn(Lawn *lawn);
 
-    // mower actions
     void turnLeft();
     void turnRight();
     Square peek();
