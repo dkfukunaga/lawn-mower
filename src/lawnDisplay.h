@@ -28,6 +28,8 @@ public:
     void        draw();
     bool        drawSquare(LawnPos position);
 private:
+    static const std::string _title;
+
     Mower*      _mower;
     Position    _cursor_position;               // absolute position of cursor
     int         _margin_offsets[2]   = {8, 4};  // offsets relative to left, top of console default {8, 4}

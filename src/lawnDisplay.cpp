@@ -1,6 +1,10 @@
 
 #include "lawnDisplay.h"
 
+/***** STATIC CONSTANTS *****/
+
+const std::string LawnDisplay::_title = "Lawn Mower Simulation";
+
 /***** CONSTRUCTORS *****/
 
 // default constructor
