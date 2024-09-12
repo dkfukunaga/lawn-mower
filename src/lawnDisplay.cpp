@@ -33,7 +33,7 @@ int LawnDisplay::getMarginSize() { return _margin_size; }
 
 void LawnDisplay::setMarginSize(int margin_size) {
     _margin_size = margin_size;
-    _margin = std::string(_margin_size, ' ');
+    _margin = std::string(_margin_size * 2, ' ');
 }
 
 /***** PUBLIC FUNCTIONS *****/
