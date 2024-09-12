@@ -1,7 +1,5 @@
 Lawn:
-    - reverse x,y coordinates so that 0,0 is lower left corner
-        (should this be part of the Position struct?)
-        (should the Position struct be a class?)
+    x reverse x,y coordinates so that 0,0 is lower left corner
     - add min/max range constructor
     - override bracket operator
 

@@ -34,11 +34,11 @@ struct Position {
         y(1) { };
 
     // return Square to the north
-    Position north() { return Position{x, y - 1}; }
+    Position north() { return Position{x, y + 1}; }
     // return Square to the west
     Position west() { return Position{x - 1, y}; }
     // return Square to the south
-    Position south() { return Position{x, y + 1}; }
+    Position south() { return Position{x, y - 1}; }
     // return Square to the east
     Position east() { return Position{x + 1, y}; }
 };
