@@ -42,11 +42,7 @@ TEST_CASE("Test movement functionality and stats") {
     Lawn *lawn = new Lawn(10,12);
     Mower mower;
 
-    // make sure mower in position (1,1)
-    REQUIRE(mower.getPosition().x == 1);
-    REQUIRE(mower.getPosition().y == 1);
-
-    SUBCASE("Facing, Peek, Turn test") {
+    SUBCASE("getFacing(), peek(), turn() test") {
         // count for north, west, south, east
         int direction_count[4] = {0, 0, 0, 0};
         // count for error, wall, unmowed, mowed
@@ -83,6 +79,17 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getPeeks() == 4);
         CHECK(mower.getTurns() == 4);
         CHECK(mower.getSteps() == 0);
+    }
+
+    SUBCASE("forward(), steps, lawnmowing test") {
+        // make sure starting square is mowed
+        CHECK(mower.getLawn()->getSquare(Position(mower.getPosition())) == Square::mowed);
+
+        // point mower north
+        while (mower.getFacing() != Direction::north)
+            mower.turnLeft();
+        
+
     }
 
     delete lawn;

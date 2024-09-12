@@ -51,6 +51,9 @@ Direction Mower::getFacing() { return _facing; }
 // return coordinates of mower on lawn
 Position Mower::getPosition() { return _position; }
 
+// return current square
+Square Mower::getSquare() { return _lawn->getSquare(getPosition()); }
+
 // returns pointer to the current lawn
 Lawn* Mower::getLawn() { return _lawn; }
 
