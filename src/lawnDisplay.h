@@ -26,7 +26,7 @@ public:
     void        setStatsOffsets(int x_offset, int y_offset);
 
     void        draw();
-    bool        drawSquare(LawnPos position);
+    void        moveMower(Direction direction);
 private:
     static const std::string _title;
 
@@ -38,7 +38,7 @@ private:
     int         _stats_offsets[2]    = {0, 3};  // offsets relative to margin, lawn default {0, 3}
     int         _square_dimension[2] = {2, 1};  // square size (2 chars) default {2, 1}
 
-    bool        drawMower();
+    void        drawSquare(LawnPos position);
     void        drawStats();
     void        updateMowerPosition();
     void        updateMowerPeeks();
