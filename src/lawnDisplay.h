@@ -10,16 +10,23 @@
 
 class LawnDisplay {
 public:
-    LawnDisplay();
-    LawnDisplay(Mower mower);
-    LawnDisplay(Mower mower, Lawn _lawn);
+    LawnDisplay(int margin_size);
+    LawnDisplay(Mower *mower, int margin_size);
+    LawnDisplay(Lawn *lawn, int margin_size);
 
-    void        fullRefresh();
-    bool        refreshSquare(Position position);
+    int         getMarginSize();
+    void        setMarginSize(int margin_size);
+
+    void        draw();
+    bool        drawSquare(Position position);
 private:
-    Mower       _mower;
+    Mower*      _mower;
     Lawn*       _lawn;
     Position    _cursor_position;
+    int         _margin_size;
+    std::string _margin;
+    
+    static const int _default_margin_size;
 
     bool        drawSquare(Position position);
     bool        drawMower();

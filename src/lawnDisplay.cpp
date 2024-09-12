@@ -1,9 +1,40 @@
 
 #include "lawnDisplay.h"
 
+/***** STATIC CONSTANTS *****/
+
+const int LawnDisplay::_default_margin_size = 4;
+
 /***** CONSTRUCTORS *****/
 
+LawnDisplay::LawnDisplay(int margin_size = _default_margin_size) {
+    _mower = new Mower();
+    _lawn = _mower->getLawn();
+    setMarginSize(margin_size);
+}
 
+LawnDisplay::LawnDisplay(Mower *mower, int margin_size = _default_margin_size) {
+    _mower = mower;
+    _lawn = _mower->getLawn();
+    setMarginSize(margin_size);
+}
+
+LawnDisplay::LawnDisplay(Lawn *lawn, int margin_size = _default_margin_size) {
+    _lawn = lawn;
+    _mower = new Mower(_lawn);
+    setMarginSize(margin_size);
+}
+
+/***** GETTERS/ACCESSORS *****/
+
+int LawnDisplay::getMarginSize() { return _margin_size; }
+
+/***** SETTERS/MUTATORS *****/
+
+void LawnDisplay::setMarginSize(int margin_size) {
+    _margin_size = margin_size;
+    _margin = std::string(_margin_size, ' ');
+}
 
 /***** PUBLIC FUNCTIONS *****/
 
