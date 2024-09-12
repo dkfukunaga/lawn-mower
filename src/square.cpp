@@ -6,23 +6,30 @@
 const std::string Square::_error_string = "??";
 const std::string Square::_wall_string = "##";  // will be blank when colorization implemented
 const std::string Square::_unmowed_string[2] = {"\",", ",\""};  // can be randomized
-const std::string Square::_mowed_string = ". ";
+const std::string Square::_mowed_string = " .";
 
 /***** CONSTRUCTORS *****/
 
 // default constructor
 // defaults to error type
 Square::Square():
-    _type(SquareType::error) { };
+    _type(SquareType::error) {
+    _variant = rand() % 2;
+};
 
 // full constructor
 Square::Square(SquareType type):
-    _type(type) { };
+    _type(type) {
+    _variant = rand() % 2;
+};
     
 /***** GETTERS/ACCESSORS *****/
 
 // returns SquareType
 SquareType Square::getType() { return _type; }
+
+// returns variant type for squres with randomized strings
+int Square::getVariant() { return _variant; }
 
 // returns 2 char ascii string representation of square type
 // error:   "??"
@@ -38,9 +45,7 @@ std::string Square::getString() {
             return _wall_string;
             break;
         case SquareType::unmowed:
-            srand(time(NULL));
-            int randomizer = rand() % 2;
-            return _unmowed_string[randomizer];
+            return _unmowed_string[_variant];
             break;
         case SquareType::mowed:
             return _mowed_string;
