@@ -18,6 +18,7 @@ public:
     int*        getTitleOffsets();
     int*        getLawnOffsets();
     int*        getStatsOffsets();
+    LawnPos     getLawnPosition();
 
     void        setMarginOffsets(int x_offset, int y_offset);
     void        setTitleOffsets(int x_offset, int y_offset);
@@ -31,7 +32,7 @@ private:
     Lawn*       _lawn;
     Position    _cursor_position;
     int         _margin_offsets[2]      = {8, 4};   // offsets from left, top of console default {8, 4}
-    int         _title_offsets[2]       = {0, 2};   // offsets from border, border default {0, 2}
+    int         _title_offsets[2]       = {0, 0};   // offsets from border, border default {0, 0}
     int         _lawn_offsets[2]        = {0, 3};   // offsets from border, title default {0, 3}
     int         _stats_offsets[2]       = {0, 3};   // offsets from border, lawn default {0, 3}
     int         _square_dimension[2]    = {2, 1};   // square size (2 chars) default {2, 1}
@@ -43,6 +44,8 @@ private:
     void        restoreCursorPosition();
     void        hideCursor();
     void        showCursor();
+    
+    Position    convertLawnPosition(LawnPos lawn_position);
 };
 
 #endif

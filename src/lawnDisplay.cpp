@@ -24,6 +24,22 @@ int* LawnDisplay::getMarginOffsets() { return _margin_offsets; }
 int* LawnDisplay::getTitleOffsets() { return _title_offsets; }
 int* LawnDisplay::getLawnOffsets() { return _lawn_offsets; }
 int* LawnDisplay::getStatsOffsets() { return _stats_offsets; }
+LawnPos LawnDisplay::getLawnPosition() {
+    // adjust for side margin
+    int x = (_cursor_position.x - _margin_offsets[0]);
+
+    // adjust for square width
+    x = x / _square_dimension[0];
+
+    // adjust for top margin, title, and title offset
+    // assumes title is 1 line
+    int y = _cursor_position.y - _margin_offsets[1] - _title_offsets[1] - 1;
+
+    // adjust for lawn y axis being reversed
+    y = _lawn->getHeight() - y;
+
+    return LawnPos(x, y);
+}
 
 /***** SETTERS/MUTATORS *****/
 
@@ -98,3 +114,23 @@ void LawnDisplay::showCursor() {
 }
 
 /***** PRIVATE HELPER FUNCTIONS *****/
+
+Position LawnDisplay::convertLawnPosition(LawnPos lawn_position) {
+    int x = lawn_position.x;
+    int y = lawn_position.y;
+
+    // adjust for square width
+    x = x * _square_dimension[0];
+
+    // adjust for side margin
+    x = x + _margin_offsets[0];
+
+    // adjust for lawn y axis being reversed
+    y = _lawn->getHeight() - y;
+
+    // adjust for top margin, title, and title offset
+    // assumes title is 1 line
+    y = y + _title_offsets[1] + 1 + _margin_offsets[1];
+
+    return Position(x, y);
+}
