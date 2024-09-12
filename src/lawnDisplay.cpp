@@ -1,55 +1,61 @@
 
 #include "lawnDisplay.h"
 
-/***** STATIC CONSTANTS *****/
-
-const int LawnDisplay::_default_margin_offsets[]  = {8, 4};
-const int LawnDisplay::_default_title_offsest[] = {0, 2};
-const int LawnDisplay::_default_lawn_offsets[]  = {0, 3};
-const int LawnDisplay::_default_stats_offsets[] = {0, 3};
-const int LawnDisplay::_square_dimensions[]     = {2, 1};
-
 /***** CONSTRUCTORS *****/
 
-LawnDisplay::LawnDisplay(int x_margin = _default_margin_offsets[0],
-                         int y_margin = _default_margin_offsets[0]) {
+LawnDisplay::LawnDisplay() {
     _mower = new Mower();
     _lawn = _mower->getLawn();
-    setMargins(x_margin, y_margin);
 }
 
-LawnDisplay::LawnDisplay(Mower *mower,
-                         int x_margin = _default_margin_offsets[0],
-                         int y_margin = _default_margin_offsets[0]) {
+LawnDisplay::LawnDisplay(Mower *mower) {
     _mower = mower;
     _lawn = _mower->getLawn();
-    setMargins(x_margin, y_margin);
 }
 
-LawnDisplay::LawnDisplay(Lawn *lawn,
-                         int x_margin = _default_margin_offsets[0],
-                         int y_margin = _default_margin_offsets[0]) {
+LawnDisplay::LawnDisplay(Lawn *lawn) {
     _lawn = lawn;
     _mower = new Mower(_lawn);
-    setMargins(x_margin, y_margin);
 }
 
 /***** GETTERS/ACCESSORS *****/
 
-int* LawnDisplay::getMargins() { return _margin_offsets; }
+int* LawnDisplay::getMarginOffsets() { return _margin_offsets; }
+int* LawnDisplay::getTitleOffsets() { return _title_offsets; }
+int* LawnDisplay::getLawnOffsets() { return _lawn_offsets; }
+int* LawnDisplay::getStatsOffsets() { return _stats_offsets; }
 
 /***** SETTERS/MUTATORS *****/
 
-void LawnDisplay::setMargins(int x_margin, int y_margin) {
+// set margin offsets from top and left side of console
+void LawnDisplay::setMarginOffsets(int x_margin,int  y_margin) {
     _margin_offsets[0] = x_margin;
     _margin_offsets[1] = y_margin;
+}
+
+// set title offsets from border, border
+void LawnDisplay::setTitleOffsets(int x_margin,int  y_margin) {
+    _title_offsets[0] = x_margin;
+    _title_offsets[1] = y_margin;
+}
+
+// set lawn offsets from border, title
+void LawnDisplay::setLawnOffsets(int x_margin,int  y_margin) {
+    _lawn_offsets[0] = x_margin;
+    _lawn_offsets[1] = y_margin;
+}
+
+// set stats offsets from border, lawn
+void LawnDisplay::setStatsOffsetsint(int x_margin,int  y_margin) {
+    _stats_offsets[0] = x_margin;
+    _stats_offsets[1] = y_margin;
 }
 
 /***** PUBLIC FUNCTIONS *****/
 
 
 
-/***** PRIVATE PRINT FUNCTIONS *****/
+/***** PRIVATE PRFUNCTIONS *****/
 
 
 
@@ -90,3 +96,5 @@ void LawnDisplay::showCursor() {
     cursorInfo.bVisible = true; // Set cursor visibility to true
     SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
+
+/***** PRIVATE HELPER FUNCTIONS *****/

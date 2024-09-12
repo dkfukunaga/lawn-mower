@@ -10,29 +10,31 @@
 
 class LawnDisplay {
 public:
-    LawnDisplay(int x_margin, int y_margin);                // defaults to default margins
-    LawnDisplay(Mower *mower, int x_margin, int y_margin);  // defaults to default margins
-    LawnDisplay(Lawn *lawn, int x_margin, int y_margin);    // defaults to default margins
+    LawnDisplay();
+    LawnDisplay(Mower *mower);
+    LawnDisplay(Lawn *lawn);
 
-    int*        getMargins();    
-    void        setMargins(int x_margin, int y_margin);
+    int*        getMarginOffsets();
+    int*        getTitleOffsets();
+    int*        getLawnOffsets();
+    int*        getStatsOffsets();
+
+    void        setMarginOffsets(int x_offset, int y_offset);
+    void        setTitleOffsets(int x_offset, int y_offset);
+    void        setLawnOffsets(int x_offset, int y_offset);
+    void        setStatsOffsetsint(int x_offset, int y_offset);
 
     void        draw();
     bool        drawSquare(LawnPos position);
 private:
-    static const int _default_margin_offsets[2];    // default border around whole display {8, 4}
-    static const int _default_title_offsest[2];     // default title offsets from border, display {0, 2}
-    static const int _default_lawn_offsets[2];      // default lawn offsets from border, title {0, }
-    static const int _default_stats_offsets[2];     // default stats offsets from border, lawn {0, 3}
-    static const int _square_dimensions[2];         // square dimensions in console {2, 1}
-
     Mower*      _mower;
     Lawn*       _lawn;
     Position    _cursor_position;
-    int         _margin_offsets[2];
-    int         _title_offsets[2];
-    int         _lawn_offsets[2];
-    int         _stats_offsets[2];
+    int         _margin_offsets[2]      = {8, 4};   // offsets from left, top of console default {8, 4}
+    int         _title_offsets[2]       = {0, 2};   // offsets from border, border default {0, 2}
+    int         _lawn_offsets[2]        = {0, 3};   // offsets from border, title default {0, 3}
+    int         _stats_offsets[2]       = {0, 3};   // offsets from border, lawn default {0, 3}
+    int         _square_dimension[2]    = {2, 1};   // square size (2 chars) default {2, 1}
 
     bool        drawMower();
     
