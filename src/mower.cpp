@@ -15,7 +15,7 @@ Mower::Mower(Lawn *lawn) {
     _facing = static_cast<Direction>(rand() % 4);
 
     // set initial position lower left corner of grass
-    _position = Position(1, 1);
+    _position = LawnPos(1, 1);
 
     // mow current position
     _lawn->mowSquare(_position);
@@ -36,7 +36,7 @@ Mower::Mower() {
     _facing = static_cast<Direction>(rand() % 4);
 
     // set initial position lower left corner of grass
-    _position = Position(1, 1);
+    _position = LawnPos(1, 1);
 
     // mow current position
     _lawn->mowSquare(_position);
@@ -53,7 +53,7 @@ Mower::Mower() {
 Direction Mower::getFacing() { return _facing; }
 
 // return coordinates of mower on lawn
-Position Mower::getPosition() { return _position; }
+LawnPos Mower::getPosition() { return _position; }
 
 // return current square
 SquareType Mower::getSquare() { return _lawn->getSquare(this->getPosition()); }

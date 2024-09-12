@@ -16,7 +16,7 @@ public:
     Mower();
 
     Direction   getFacing();
-    Position    getPosition();
+    LawnPos     getPosition();
     SquareType  getSquare();
     Lawn*       getLawn();
     char        getMowerChar();
@@ -33,7 +33,7 @@ public:
 private:
     Lawn        *_lawn;
     Direction   _facing;
-    Position    _position;
+    LawnPos     _position;
     int         _peeks;
     int         _turns;
     int         _steps;

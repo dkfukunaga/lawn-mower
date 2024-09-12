@@ -59,5 +59,7 @@ struct Position {
     }
 };
 
+typedef Position LawnPos;
+
 
 #endif

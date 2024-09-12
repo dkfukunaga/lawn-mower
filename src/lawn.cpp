@@ -36,7 +36,7 @@ int Lawn::getWidth() { return _width; }
 int Lawn::getHeight() { return _height; }
 
 // Return Square at position
-SquareType Lawn::getSquare(Position position) {
+SquareType Lawn::getSquare(LawnPos position) {
     int x_index = _width - position.x - 1;
     int y_index = _height - position.y - 1;
     return _field[(y_index * _width) + x_index].getType();
@@ -46,7 +46,7 @@ SquareType Lawn::getSquare(Position position) {
 
 // Cause an unmowed Square at position to become mowed
 // Ignores wall Squares
-bool Lawn::mowSquare(Position position) {
+bool Lawn::mowSquare(LawnPos position) {
     int x_index = _width - position.x - 1;
     int y_index = _height - position.y - 1;
     if (_field[(y_index * _width) + x_index].getType() != SquareType::wall) {

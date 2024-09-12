@@ -10,8 +10,8 @@ TEST_CASE("Test Mower contructor") {
         CHECK_FALSE(mower.getLawn() == nullptr);
 
         // make sure mower initialized to position (1,1)
-        CHECK(mower.getPosition().x == Position(1,1).x);
-        CHECK(mower.getPosition().y == Position(1,1).y);
+        CHECK(mower.getPosition().x == LawnPos(1,1).x);
+        CHECK(mower.getPosition().y == LawnPos(1,1).y);
 
         // make sure mower stats initialized to 0
         CHECK(mower.getPeeks() == 0);
@@ -26,8 +26,8 @@ TEST_CASE("Test Mower contructor") {
         CHECK_FALSE(mower.getLawn() == nullptr);
 
         // make sure mower initialized to position (1,1)
-        CHECK(mower.getPosition().x == Position(1,1).x);
-        CHECK(mower.getPosition().y == Position(1,1).y);
+        CHECK(mower.getPosition().x == LawnPos(1,1).x);
+        CHECK(mower.getPosition().y == LawnPos(1,1).y);
 
         // make sure mower stats initialized to 0
         CHECK(mower.getPeeks() == 0);

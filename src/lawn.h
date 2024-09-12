@@ -15,17 +15,17 @@ public:
     Lawn();
     ~Lawn() { delete _field; };
 
-    int getWidth();
-    int getHeight();
+    int         getWidth();
+    int         getHeight();
 
-    SquareType  getSquare(Position position);
-    bool    mowSquare(Position position);
+    SquareType  getSquare(LawnPos position);
+    bool        mowSquare(LawnPos position);
 private:
-    int     _width;
-    int     _height;
-    Square* _field;
+    int         _width;
+    int         _height;
+    Square*     _field;
 
-    void    initField();
+    void        initField();
 };
 
 #endif
