@@ -3,23 +3,30 @@
 
 /***** STATIC CONSTANTS *****/
 
-const int LawnDisplay::_default_margin_size = 4;
+const int LawnDisplay::_default_side_margin = 4;        // default border around whole display: 4
+const int LawnDisplay::_default_title_x_offset = 0;     // default title x offset from border: 0
+const int LawnDisplay::_default_title_y_offset = 0;     // default title y offset from border: 0
+const int LawnDisplay::_default_lawn_x_offset = 0;      // default lawn x offset from border: 0
+const int LawnDisplay::_default_lawn_y_offset = 3;      // default lawn y offset from title: 3
+const int LawnDisplay::_default_stats_x_offset = 0;     // default stats x offset from border: 0
+const int LawnDisplay::_default_stats_y_offset = 3;     // default stats y offset from lawn: 3
+const int LawnDisplay::_square_dimensions[2] = {2, 1};  // two chars wide - {2, 1}
 
 /***** CONSTRUCTORS *****/
 
-LawnDisplay::LawnDisplay(int margin_size = _default_margin_size) {
+LawnDisplay::LawnDisplay(int margin_size = _default_side_margin) {
     _mower = new Mower();
     _lawn = _mower->getLawn();
     setMarginSize(margin_size);
 }
 
-LawnDisplay::LawnDisplay(Mower *mower, int margin_size = _default_margin_size) {
+LawnDisplay::LawnDisplay(Mower *mower, int margin_size = _default_side_margin) {
     _mower = mower;
     _lawn = _mower->getLawn();
     setMarginSize(margin_size);
 }
 
-LawnDisplay::LawnDisplay(Lawn *lawn, int margin_size = _default_margin_size) {
+LawnDisplay::LawnDisplay(Lawn *lawn, int margin_size = _default_side_margin) {
     _lawn = lawn;
     _mower = new Mower(_lawn);
     setMarginSize(margin_size);
@@ -33,6 +40,8 @@ int LawnDisplay::getMarginSize() { return _margin_size; }
 
 void LawnDisplay::setMarginSize(int margin_size) {
     _margin_size = margin_size;
+    _lawn_x_offset = _margin_size * 2;
+    _lawn_y_offset = _margin_size;
 }
 
 /***** PUBLIC FUNCTIONS *****/

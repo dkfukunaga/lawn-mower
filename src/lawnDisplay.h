@@ -20,17 +20,27 @@ public:
     void        draw();
     bool        drawSquare(Position position);
 private:
+    static const int _default_side_margin;      // border around whole display
+    static const int _default_title_x_offset;   // title x offset from border
+    static const int _default_title_y_offset;   // title y offset from border
+    static const int _default_lawn_x_offset;    // lawn x offset from border
+    static const int _default_lawn_y_offset;    // lawn y offset from title
+    static const int _default_stats_x_offset;   // stats x offset from border
+    static const int _default_stats_y_offset;   // stats y offset from lawn
+    static const int _square_dimensions[2];
+
     Mower*      _mower;
     Lawn*       _lawn;
     Position    _cursor_position;
-    int         _margin_size;
-    std::string _margin;
-    
-    static const int _default_margin_size;
+    int         _margin_size    = _default_side_margin;
+    int         _title_x_offset = _default_title_x_offset;
+    int         _title_y_offset = _default_title_y_offset;
+    int         _lawn_x_offset  = _default_lawn_x_offset;
+    int         _lawn_y_offset  = _default_lawn_y_offset;
+    int         _stats_x_offset = _default_stats_x_offset;
+    int         _stats_y_offset = _default_stats_y_offset;
 
-    bool        drawSquare(Position position);
     bool        drawMower();
-
     void        moveCursor(Position position);
     void        saveCursorPosition();
     void        restoreCursorPosition();
