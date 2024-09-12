@@ -81,7 +81,7 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getSteps() == 0);
     }
 
-    SUBCASE("getSquare(), forward(), steps, lawnmowing test") {
+    SUBCASE("getSquare(), forward(), turnLeft(), turnRight(), steps, lawnmowing test") {
         // make sure starting square is mowed
         REQUIRE(mower.getSquare() == Square::mowed);
 
