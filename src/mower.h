@@ -23,6 +23,7 @@ public:
     int         getPeeks();
     int         getTurns();
     int         getSteps();
+    int         getTotal();
 
     void        setLawn(Lawn *lawn);
 

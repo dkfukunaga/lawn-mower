@@ -92,6 +92,9 @@ int Mower::getTurns() { return _turns; }
 // returns number of steps
 int Mower::getSteps() { return _steps; }
 
+// returns total actions taken
+int Mower::getTotal() { return _peeks + _turns + _steps; }
+
 /***** SETTERS/MUTATORS *****/
 
 // sets the mower's lawn to a new lawn and resets mower stats
