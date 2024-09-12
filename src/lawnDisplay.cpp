@@ -3,26 +3,39 @@
 
 /***** CONSTRUCTORS *****/
 
+// default constructor
+// creates default mower and lawn
 LawnDisplay::LawnDisplay() {
     _mower = new Mower();
-    _lawn = _mower->getLawn();
 }
 
+// mower constructor
+// takes provided mower and its lawn
 LawnDisplay::LawnDisplay(Mower *mower) {
     _mower = mower;
-    _lawn = _mower->getLawn();
 }
 
+// lawn constructor
+// creates new mower and assigns provided lawn
 LawnDisplay::LawnDisplay(Lawn *lawn) {
-    _lawn = lawn;
-    _mower = new Mower(_lawn);
+    _mower = new Mower;
+    _mower->setLawn(lawn);
 }
 
 /***** GETTERS/ACCESSORS *****/
 
+// returns array of x and y margin offsets
 int* LawnDisplay::getMarginOffsets() { return _margin_offsets; }
+
+// returns array of x and y title offsets from inside the margins
 int* LawnDisplay::getTitleOffsets() { return _title_offsets; }
+
+// returns array of x and y lawn offsets from inside the margin
+// and relative to the bottom of the title
 int* LawnDisplay::getLawnOffsets() { return _lawn_offsets; }
+
+// returns array of x and y stats offsets from inside the margin
+// and relative to the bottom of the lawn
 int* LawnDisplay::getStatsOffsets() { return _stats_offsets; }
 LawnPos LawnDisplay::getLawnPosition() {
     // adjust for side margin
@@ -36,7 +49,7 @@ LawnPos LawnDisplay::getLawnPosition() {
     int y = _cursor_position.y - _margin_offsets[1] - _title_offsets[1] - 1;
 
     // adjust for lawn y axis being reversed
-    y = _lawn->getHeight() - y;
+    y = _mower->getLawn()->getHeight() - y;
 
     return LawnPos(x, y);
 }
@@ -78,13 +91,10 @@ void LawnDisplay::setStatsOffsetsint(int x_margin,int  y_margin) {
 /***** PRIVATE CURSOR FUNCTIONS *****/
 
 // moves cursor to provided position
-// (0,0) is the top left corner, not including margins
+// (0,0) is the top left corner of the console
 void LawnDisplay::moveCursor(Position position) {
-    std::cout << "\033[" 
-              << std::to_string(position.y + _margin_offsets[1])
-              << ";"
-              << std::to_string(position.x  + (_margin_offsets[0] * 2))
-              << "H";
+    std::cout << "\033[" << std::to_string(position.y) << ";"
+              << std::to_string(position.x) << "H";
 }
 
 // saves cursor position using ANSI escape code
@@ -115,6 +125,8 @@ void LawnDisplay::showCursor() {
 
 /***** PRIVATE HELPER FUNCTIONS *****/
 
+// convert a Lawn position into the absolute position in the console
+// returns Position
 Position LawnDisplay::convertLawnPosition(LawnPos lawn_position) {
     int x = lawn_position.x;
     int y = lawn_position.y;
@@ -126,7 +138,7 @@ Position LawnDisplay::convertLawnPosition(LawnPos lawn_position) {
     x = x + _margin_offsets[0];
 
     // adjust for lawn y axis being reversed
-    y = _lawn->getHeight() - y;
+    y = _mower->getLawn()->getHeight() - y;
 
     // adjust for top margin, title, and title offset
     // assumes title is 1 line
