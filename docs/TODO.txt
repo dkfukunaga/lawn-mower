@@ -10,7 +10,7 @@ LawnTest:
     - create tests for bracket operator override
 
 Mower:
-    - modify to use Square class
+    x modify to use Square class
 
 MowerTest:
     x create tests for forward and steps
