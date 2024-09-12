@@ -18,7 +18,7 @@ public:
     int getWidth();
     int getHeight();
 
-    SquareType  getSquare(Position position);
+    Square  getSquare(Position position);
     bool    mowSquare(Position position);
 private:
     int     _width;

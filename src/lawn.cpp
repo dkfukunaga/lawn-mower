@@ -36,10 +36,10 @@ int Lawn::getWidth() { return _width; }
 int Lawn::getHeight() { return _height; }
 
 // Return Square at position
-SquareType Lawn::getSquare(Position position) {
+Square Lawn::getSquare(Position position) {
     int x_index = _width - position.x - 1;
     int y_index = _height - position.y - 1;
-    return _field[(y_index * _width) + x_index].getType();
+    return _field[(y_index * _width) + x_index];
 }
 
 /***** PUBLIC FUNCTIONS *****/
