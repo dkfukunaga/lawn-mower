@@ -1,5 +1,5 @@
 Lawn:
-    - modify to use Square class
+    x modify to use Square class
     x reverse x,y coordinates so that 0,0 is lower left corner
     - add min/max range constructor
     - override bracket operator
