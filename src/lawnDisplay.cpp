@@ -54,6 +54,16 @@ void LawnDisplay::setMarginSize(int margin_size) {
 
 /***** PRIVATE CURSOR FUNCTIONS *****/
 
+// moves cursor to provided position
+// (0,0) is the top left corner, not including margins
+void LawnDisplay::moveCursor(Position position) {
+    std::cout << "\033[" 
+              << std::to_string(position.y + _margin_size)
+              << ";"
+              << std::to_string(position.x  + (_margin_size * 2))
+              << "H";
+}
+
 // saves cursor position using ANSI escape code
 void LawnDisplay::saveCursorPosition() { std::cout << "\033[s"; }
 

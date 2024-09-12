@@ -18,7 +18,7 @@ public:
     void        setMarginSize(int margin_size);
 
     void        draw();
-    bool        drawSquare(Position position);
+    bool        drawSquare(LawnPos position);
 private:
     static const int _default_side_margin;      // border around whole display
     static const int _default_title_x_offset;   // title x offset from border
@@ -41,6 +41,7 @@ private:
     int         _stats_y_offset = _default_stats_y_offset;
 
     bool        drawMower();
+    
     void        moveCursor(Position position);
     void        saveCursorPosition();
     void        restoreCursorPosition();
