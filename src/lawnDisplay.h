@@ -5,7 +5,8 @@
 #include "common.h"
 #include "lawn.h"
 #include "mower.h"
-#include <string>
+#include <iostream>
+#include <windows.h>
 
 class LawnDisplay {
 public:
@@ -23,11 +24,11 @@ private:
     bool        drawSquare(Position position);
     bool        drawMower();
 
-    void        hideCursor();
-    void        showCursor();
     void        moveCursor(Position position);
     void        saveCursorPosition();
     void        restoreCursorPosition();
+    void        hideCursor();
+    void        showCursor();
 };
 
 #endif
