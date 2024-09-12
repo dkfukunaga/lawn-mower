@@ -8,7 +8,7 @@ using namespace std;
 
 enum class Direction { north, east, south, west };
 
-enum class Square { red, green, visited };
+enum class SquareType { red, green, visited };
 
 struct Mower {
     Direction facing;
@@ -23,11 +23,11 @@ struct Field {
     int height;
     int width;
     Mower mower;
-    Square **field = new Square*[height];
+    SquareType **field = new SquareType*[height];
 };
 
 void initLawn(Field&);
-string squareString(Square&);
+string squareString(SquareType&);
 string mowerString(Field&);
 void printLawn(Field&);
 void moveTo(Field&, int, int);
@@ -36,7 +36,7 @@ void restorePos();
 void updateMowerPos(Field&);
 string getFacing(Field&);
 string getPos(Field&);
-Square peek(Field&);
+SquareType peek(Field&);
 int forward(Field&);
 void turnLeft(Field&);
 void turnRight(Field&);
@@ -84,15 +84,15 @@ int main() {
     
 
     // orient mower west from bottom left corner
-    if (peek(lawn) == Square::green) {
+    if (peek(lawn) == SquareType::green) {
         turnRight(lawn);
-        if (peek(lawn) != Square::green) {
+        if (peek(lawn) != SquareType::green) {
             turnLeft(lawn);
         }
     } else {
         do {
             turnLeft(lawn);
-        } while (peek(lawn) != Square::green);
+        } while (peek(lawn) != SquareType::green);
     }
 
     // move to bottom right corner and find width
@@ -142,24 +142,24 @@ void initLawn(Field &lawn) {
 
     for (int i = 0; i < lawn.height; i++) {
         // declare array for each row
-        lawn.field[i] = new Square[lawn.width];
+        lawn.field[i] = new SquareType[lawn.width];
         // set west wall as red
-        lawn.field[i][0] = Square::red;
+        lawn.field[i][0] = SquareType::red;
         for (int j = 1; j < lawn.width - 1; j++) {
             if ((i == 0) || (i == (lawn.height - 1))) {
                 // set north and south walls as red
-                lawn.field[i][j] = Square::red;
+                lawn.field[i][j] = SquareType::red;
             } else {
                 // grassy interior
-                lawn.field[i][j] = Square::green;
+                lawn.field[i][j] = SquareType::green;
             }
         }
         // set east wall as red
-        lawn.field[i][lawn.width - 1] = Square::red;
+        lawn.field[i][lawn.width - 1] = SquareType::red;
     }
 
     // set initial Mower position to visited
-    lawn.field[1][1] = Square::visited;
+    lawn.field[1][1] = SquareType::visited;
 
 }
 
@@ -250,15 +250,15 @@ string getFacing(Field &lawn) {
 
 string getPos(Field &lawn) { return "(" + to_string(lawn.mower.x) + ", " + to_string(lawn.mower.y) + ")"; }
 
-string squareString(Square &square) {
+string squareString(SquareType &square) {
 
     string str;
 
     switch (square) {
-        case Square::red:
+        case SquareType::red:
             str = "\033[37;41m  \033[0m";
             break;
-        case Square::green:
+        case SquareType::green:
             switch (rand() %2) {
                 case 0:
                     str = "\033[37;42m\",\033[0m";
@@ -268,7 +268,7 @@ string squareString(Square &square) {
                     break;
             }
             break;
-        case Square::visited:
+        case SquareType::visited:
             str = "\033[37;42m .\033[0m";
             break;
         default: // should never happen, but just in case
@@ -304,11 +304,11 @@ string mowerString(Field &lawn) {
     return str;
 }
 
-Square peek(Field &lawn) {
+SquareType peek(Field &lawn) {
 
     lawn.mower.peeks++;
 
-    Square next;
+    SquareType next;
 
     // no bounds checking because lawnmower will never be on a wall square
     switch (lawn.mower.facing) {
@@ -336,7 +336,7 @@ int forward(Field &lawn) {
     Sleep(100);
     lawn.mower.steps++;
 
-    if (peek(lawn) == Square::red) {
+    if (peek(lawn) == SquareType::red) {
         // shouldn't count towards peek actions
         lawn.mower.peeks--;
         // cannot move onto wall Square
@@ -372,7 +372,7 @@ int forward(Field &lawn) {
     }
 
     // mark new Square as visited
-    lawn.field[lawn.mower.y][lawn.mower.x] = Square::visited;
+    lawn.field[lawn.mower.y][lawn.mower.x] = SquareType::visited;
 
     // print new visited lawn square
     cout << squareString(lawn.field[lawn.mower.y][lawn.mower.x]) << "\b\b";

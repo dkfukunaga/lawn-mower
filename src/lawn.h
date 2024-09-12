@@ -15,12 +15,12 @@ public:
     int getWidth();
     int getHeight();
 
-    Square  getSquare(Position position);
+    SquareType  getSquare(Position position);
     bool    mowSquare(Position position);
 private:
     int     _width;
     int     _height;
-    Square* _field;
+    SquareType* _field;
 
     void    initField();
 };

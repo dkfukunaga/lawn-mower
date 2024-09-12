@@ -52,7 +52,7 @@ Direction Mower::getFacing() { return _facing; }
 Position Mower::getPosition() { return _position; }
 
 // return current square
-Square Mower::getSquare() { return _lawn->getSquare(this->getPosition()); }
+SquareType Mower::getSquare() { return _lawn->getSquare(this->getPosition()); }
 
 // returns pointer to the current lawn
 Lawn* Mower::getLawn() { return _lawn; }
@@ -120,7 +120,7 @@ void Mower::turnRight() {
 }
 
 // returns the square in front of the mower and increments peeks
-Square Mower::peek() {
+SquareType Mower::peek() {
     _peeks++;
     return checkNextSquare();
 }
@@ -133,7 +133,7 @@ bool Mower::forward() {
     _steps++;
 
     // check for wall
-    if (checkNextSquare() == Square::wall)
+    if (checkNextSquare() == SquareType::wall)
         return false;
     
     // change position
@@ -159,7 +159,7 @@ bool Mower::forward() {
 }
 
 // return the square in front of the mower
-Square Mower::checkNextSquare() {
+SquareType Mower::checkNextSquare() {
     switch (_facing) {
     case Direction::north:
         return _lawn->getSquare(_position.north());
@@ -174,6 +174,6 @@ Square Mower::checkNextSquare() {
         return _lawn->getSquare(_position.east());
         break;
     }
-    return Square::error;
+    return SquareType::error;
 }
 

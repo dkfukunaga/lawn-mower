@@ -12,7 +12,7 @@ enum class Direction {
 };
 
 // square types on lawn
-enum class Square {
+enum class SquareType {
     error,      // invalid square
     wall,       // red
     unmowed,    // green
