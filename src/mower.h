@@ -15,29 +15,30 @@ public:
     Mower(Lawn *lawn);
     Mower();
 
-    Direction getFacing();
-    Position getPosition();
-    Lawn* getLawn();
-    char getMowerChar();
-    int getPeeks();
-    int getTurns();
-    int getSteps();
+    Direction   getFacing();
+    Position    getPosition();
+    Square      getSquare();
+    Lawn*       getLawn();
+    char        getMowerChar();
+    int         getPeeks();
+    int         getTurns();
+    int         getSteps();
 
-    void setLawn(Lawn *lawn);
+    void        setLawn(Lawn *lawn);
 
-    void turnLeft();
-    void turnRight();
-    Square peek();
-    bool forward();
+    void        turnLeft();
+    void        turnRight();
+    Square      peek();
+    bool        forward();
 private:
-    Lawn *_lawn;
-    Direction _facing;
-    Position _position;
-    int _peeks;
-    int _turns;
-    int _steps;
+    Lawn        *_lawn;
+    Direction   _facing;
+    Position    _position;
+    int         _peeks;
+    int         _turns;
+    int         _steps;
 
-    Square checkNextSquare();
+    Square      checkNextSquare();
 };
 
 

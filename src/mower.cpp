@@ -51,6 +51,9 @@ Direction Mower::getFacing() { return _facing; }
 // return coordinates of mower on lawn
 Position Mower::getPosition() { return _position; }
 
+// return current square
+Square Mower::getSquare() { return _lawn->getSquare(this->getPosition()); }
+
 // returns pointer to the current lawn
 Lawn* Mower::getLawn() { return _lawn; }
 
@@ -99,7 +102,7 @@ void Mower::setLawn(Lawn *lawn) {
 // mower turns to the left and increments turn counter
 void Mower::turnLeft() {
     int temp = static_cast<int>(_facing);
-    temp = (temp + 3) % 4;
+    temp = (temp + 1) % 4;
 
     _facing = static_cast<Direction>(temp);
 
@@ -109,7 +112,7 @@ void Mower::turnLeft() {
 // mower turns right and increments turn counter
 void Mower::turnRight() {
     int temp = static_cast<int>(_facing);
-    temp = (temp + 1) % 4;
+    temp = (temp + 3) % 4;
 
     _facing = static_cast<Direction>(temp);
 
