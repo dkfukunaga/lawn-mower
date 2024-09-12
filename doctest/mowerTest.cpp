@@ -123,7 +123,7 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getSteps() == 4);
         CHECK(mower.getTurns() == 2  + turns);  // include turns from reorientation north
         CHECK(mower.getPeeks() == 1);
-
+        CHECK(mower.getTotal() == 7 + turns);
     }
 
     delete lawn;
