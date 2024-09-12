@@ -3,7 +3,6 @@
 #include "lawn.h"
 #include <random>
 #include <time.h>
-#include <iostream>
 
 // Construct new Lawn object with width and height specified
 Lawn::Lawn(int width, int height):
@@ -37,28 +36,27 @@ int Lawn::getHeight() { return _height; }
 
 // Return Square at position
 Square Lawn::getSquare(Position position) {
-    return _field[(position.y * _width) + position.x];
+    int x_index = _width - position.x - 1;
+    int y_index = _height - position.y - 1;
+    return _field[(y_index * _width) + x_index];
 }
 
 // Cause an unmowed Square at position to become mowed
 // Ignores wall Squares
 bool Lawn::mowSquare(Position position) {
-    if (_field[(position.y * _width) + position.x] != Square::wall) {
-        _field[(position.y * _width) + position.x] = Square::mowed;
+    int x_index = _width - position.x - 1;
+    int y_index = _height - position.y - 1;
+    if (_field[(y_index * _width) + x_index] != Square::wall) {
+        _field[(y_index * _width) + x_index] = Square::mowed;
         return true;
     }
     return false;       // can't mow the wall
 }
 
-// Initialize Lawn with a wall all around the border and
-// unmowed Squares everywhere else
 void Lawn::initField() {
 
-    // loop through rows
     for (int y = 0; y < _height; y++) {
-        // loop through columns
         for (int x = 0; x < _width; x++) {
-            // calculate index from x,y
             if ((y == 0 || y == _height - 1) || 
                 (x == 0 || x == _width - 1))
                 _field[(y * _width) + x] = Square::wall;

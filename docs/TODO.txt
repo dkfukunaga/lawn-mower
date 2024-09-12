@@ -1,0 +1,13 @@
+Lawn:
+    x reverse x,y coordinates so that 0,0 is lower left corner
+    - add min/max range constructor
+    - override bracket operator
+
+LawnTest:
+    - test new x,y coordinates
+    - test min/max range constructor
+    - test bracket operator override
+
+MowerTest:
+    - test forward and steps
+    - test mowerChar
