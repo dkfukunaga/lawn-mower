@@ -17,7 +17,7 @@ public:
 
     Direction   getFacing();
     Position    getPosition();
-    SquareType      getSquare();
+    SquareType  getSquare();
     Lawn*       getLawn();
     char        getMowerChar();
     int         getPeeks();
@@ -28,7 +28,7 @@ public:
 
     void        turnLeft();
     void        turnRight();
-    SquareType      peek();
+    SquareType  peek();
     bool        forward();
 private:
     Lawn        *_lawn;
@@ -38,7 +38,7 @@ private:
     int         _turns;
     int         _steps;
 
-    SquareType      checkNextSquare();
+    SquareType  checkNextSquare();
 };
 
 

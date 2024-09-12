@@ -23,8 +23,6 @@ private:
     bool        drawSquare(Position position);
     bool        drawMower();
 
-    std::string squareString(SquareType square);
-
     void        hideCursor();
     void        showCursor();
     void        moveCursor(Position position);

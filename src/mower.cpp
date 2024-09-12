@@ -3,6 +3,8 @@
 
 #include "mower.h"
 
+/***** CONSTRUCTORS *****/
+
 // create a mower on the provided lawn
 Mower::Mower(Lawn *lawn) {
     // set pointer to lawn
@@ -44,6 +46,8 @@ Mower::Mower() {
     _turns = 0;
     _steps = 0;
 }
+
+/***** GETTERS/ACCESSORS *****/
 
 // returns direction the mower is facing
 Direction Mower::getFacing() { return _facing; }
@@ -88,6 +92,8 @@ int Mower::getTurns() { return _turns; }
 // returns number of steps
 int Mower::getSteps() { return _steps; }
 
+/***** SETTERS/MUTATORS *****/
+
 // sets the mower's lawn to a new lawn and resets mower stats
 void Mower::setLawn(Lawn *lawn) {
     // set lawn pointer to new lawn
@@ -98,6 +104,8 @@ void Mower::setLawn(Lawn *lawn) {
     _turns = 0;
     _steps = 0;
 }
+
+/***** PUBLIC MOWER ACTION FUNCTIONS *****/
 
 // mower turns to the left and increments turn counter
 void Mower::turnLeft() {
@@ -157,6 +165,8 @@ bool Mower::forward() {
     
     return true;
 }
+
+/***** PRIVATE HELPER FUNCTIONS *****/
 
 // return the square in front of the mower
 SquareType Mower::checkNextSquare() {

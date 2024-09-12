@@ -1,8 +1,7 @@
 
-#include "common.h"
 #include "lawn.h"
-#include <random>
-#include <time.h>
+
+/***** CONSTRUCTORS *****/
 
 // Construct new Lawn object with width and height specified
 Lawn::Lawn(int width, int height):
@@ -28,6 +27,8 @@ Lawn::Lawn() {
     initField();
 }
 
+/***** GETTERS/ACCESSORS *****/
+
 // Return lawn width
 int Lawn::getWidth() { return _width; }
 
@@ -41,6 +42,8 @@ SquareType Lawn::getSquare(Position position) {
     return _field[(y_index * _width) + x_index];
 }
 
+/***** PUBLIC FUNCTIONS *****/
+
 // Cause an unmowed Square at position to become mowed
 // Ignores wall Squares
 bool Lawn::mowSquare(Position position) {
@@ -52,6 +55,8 @@ bool Lawn::mowSquare(Position position) {
     }
     return false;       // can't mow the wall
 }
+
+/***** PRIVATE HELPER FUNCTIONS *****/
 
 void Lawn::initField() {
 
@@ -65,9 +70,3 @@ void Lawn::initField() {
         } // end column loop
     } // end row loop
 }
-
-
-// TODO:
-// add support for specific lawn size,
-//   and/or min/max range for randomization
-// override bracket operators

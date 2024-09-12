@@ -2,6 +2,8 @@
 #define LAWN_H
 
 #include "common.h"
+#include <random>
+#include <time.h>
 
 // A rectangle of Squares with a one square wide border
 // of wall Squares and either unmowed or mowed Squares
