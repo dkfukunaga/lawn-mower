@@ -39,6 +39,12 @@ private:
     int         _square_dimension[2] = {2, 1};  // square size (2 chars) default {2, 1}
 
     bool        drawMower();
+    void        drawStats();
+    void        updateMowerPosition();
+    void        updateMowerPeeks();
+    void        updateMowerTurns();
+    void        updateMowerSteps();
+    void        updateMowerTotal();
     
     void        moveCursor(Position position);
     void        saveCursorPosition();
