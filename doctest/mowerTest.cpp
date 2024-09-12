@@ -81,9 +81,9 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getSteps() == 0);
     }
 
-    SUBCASE("forward(), steps, lawnmowing test") {
+    SUBCASE("getSquareIO, forward(), steps, lawnmowing test") {
         // make sure starting square is mowed
-        CHECK(mower.getLawn()->getSquare(Position(mower.getPosition())) == Square::mowed);
+        CHECK(mower.getSquare() == Square::mowed);
 
         // point mower north
         while (mower.getFacing() != Direction::north)
