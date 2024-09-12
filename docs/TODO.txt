@@ -29,3 +29,5 @@ LawnDisplayTest:
 
 General:
     - remove all srand function calls and call once in main
+    - Postion typedefs for LawnPos, ArrayPos, ScreenPos
+    - create function in Lawn to convert to array index
