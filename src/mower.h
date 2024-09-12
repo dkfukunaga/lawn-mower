@@ -17,7 +17,7 @@ public:
 
     Direction   getFacing();
     Position    getPosition();
-    SquareType  getSquare();
+    Square      getSquare();
     Lawn*       getLawn();
     char        getMowerChar();
     int         getPeeks();
