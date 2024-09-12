@@ -123,7 +123,29 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getSteps() == 4);
         CHECK(mower.getTurns() == 2  + turns);  // include turns from reorientation north
         CHECK(mower.getPeeks() == 1);
+
     }
 
     delete lawn;
+}
+
+TEST_CASE("Test getMowerChar()") {
+    Mower mower;
+
+    // point mower north
+    while (mower.getFacing() != Direction::north) {
+        mower.turnLeft();
+    }
+
+    // double check facing
+    REQUIRE(mower.getFacing() == Direction::north);
+
+    // check all four directions
+    CHECK(mower.getMowerChar() == '^');
+    mower.turnLeft();
+    CHECK(mower.getMowerChar() == '<');
+    mower.turnLeft();
+    CHECK(mower.getMowerChar() == 'v');
+    mower.turnLeft();
+    CHECK(mower.getMowerChar() == '>');
 }

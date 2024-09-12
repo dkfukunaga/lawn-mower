@@ -9,5 +9,5 @@ LawnTest:
     - test bracket operator override
 
 MowerTest:
-    - test forward and steps
-    - test mowerChar
+    x test forward and steps
+    x test mowerChar
