@@ -27,3 +27,5 @@ LawnDisplay:
 LawnDisplayTest:
     - figure out how to unit test the ascii display
 
+General:
+    - remove all srand function calls and call once in main
