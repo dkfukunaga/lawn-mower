@@ -41,6 +41,22 @@ struct Position {
     Position south() { return Position{x, y - 1}; }
     // return Position to the east
     Position east() { return Position{x + 1, y}; }
+
+    // move to new Position by offset
+    // returns new Position
+    Position move(int x_offset, int y_offset) {
+        x += x_offset;
+        y += y_offset;
+        return *this;
+    }
+
+    // set to new Position by coordinates
+    // returns new Position
+    Position set(int new_x, int new_y) {
+        x = new_x;
+        y = new_y;
+        return *this;
+    }
 };
 
 
