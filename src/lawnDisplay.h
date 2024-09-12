@@ -23,7 +23,7 @@ public:
     void        setMarginOffsets(int x_offset, int y_offset);
     void        setTitleOffsets(int x_offset, int y_offset);
     void        setLawnOffsets(int x_offset, int y_offset);
-    void        setStatsOffsetsint(int x_offset, int y_offset);
+    void        setStatsOffsets(int x_offset, int y_offset);
 
     void        draw();
     bool        drawSquare(LawnPos position);

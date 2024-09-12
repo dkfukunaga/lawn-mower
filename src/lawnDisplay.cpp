@@ -75,7 +75,7 @@ void LawnDisplay::setLawnOffsets(int x_margin,int  y_margin) {
 }
 
 // set stats offsets from border, lawn
-void LawnDisplay::setStatsOffsetsint(int x_margin,int  y_margin) {
+void LawnDisplay::setStatsOffsets(int x_margin,int  y_margin) {
     _stats_offsets[0] = x_margin;
     _stats_offsets[1] = y_margin;
 }
