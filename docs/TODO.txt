@@ -1,16 +1,20 @@
 Lawn:
+    - modify to use Square class
     x reverse x,y coordinates so that 0,0 is lower left corner
     - add min/max range constructor
     - override bracket operator
 
 LawnTest:
-    x test new x,y coordinates
-    - test min/max range constructor
-    - test bracket operator override
+    x create tests for new x,y coordinates
+    - create tests for min/max range constructor
+    - create tests for bracket operator override
+
+Mower:
+    - modify to use Square class
 
 MowerTest:
-    x test forward and steps
-    x test mowerChar
+    x create tests for forward and steps
+    x create tests for mowerChar
 
 LawnDisplay:
     - draw lawn on screen in ascii with 2 char wide squares
@@ -20,6 +24,6 @@ LawnDisplay:
     - display mower stats below lawn
     - add program title and reposition everything to be more aesthetic
 
-LawnTest:
+LawnDisplayTest:
     - figure out how to unit test the ascii display
 
