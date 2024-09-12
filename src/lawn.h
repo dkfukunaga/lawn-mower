@@ -2,6 +2,7 @@
 #define LAWN_H
 
 #include "common.h"
+#include "square.h"
 #include <random>
 #include <time.h>
 
@@ -22,7 +23,7 @@ public:
 private:
     int     _width;
     int     _height;
-    SquareType* _field;
+    Square* _field;
 
     void    initField();
 };

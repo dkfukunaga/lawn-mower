@@ -8,7 +8,7 @@ Lawn::Lawn(int width, int height):
     _width(width),
     _height(height)  {
     // create a field matrix as an array
-    _field = new SquareType[_width * _height];
+    _field = new Square[_width * _height];
     // initialize field
     initField();
 };
@@ -22,7 +22,7 @@ Lawn::Lawn() {
     _height = rand() % 15 + 7;
 
     // create a field matrix as an array
-    _field = new SquareType[_width * _height];
+    _field = new Square[_width * _height];
     // initialize field
     initField();
 }
@@ -39,7 +39,7 @@ int Lawn::getHeight() { return _height; }
 SquareType Lawn::getSquare(Position position) {
     int x_index = _width - position.x - 1;
     int y_index = _height - position.y - 1;
-    return _field[(y_index * _width) + x_index];
+    return _field[(y_index * _width) + x_index].getType();
 }
 
 /***** PUBLIC FUNCTIONS *****/
@@ -49,8 +49,8 @@ SquareType Lawn::getSquare(Position position) {
 bool Lawn::mowSquare(Position position) {
     int x_index = _width - position.x - 1;
     int y_index = _height - position.y - 1;
-    if (_field[(y_index * _width) + x_index] != SquareType::wall) {
-        _field[(y_index * _width) + x_index] = SquareType::mowed;
+    if (_field[(y_index * _width) + x_index].getType() != SquareType::wall) {
+        _field[(y_index * _width) + x_index].setType(SquareType::mowed);
         return true;
     }
     return false;       // can't mow the wall
@@ -64,9 +64,9 @@ void Lawn::initField() {
         for (int x = 0; x < _width; x++) {
             if ((y == 0 || y == _height - 1) || 
                 (x == 0 || x == _width - 1))
-                _field[(y * _width) + x] = SquareType::wall;
+                _field[(y * _width) + x].setType(SquareType::wall);
             else
-                _field[(y * _width) + x] = SquareType::unmowed;
+                _field[(y * _width) + x].setType(SquareType::unmowed);
         } // end column loop
     } // end row loop
 }
