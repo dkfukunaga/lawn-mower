@@ -87,6 +87,10 @@ Position Position::move(Direction direction) {
     return *this;
 }
 
+// returns true if coordinates are both non-negative
+// returns false otherwise
+bool Position::good() { return _x >= 0 && _y >= 0; }
+
 /***** OPERATOR OVERRIDES *****/
 
 // returns true if x and y are the same, false otherwise

@@ -105,3 +105,15 @@ TEST_CASE("Test operator overloads") {
     CHECK_FALSE(pos1_pos3);
     CHECK(pos2_pos3);
 }
+
+TEST_CASE("Test good()") {
+    Position good_position;
+    Position bad_position1(-1, 0);
+    Position bad_position2(0, -1);
+    Position bad_position3(-1, -1);
+
+    CHECK(good_position.good());
+    CHECK_FALSE(bad_position1.good());
+    CHECK_FALSE(bad_position2.good());
+    CHECK_FALSE(bad_position3.good());
+}

@@ -29,6 +29,8 @@ public:
     Position    move(int x, int y);
     Position    move(Direction direction);
 
+    bool        good();
+
     bool        operator==(Position &rhs);
     bool        operator!=(Position &rhs);
 private:
