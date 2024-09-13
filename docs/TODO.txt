@@ -1,3 +1,8 @@
+Common:
+    - rewrite Position as a class of its own
+    - create LawnPos class as child of Position
+        - cardinal direction functions in LawnPos as wrappers for move
+
 Lawn:
     x modify to use Square class
     x reverse x,y coordinates so that 0,0 is lower left corner
