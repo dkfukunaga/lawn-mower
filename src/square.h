@@ -7,6 +7,14 @@
 #include <random>
 #include <ctime>
 
+// square types on lawn
+enum class SquareType {
+    error,      // invalid square
+    wall,       // red
+    unmowed,    // green
+    mowed       // green
+};
+
 class Square {
 public:
     Square();
