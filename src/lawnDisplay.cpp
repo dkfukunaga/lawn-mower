@@ -41,7 +41,22 @@ int* LawnDisplay::getLawnOffsets() { return _lawn_offsets; }
 // returns array of x and y stats offsets from inside the margin
 // and relative to the bottom of the lawn
 int* LawnDisplay::getStatsOffsets() { return _stats_offsets; }
-LawnPos LawnDisplay::getLawnPosition() {
+
+// returns LawnPos of cursor
+// if cursor not in lawn, returns LawnPos(-1, -1)
+LawnPos LawnDisplay::getLawnPosition() const {
+    // calculate lawn boundaries
+    int lawn_left = _margin_offsets[0] + _lawn_offsets[0];
+    int lawn_right = lawn_left + _mower->getLawn()->getWidth() * 2;
+    int lawn_top = _margin_offsets[1] + _title_offsets[1] + _lawn_offsets[1] + 1;
+    int lawn_bottom = lawn_top + _mower->getLawn()->getHeight();
+
+    // check if within bounds of lawn
+    if (_cursor_position.x < lawn_left || _cursor_position.x > lawn_right ||
+        _cursor_position.y < lawn_top || _cursor_position.y > lawn_bottom) {
+        return LawnPos(-1, -1); // indicates error
+    }
+
     // adjust for side margin
     int x = (_cursor_position.x - _margin_offsets[0]);
 
@@ -131,7 +146,7 @@ void LawnDisplay::showCursor() {
 
 // convert a Lawn position into the absolute position in the console
 // returns Position
-Position LawnDisplay::convertLawnPosition(LawnPos lawn_position) {
+Position LawnDisplay::convertLawnPosition(LawnPos lawn_position) const {
     int x = lawn_position.x;
     int y = lawn_position.y;
 

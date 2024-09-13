@@ -18,7 +18,7 @@ public:
     int*        getTitleOffsets();
     int*        getLawnOffsets();
     int*        getStatsOffsets();
-    LawnPos     getLawnPosition();
+    LawnPos     getLawnPosition() const;
 
     void        setMarginOffsets(int x_offset, int y_offset);
     void        setTitleOffsets(int x_offset, int y_offset);
@@ -52,7 +52,7 @@ private:
     void        hideCursor();
     void        showCursor();
     
-    Position    convertLawnPosition(LawnPos lawn_position);
+    Position    convertLawnPosition(LawnPos lawn_position) const;
 };
 
 #endif
