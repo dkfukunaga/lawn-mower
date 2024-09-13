@@ -36,10 +36,10 @@ int Lawn::getWidth() const { return _width; }
 int Lawn::getHeight() const { return _height; }
 
 // Return Square at position
-SquareType Lawn::getSquare(LawnPos position) {
+Square Lawn::getSquare(LawnPos position) const {
     int x_index = _width - position.x - 1;
     int y_index = _height - position.y - 1;
-    return _field[(y_index * _width) + x_index].getType();
+    return _field[(y_index * _width) + x_index];
 }
 
 /***** PUBLIC FUNCTIONS *****/
