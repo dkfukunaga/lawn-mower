@@ -1,5 +1,11 @@
-Common:
+Position:
     x rewrite Position as a class of its own
+
+PositionTest:
+    x test constructors
+    x test north(), west(), south(), east()
+    x test move functions
+    x test operator overloads
 
 Lawn:
     - add min/max range constructor
