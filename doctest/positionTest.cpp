@@ -57,8 +57,31 @@ TEST_CASE("Test north(), west(), south(), east()") {
     CHECK(position.getY() == 5);
 }
 
-TEST_CASE("Test move functoins") {
+TEST_CASE("Test move functions") {
+    Position position(5, 5);
 
+    // verify correct starting position
+    REQUIRE(position.getX() == 5);
+    REQUIRE(position.getY() == 5);
+
+    // test move(x, y)
+    position.move(-1, 2);
+    CHECK(position.getX() == 4);
+    CHECK(position.getY() == 7);
+
+    position.move(3, -4);
+    CHECK(position.getX() == 7);
+    CHECK(position.getY() == 3);
+
+    // test move(north)
+    CHECK(position.move(Direction::north).getY() == 4);
+    CHECK(position.getY() == 4);
+    CHECK(position.getX() == 7);
+
+    // test move(west)
+    CHECK(position.move(Direction::west).getX() == 6);
+    CHECK(position.getY() == 4);
+    CHECK(position.getX() == 6);
 }
 
 TEST_CASE("Test operator overloads") {
