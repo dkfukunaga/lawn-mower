@@ -57,6 +57,14 @@ struct Position {
         y = new_y;
         return *this;
     }
+
+    bool operator==(Position *that) {
+        return this->x == that->x && this->y == that->y;
+    }
+
+    bool operator!=(Position *that) {
+        return !(this == that);
+    }
 };
 
 typedef Position LawnPos;
