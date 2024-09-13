@@ -126,6 +126,58 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getTotal() == 7 + turns);
     }
 
+    SUBCASE("check if forward() runs into wall") {
+        // point mower south
+        while (mower.getFacing() != Direction::south) {
+            mower.turnLeft();
+        }
+        // check for wall
+        REQUIRE(mower.peek() == SquareType::wall);
+        // check for wall collision
+        CHECK_FALSE(mower.forward());
+        CHECK_FALSE(mower.forward());
+
+        // point mower west
+        mower.turnRight();
+        // check for wall
+        REQUIRE(mower.peek() == SquareType::wall);
+        // check for wall collision
+        CHECK_FALSE(mower.forward());
+        CHECK_FALSE(mower.forward());
+
+        // point mower north
+        mower.turnRight();
+
+        // move north until hit wall
+        while (true) {
+            if (!mower.forward())
+                break;
+        }
+        // check for wall
+        REQUIRE(mower.peek() == SquareType::wall);
+        // check for wall collision
+        CHECK_FALSE(mower.forward());
+        CHECK_FALSE(mower.forward());
+        // check mower position
+        CHECK(mower.getPosition().y == 10);
+
+        // point mower east
+        mower.turnRight();
+
+        // move east until hit wall
+        while (true) {
+            if (!mower.forward())
+                break;
+        }
+        // check for wall
+        REQUIRE(mower.peek() == SquareType::wall);
+        // check for wall collision
+        CHECK_FALSE(mower.forward());
+        CHECK_FALSE(mower.forward());
+        // check mower position
+        CHECK(mower.getPosition().x == 8);
+    }
+
     delete lawn;
 }
 
