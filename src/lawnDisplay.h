@@ -5,7 +5,6 @@
 #include "common.h"
 #include "lawn.h"
 #include "mower.h"
-#include <iostream>
 #include <windows.h>
 
 class LawnDisplay {
@@ -47,12 +46,9 @@ private:
     void        updateMowerTotal();
     
     void        moveCursor(Position position);
-    void        saveCursorPosition();
-    void        restoreCursorPosition();
+    void        moveCursorToLawnPos(LawnPos position);
     void        hideCursor();
     void        showCursor();
-    
-    Position    convertLawnPosition(LawnPos lawn_position) const;
 };
 
 #endif
