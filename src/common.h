@@ -58,13 +58,14 @@ struct Position {
         return *this;
     }
 
-    bool operator==(Position *that) {
-        return this->x == that->x && this->y == that->y;
+    bool operator==(Position &rhs) {
+        return this->x == rhs.x && this->y == rhs.y;
     }
 
-    bool operator!=(Position *that) {
-        return !(this == that);
+    bool operator!=(Position &rhs) {
+        return !(*this == rhs);
     }
+
 };
 
 typedef Position LawnPos;
