@@ -27,6 +27,34 @@ TEST_CASE("Test constructors, set") {
 
 TEST_CASE("Test north(), west(), south(), east()") {
     // check that they return the correct position and don't move position
+    Position position(5, 5);
+
+    REQUIRE(position.getX() == 5);
+    REQUIRE(position.getY() == 5);
+
+    // test north()
+    CHECK(position.north().getX() == 5);
+    CHECK(position.north().getY() == 6);
+    CHECK(position.getX() == 5);
+    CHECK(position.getY() == 5);
+
+    // test west()
+    CHECK(position.west().getX() == 4);
+    CHECK(position.west().getY() == 5);
+    CHECK(position.getX() == 5);
+    CHECK(position.getY() == 5);
+
+    // test south()
+    CHECK(position.south().getX() == 5);
+    CHECK(position.south().getY() == 4);
+    CHECK(position.getX() == 5);
+    CHECK(position.getY() == 5);
+
+    // test east()
+    CHECK(position.east().getX() == 6);
+    CHECK(position.east().getY() == 5);
+    CHECK(position.getX() == 5);
+    CHECK(position.getY() == 5);
 }
 
 TEST_CASE("Test move functoins") {
