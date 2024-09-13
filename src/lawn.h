@@ -15,8 +15,8 @@ public:
     Lawn();
     ~Lawn() { delete _field; };
 
-    int         getWidth();
-    int         getHeight();
+    int         getWidth() const;
+    int         getHeight() const;
 
     SquareType  getSquare(LawnPos position);
     bool        mowSquare(LawnPos position);

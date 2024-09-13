@@ -15,15 +15,15 @@ public:
     Mower(Lawn *lawn);
     Mower();
 
-    Direction   getFacing();
-    LawnPos     getPosition();
-    SquareType  getSquare();
-    Lawn*       getLawn();
-    char        getMowerChar();
-    int         getPeeks();
-    int         getTurns();
-    int         getSteps();
-    int         getTotal();
+    Direction   getFacing() const;
+    LawnPos     getPosition() const;
+    SquareType  getSquare() const;
+    Lawn*       getLawn() const;
+    char        getMowerChar() const;
+    int         getPeeks() const;
+    int         getTurns() const;
+    int         getSteps() const;
+    int         getTotal() const;
 
     void        setLawn(Lawn *lawn);
 

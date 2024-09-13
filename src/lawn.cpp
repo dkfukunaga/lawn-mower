@@ -30,10 +30,10 @@ Lawn::Lawn() {
 /***** GETTERS/ACCESSORS *****/
 
 // Return lawn width
-int Lawn::getWidth() { return _width; }
+int Lawn::getWidth() const { return _width; }
 
 // Return lawn height
-int Lawn::getHeight() { return _height; }
+int Lawn::getHeight() const { return _height; }
 
 // Return Square at position
 SquareType Lawn::getSquare(LawnPos position) {

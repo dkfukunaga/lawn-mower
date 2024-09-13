@@ -50,19 +50,19 @@ Mower::Mower() {
 /***** GETTERS/ACCESSORS *****/
 
 // returns direction the mower is facing
-Direction Mower::getFacing() { return _facing; }
+Direction Mower::getFacing() const { return _facing; }
 
 // return coordinates of mower on lawn
-LawnPos Mower::getPosition() { return _position; }
+LawnPos Mower::getPosition() const { return _position; }
 
 // return current square
-SquareType Mower::getSquare() { return _lawn->getSquare(this->getPosition()); }
+SquareType Mower::getSquare() const { return _lawn->getSquare(this->getPosition()); }
 
 // returns pointer to the current lawn
-Lawn* Mower::getLawn() { return _lawn; }
+Lawn* Mower::getLawn() const { return _lawn; }
 
 // returns ascii character for mower depending on facing
-char Mower::getMowerChar() {
+char Mower::getMowerChar() const {
     switch (_facing) {
     case Direction::north:
         return '^';
@@ -84,16 +84,16 @@ char Mower::getMowerChar() {
 }
 
 // returns number of peeks
-int Mower::getPeeks() { return _peeks; }
+int Mower::getPeeks() const { return _peeks; }
 
 // returns number of turns
-int Mower::getTurns() { return _turns; }
+int Mower::getTurns() const { return _turns; }
 
 // returns number of steps
-int Mower::getSteps() { return _steps; }
+int Mower::getSteps() const { return _steps; }
 
 // returns total actions taken
-int Mower::getTotal() { return _peeks + _turns + _steps; }
+int Mower::getTotal() const { return _peeks + _turns + _steps; }
 
 /***** SETTERS/MUTATORS *****/
 

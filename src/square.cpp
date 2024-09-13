@@ -26,17 +26,17 @@ Square::Square(SquareType type):
 /***** GETTERS/ACCESSORS *****/
 
 // returns SquareType
-SquareType Square::getType() { return _type; }
+SquareType Square::getType() const { return _type; }
 
 // returns variant type for squres with randomized strings
-int Square::getVariant() { return _variant; }
+int Square::getVariant() const { return _variant; }
 
 // returns 2 char ascii string representation of square type
 // error:   "??"
 // wall:    "  "
 // unmowed: "\"," or ",\""
 // mowed:   " ."
-std::string Square::getString() {
+std::string Square::getString() const {
     switch (_type) {
         case SquareType::error:
             return _error_string;
