@@ -2,7 +2,6 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "common.h"
 #include <string>
 #include <random>
 #include <ctime>

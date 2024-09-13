@@ -1,8 +1,8 @@
 #ifndef LAWN_H
 #define LAWN_H
 
-#include "common.h"
 #include "square.h"
+#include "position.h"
 #include <random>
 #include <time.h>
 

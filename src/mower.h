@@ -4,8 +4,8 @@
 #ifndef MOWER_H
 #define MOWER_H
 
-#include "common.h"
 #include "lawn.h"
+#include "position.h"
 #include <random>
 #include <time.h>
 
