@@ -4,9 +4,14 @@
 
 /***** CONSTRUCTORS *****/
 
-// Constructor for Position
+// Default constructor for Position
 // defaults coordinates to (0, 0)
-Position::Position(int x = 0, int y = 0):
+Position::Position():
+    _x(0),
+    _y(0) { };
+
+// Constructor for Position
+Position::Position(int x, int y):
     _x(x),
     _y(y) { };
 
@@ -39,6 +44,51 @@ Position Position::move(int x, int y) {
     _x += x;
     _y += y;
     return *this;
+}
+
+// move once in direction
+// north (y + 1), west (x - 1), south (y - 1), east (x + 1)
+// returns new Position
+Position Position::move(Direction direction) {
+    switch (direction) {
+        case Direction::north:
+            move(0, 1);
+            break;
+        case Direction::west:
+            move(-1, 0);
+            break;
+        case Direction::south:
+            move(0, -1);
+            break;
+        case Direction::east:
+            move(1, 0);
+            break;
+    }
+    return *this;
+}
+
+// move north (y + 1) once
+// returns new Position
+Position Position::north() const {
+    return Position(_x, _y + 1);
+}
+
+// move west (x - 1) once
+// returns new Position
+Position Position::west() const {
+    return Position(_x - 1, _y);
+}
+
+// move south (y - 1) once
+// returns new Position
+Position Position::south() const {
+    return Position(_x, _y - 1);
+}
+
+// move east (x + 1) once
+// returns new Position
+Position Position::east() const {
+    return Position(_x + 1, _y);
 }
 
 /***** OPERATOR OVERRIDES *****/
