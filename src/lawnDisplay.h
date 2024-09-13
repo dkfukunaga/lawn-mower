@@ -17,7 +17,6 @@ public:
     int*        getTitleOffsets();
     int*        getLawnOffsets();
     int*        getStatsOffsets();
-    LawnPos     getLawnPosition() const;
 
     void        setMarginOffsets(int x_offset, int y_offset);
     void        setTitleOffsets(int x_offset, int y_offset);
@@ -30,7 +29,6 @@ private:
     static const std::string _title;
 
     Mower*      _mower;
-    Position    _cursor_position;               // absolute position of cursor
     int         _margin_offsets[2]   = {8, 4};  // offsets relative to left, top of console default {8, 4}
     int         _title_offsets[2]    = {0, 0};  // offsets relative to margin, border default {0, 0}
     int         _lawn_offsets[2]     = {0, 3};  // offsets relative to margin, title default {0, 3}

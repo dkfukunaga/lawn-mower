@@ -42,37 +42,6 @@ int* LawnDisplay::getLawnOffsets() { return _lawn_offsets; }
 // and relative to the bottom of the lawn
 int* LawnDisplay::getStatsOffsets() { return _stats_offsets; }
 
-// returns LawnPos of cursor
-// if cursor not in lawn, returns LawnPos(-1, -1)
-LawnPos LawnDisplay::getLawnPosition() const {
-    // calculate lawn boundaries
-    int lawn_left = _margin_offsets[0] + _lawn_offsets[0];
-    int lawn_right = lawn_left + _mower->getLawn()->getWidth() * 2;
-    int lawn_top = _margin_offsets[1] + _title_offsets[1] + _lawn_offsets[1] + 1;
-    int lawn_bottom = lawn_top + _mower->getLawn()->getHeight();
-
-    // check if within bounds of lawn
-    if (_cursor_position.x < lawn_left || _cursor_position.x > lawn_right ||
-        _cursor_position.y < lawn_top || _cursor_position.y > lawn_bottom) {
-        return LawnPos(-1, -1); // indicates error
-    }
-
-    // adjust for side margin
-    int x = (_cursor_position.x - _margin_offsets[0]);
-
-    // adjust for square width
-    x = x / _square_dimension[0];
-
-    // adjust for top margin, title, and title offset
-    // assumes title is 1 line
-    int y = _cursor_position.y - _margin_offsets[1] - _title_offsets[1] - 1;
-
-    // adjust for lawn y axis being reversed
-    y = _mower->getLawn()->getHeight() - y;
-
-    return LawnPos(x, y);
-}
-
 /***** SETTERS/MUTATORS *****/
 
 // set margin offsets from top and left side of console
