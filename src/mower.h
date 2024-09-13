@@ -17,7 +17,7 @@ public:
 
     Direction   getFacing() const;
     LawnPos     getPosition() const;
-    SquareType  getSquare() const;
+    Square      getSquare() const;
     Lawn*       getLawn() const;
     char        getMowerChar() const;
     int         getPeeks() const;

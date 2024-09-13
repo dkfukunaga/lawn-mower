@@ -83,7 +83,7 @@ TEST_CASE("Test movement functionality and stats") {
 
     SUBCASE("getSquare(), forward(), turnLeft(), turnRight(), steps, lawnmowing test") {
         // make sure starting square is mowed
-        REQUIRE(mower.getSquare() == SquareType::mowed);
+        REQUIRE(mower.getSquare().getType() == SquareType::mowed);
 
         // point mower north
         // and count turns
@@ -110,11 +110,11 @@ TEST_CASE("Test movement functionality and stats") {
         REQUIRE(mower.getPosition().y == 4);
 
         // check squares that were mowed
-        CHECK(mower.getLawn()->getSquare(Position(2, 4)) == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(2, 3)) == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(1, 3)) == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(1, 2)) == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(1, 1)) == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(Position(2, 4)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(Position(2, 3)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(Position(1, 3)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(Position(1, 2)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(Position(1, 1)).getType() == SquareType::mowed);
 
         // check next square is unmowed
         CHECK(mower.peek() == SquareType::unmowed); // peeks = 1
