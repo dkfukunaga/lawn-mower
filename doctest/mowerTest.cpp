@@ -10,8 +10,8 @@ TEST_CASE("Test Mower contructor") {
         CHECK_FALSE(mower.getLawn() == nullptr);
 
         // make sure mower initialized to position (1,1)
-        CHECK(mower.getPosition().x == LawnPos(1,1).x);
-        CHECK(mower.getPosition().y == LawnPos(1,1).y);
+        CHECK(mower.getPosition().getX() == LawnPos(1,1).getX());
+        CHECK(mower.getPosition().getY() == LawnPos(1,1).getY());
 
         // make sure mower stats initialized to 0
         CHECK(mower.getPeeks() == 0);
@@ -26,8 +26,8 @@ TEST_CASE("Test Mower contructor") {
         CHECK_FALSE(mower.getLawn() == nullptr);
 
         // make sure mower initialized to position (1,1)
-        CHECK(mower.getPosition().x == LawnPos(1,1).x);
-        CHECK(mower.getPosition().y == LawnPos(1,1).y);
+        CHECK(mower.getPosition().getX() == LawnPos(1,1).getX());
+        CHECK(mower.getPosition().getY() == LawnPos(1,1).getY());
 
         // make sure mower stats initialized to 0
         CHECK(mower.getPeeks() == 0);
@@ -95,26 +95,28 @@ TEST_CASE("Test movement functionality and stats") {
         
         // make sure facing north
         REQUIRE(mower.getFacing() == Direction::north);
+        // make sure position is (1,1)
+        REQUIRE(mower.getPosition().getX() == 1);
+        REQUIRE(mower.getPosition().getY() == 1);
 
         // conduct series of moves
-
         mower.forward();        // y++ (1, 2)   steps = 1
         mower.forward();        // y++ (1, 3)   steps = 2
         mower.turnRight();      // facing east  turns = 1
         mower.forward();        // x++ (2, 3)   steps = 3
         mower.turnLeft();       // facing north turns = 2
-        mower.forward();        // y ++ (2, 4)  steps = 4
+        mower.forward();        // y++ (2, 4)   steps = 4
 
         // check current position
-        REQUIRE(mower.getPosition().x == 2);
-        REQUIRE(mower.getPosition().y == 4);
+        REQUIRE(mower.getPosition().getX() == 2);
+        REQUIRE(mower.getPosition().getY() == 4);
 
         // check squares that were mowed
-        CHECK(mower.getLawn()->getSquare(Position(2, 4)).getType() == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(2, 3)).getType() == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(1, 3)).getType() == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(1, 2)).getType() == SquareType::mowed);
-        CHECK(mower.getLawn()->getSquare(Position(1, 1)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(LawnPos(2, 4)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(LawnPos(2, 3)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(LawnPos(1, 3)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(LawnPos(1, 2)).getType() == SquareType::mowed);
+        CHECK(mower.getLawn()->getSquare(LawnPos(1, 1)).getType() == SquareType::mowed);
 
         // check next square is unmowed
         CHECK(mower.peek() == SquareType::unmowed); // peeks = 1
@@ -159,7 +161,7 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK_FALSE(mower.forward());
         CHECK_FALSE(mower.forward());
         // check mower position
-        CHECK(mower.getPosition().y == 10);
+        CHECK(mower.getPosition().getY() == 10);
 
         // point mower east
         mower.turnRight();
@@ -175,7 +177,7 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK_FALSE(mower.forward());
         CHECK_FALSE(mower.forward());
         // check mower position
-        CHECK(mower.getPosition().x == 8);
+        CHECK(mower.getPosition().getX() == 8);
     }
 
     delete lawn;
