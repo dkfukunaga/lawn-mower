@@ -24,7 +24,7 @@ public:
     void        setStatsOffsets(int x_offset, int y_offset);
 
     void        draw();
-    void        moveMower(Direction direction);
+    void        moveMower();
 private:
     static const std::string _title;
 
@@ -44,6 +44,7 @@ private:
     void        updateMowerTotal();
     
     void        moveCursor(Position position);
+    void        moveCursor(int x, int y);
     void        moveCursorToLawnPos(LawnPos position);
     void        hideCursor();
     void        showCursor();

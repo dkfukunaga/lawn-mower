@@ -70,7 +70,18 @@ void LawnDisplay::setStatsOffsets(int x_margin,int  y_margin) {
 
 /***** PUBLIC FUNCTIONS *****/
 
+void LawnDisplay::moveMower() {
+    // save old mower position
+    LawnPos old_pos = _mower->getPosition();
 
+    // move mower
+    _mower->forward();
+
+    // redraw old square
+    drawSquare(old_pos);
+    // draw new square
+    drawSquare(_mower->getPosition());
+}
 
 /***** PRIVATE DRAW FUNCTIONS *****/
 
@@ -95,6 +106,17 @@ void LawnDisplay::drawSquare(LawnPos position) {
 void LawnDisplay::moveCursor(Position position) {
     // move cursor using ANSI escape code
     printf("\033[%d;%dH", position.y, position.x);
+}
+
+// move cursor by absolute offset using ANSI escape codes
+void LawnDisplay::moveCursor(int x, int y) {
+    char x_direction = (x > 0 ? 'C' : 'D');
+    char y_direction = (y > 0 ? 'A' : 'B');
+
+    if (x != 0)
+        printf("\033[%d%c", x, x_direction);
+    if (y != 0)
+        printf("\033[%d%c", y, y_direction);
 }
 
 // moves cursor to provided lawn position
