@@ -20,13 +20,14 @@ public:
     int         getX() const;
     int         getY() const;
 
-    Position    set(int x, int y);
-    Position    move(int x, int y);
-    Position    move(Direction direction);
     Position    north() const;
     Position    west() const;
     Position    south() const;
     Position    east() const;
+    
+    Position    set(int x, int y);
+    Position    move(int x, int y);
+    Position    move(Direction direction);
 
     bool        operator==(Position &rhs);
     bool        operator!=(Position &rhs);

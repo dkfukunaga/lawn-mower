@@ -28,6 +28,26 @@ int Position::getX() const { return _x; }
 // returns y coordinate
 int Position::getY() const { return _y; }
 
+// returns position to the north (y + 1)
+Position Position::north() const {
+    return Position(_x, _y + 1);
+}
+
+// returns position to the west (x - 1)
+Position Position::west() const {
+    return Position(_x - 1, _y);
+}
+
+// returns position to the south (y - 1)
+Position Position::south() const {
+    return Position(_x, _y - 1);
+}
+
+// returns position to the east (x + 1)
+Position Position::east() const {
+    return Position(_x + 1, _y);
+}
+
 /***** SETTERS/MUTATORS *****/
 
 // sets x and y coordinates to new values
@@ -65,30 +85,6 @@ Position Position::move(Direction direction) {
             break;
     }
     return *this;
-}
-
-// move north (y + 1) once
-// returns new Position
-Position Position::north() const {
-    return Position(_x, _y + 1);
-}
-
-// move west (x - 1) once
-// returns new Position
-Position Position::west() const {
-    return Position(_x - 1, _y);
-}
-
-// move south (y - 1) once
-// returns new Position
-Position Position::south() const {
-    return Position(_x, _y - 1);
-}
-
-// move east (x + 1) once
-// returns new Position
-Position Position::east() const {
-    return Position(_x + 1, _y);
 }
 
 /***** OPERATOR OVERRIDES *****/
