@@ -102,6 +102,9 @@ void Mower::setLawn(Lawn *lawn) {
     // set lawn pointer to new lawn
     _lawn = lawn;
 
+    // reset to lower left corner
+    _position.set(1, 1);
+
     // set stats to 0
     _peeks = 0;
     _turns = 0;
@@ -150,16 +153,16 @@ bool Mower::forward() {
     // change position
     switch (_facing) {
     case Direction::north:
-        _position = _position.north();
+        _position.move(Direction::north);
         break;
     case Direction::west:
-        _position = _position.west();
+        _position.move(Direction::west);
         break;
     case Direction::south:
-        _position = _position.south();
+        _position.move(Direction::south);
         break;
     case Direction::east:
-        _position = _position.east();
+        _position.move(Direction::east);
         break;
     }
 
