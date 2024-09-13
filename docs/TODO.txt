@@ -19,14 +19,12 @@ MowerTest:
 LawnDisplay:
     - draw lawn on screen in ascii with 2 char wide squares
     x draw mower over lawn square
+    - redraw lawn square after mower movement
     - colorize lawn
     - display mower stats below lawn
 
 LawnDisplayTest:
     - figure out how to unit test the ascii display
-
-LawnMowerDriver:
-    - redraw lawn square after mower movement
 
 General:
     - remove all srand function calls and call once in main
