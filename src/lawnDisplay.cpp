@@ -105,7 +105,7 @@ void LawnDisplay::drawSquare(LawnPos position) {
 // (0,0) is the top left corner of the console
 void LawnDisplay::moveCursor(Position position) {
     // move cursor using ANSI escape code
-    printf("\033[%d;%dH", position.y, position.x);
+    printf("\033[%d;%dH", position.getY(), position.getX());
 }
 
 // move cursor by absolute offset using ANSI escape codes
@@ -123,8 +123,8 @@ void LawnDisplay::moveCursor(int x, int y) {
 // (0,0) is the top left corner of the console
 void LawnDisplay::moveCursorToLawnPos(LawnPos position) {
     // convert lawn position to absolute position
-    int x = position.x;
-    int y = position.y;
+    int x = position.getX();
+    int y = position.getY();
 
     // adjust for square width
     x = x * _square_dimension[0];

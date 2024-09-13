@@ -2,9 +2,9 @@
 #ifndef LAWN_DISPLAY_H
 #define LAWN_DISPLAY_H
 
-#include "common.h"
 #include "lawn.h"
 #include "mower.h"
+#include "position.h"
 #include <windows.h>
 
 class LawnDisplay {
