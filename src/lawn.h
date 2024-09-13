@@ -17,9 +17,9 @@ public:
 
     int         getWidth() const;
     int         getHeight() const;
-    Square      getSquare(LawnPos position) const;
+    Square      getSquare(LawnPos lawn_pos) const;
     
-    bool        mowSquare(LawnPos position);
+    bool        mowSquare(LawnPos lawn_pos);
 private:
     int         _width;
     int         _height;

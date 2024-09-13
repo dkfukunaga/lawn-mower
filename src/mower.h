@@ -16,7 +16,7 @@ public:
     Mower();
 
     Direction   getFacing() const;
-    LawnPos     getPosition() const;
+    LawnPos     getLawnPos() const;
     Square      getSquare() const;
     Lawn*       getLawn() const;
     char        getMowerChar() const;
@@ -34,7 +34,7 @@ public:
 private:
     Lawn        *_lawn;
     Direction   _facing;
-    LawnPos     _position;
+    LawnPos     _lawn_pos;
     int         _peeks;
     int         _turns;
     int         _steps;

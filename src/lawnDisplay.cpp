@@ -72,7 +72,7 @@ void LawnDisplay::setStatsOffsets(int x_margin,int  y_margin) {
 
 void LawnDisplay::moveMower() {
     // save old mower position
-    LawnPos old_pos = _mower->getPosition();
+    LawnPos old_pos = _mower->getLawnPos();
 
     // move mower
     _mower->forward();
@@ -80,7 +80,7 @@ void LawnDisplay::moveMower() {
     // redraw old square
     drawSquare(old_pos);
     // draw new square
-    drawSquare(_mower->getPosition());
+    drawSquare(_mower->getLawnPos());
 }
 
 /***** PRIVATE DRAW FUNCTIONS *****/
@@ -90,7 +90,7 @@ void LawnDisplay::drawSquare(LawnPos position) {
     moveCursorToLawnPos(position);
 
     // check if mower is on the square
-    if (_mower->getPosition() == position) {
+    if (_mower->getLawnPos() == position) {
         // print square string with mower char on left
         printf("%c%c", _mower->getMowerChar(), _mower->getSquare().getString().at(1));
     } else {

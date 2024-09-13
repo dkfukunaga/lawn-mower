@@ -15,10 +15,10 @@ Mower::Mower(Lawn *lawn) {
     _facing = static_cast<Direction>(rand() % 4);
 
     // set initial position lower left corner of grass
-    _position = LawnPos(1, 1);
+    _lawn_pos = LawnPos(1, 1);
 
     // mow current position
-    _lawn->mowSquare(_position);
+    _lawn->mowSquare(_lawn_pos);
 
     // set stats to 0
     _peeks = 0;
@@ -36,10 +36,10 @@ Mower::Mower() {
     _facing = static_cast<Direction>(rand() % 4);
 
     // set initial position lower left corner of grass
-    _position = LawnPos(1, 1);
+    _lawn_pos = LawnPos(1, 1);
 
     // mow current position
-    _lawn->mowSquare(_position);
+    _lawn->mowSquare(_lawn_pos);
 
     // set stats to 0
     _peeks = 0;
@@ -53,10 +53,10 @@ Mower::Mower() {
 Direction Mower::getFacing() const { return _facing; }
 
 // return coordinates of mower on lawn
-LawnPos Mower::getPosition() const { return _position; }
+LawnPos Mower::getLawnPos() const { return _lawn_pos; }
 
 // return current square
-Square Mower::getSquare() const { return _lawn->getSquare(this->getPosition()); }
+Square Mower::getSquare() const { return _lawn->getSquare(this->getLawnPos()); }
 
 // returns pointer to the current lawn
 Lawn* Mower::getLawn() const { return _lawn; }
@@ -103,7 +103,7 @@ void Mower::setLawn(Lawn *lawn) {
     _lawn = lawn;
 
     // reset to lower left corner
-    _position.set(1, 1);
+    _lawn_pos.set(1, 1);
 
     // set stats to 0
     _peeks = 0;
@@ -153,21 +153,21 @@ bool Mower::forward() {
     // change position
     switch (_facing) {
     case Direction::north:
-        _position.move(Direction::north);
+        _lawn_pos.move(Direction::north);
         break;
     case Direction::west:
-        _position.move(Direction::west);
+        _lawn_pos.move(Direction::west);
         break;
     case Direction::south:
-        _position.move(Direction::south);
+        _lawn_pos.move(Direction::south);
         break;
     case Direction::east:
-        _position.move(Direction::east);
+        _lawn_pos.move(Direction::east);
         break;
     }
 
     // mow new position
-    _lawn->mowSquare(_position);
+    _lawn->mowSquare(_lawn_pos);
     
     return true;
 }
@@ -178,16 +178,16 @@ bool Mower::forward() {
 SquareType Mower::checkNextSquare() {
     switch (_facing) {
     case Direction::north:
-        return _lawn->getSquare(_position.north()).getType();
+        return _lawn->getSquare(_lawn_pos.north()).getType();
         break;
     case Direction::west:
-        return _lawn->getSquare(_position.west()).getType();
+        return _lawn->getSquare(_lawn_pos.west()).getType();
         break;
     case Direction::south:
-        return _lawn->getSquare(_position.south()).getType();
+        return _lawn->getSquare(_lawn_pos.south()).getType();
         break;
     case Direction::east:
-        return _lawn->getSquare(_position.east()).getType();
+        return _lawn->getSquare(_lawn_pos.east()).getType();
         break;
     }
     return SquareType::error;
