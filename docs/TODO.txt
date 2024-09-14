@@ -1,35 +1,24 @@
-Square:
-    x add more unmowed variants
-    x add wall variants ([# ] and [ #] for left and right walls)
-
-SquareTest:
-    x update tests to check for wall variants
+MowerLogic:
+    - create framework for controlling mower
+    - create basic mower logic routine
 
 Lawn:
-    x update to use wall variants
     - add min/max range constructor
     - override bracket operator
 
 LawnTest:
-    x create setLawn test
-    x modify to check for wall variants
     - create tests for min/max range constructor
     - create tests for bracket operator override
 
 LawnDisplay:
-    x draw lawn on screen in ascii with 2 char wide squares
-    x redraw lawn square after mower movement
-    x implement drawStats
     - colorize lawn
 
 LawnDisplayTest:
     - figure out how to unit test the ascii display
         - possibly print to file and then compare specific lines to test cases
           in another file
-    x test moveMower
 
 General:
     - remove all srand function calls and call once in main
-    x Position typedefs for LawnPos, ArrayPos, ScreenPos
-        x made into class with LawnPos typedef
+        - probably will be in LawnDriver?
     - create function in Lawn to convert to array index
