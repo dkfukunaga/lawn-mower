@@ -37,7 +37,7 @@ TEST_CASE("Test Square strings") {
 
     // create array of unmowed squares to make sure both
     // randomized strings are tested
-    int unmowed_count = 10;
+    int unmowed_count = 15;
     Square unmowed_squares[unmowed_count];
 
     // create unmowed squares
@@ -45,7 +45,8 @@ TEST_CASE("Test Square strings") {
     std::cout << "unmowed square strings:\n";
     for (int i = 0; i < unmowed_count; ++i) {
         unmowed_squares[i].setType(SquareType::unmowed);
-        std::cout << "  " << i << ": \"" << unmowed_squares[i].getString() << "\"\n";
+        printf("  %2d: \"%s\"\n", i, unmowed_squares[i].getString().c_str());
+        // std::cout << "  " << i << ": \"" << unmowed_squares[i].getString() << "\"\n";
     }
     std::cout << std::endl;
 
@@ -57,6 +58,18 @@ TEST_CASE("Test Square strings") {
                 break;
             case 1:
                 CHECK(unmowed_squares[i].getString() == ",\"");
+                break;
+            case 2:
+                CHECK(unmowed_squares[i].getString() == ";'");
+                break;
+            case 3:
+                CHECK(unmowed_squares[i].getString() == "';");
+                break;
+            case 4:
+                CHECK(unmowed_squares[i].getString() == ";\"");
+                break;
+            case 5:
+                CHECK(unmowed_squares[i].getString() == "\";");
                 break;
         }
     }

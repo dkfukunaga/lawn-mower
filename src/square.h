@@ -30,7 +30,7 @@ private:
 
     static const std::string _error_string;         // "??"
     static const std::string _wall_string;          // "##"
-    static const std::string _unmowed_string[2];    // ""," or ",""
+    static const std::string _unmowed_string[6];    // ", ," ;' '; ;" ";
     static const std::string _mowed_string;         // " ."
 };
 

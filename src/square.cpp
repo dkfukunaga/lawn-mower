@@ -5,7 +5,9 @@
 
 const std::string Square::_error_string = "??";
 const std::string Square::_wall_string = "##";  // will be blank when colorization implemented
-const std::string Square::_unmowed_string[2] = {"\",", ",\""};  // can be randomized
+const std::string Square::_unmowed_string[6] = {"\",", ",\"",
+                                                ";'", "';",
+                                                ";\"", "\";"};
 const std::string Square::_mowed_string = " .";
 
 /***** CONSTRUCTORS *****/
@@ -14,13 +16,13 @@ const std::string Square::_mowed_string = " .";
 // defaults to error type
 Square::Square():
     _type(SquareType::error) {
-    _variant = rand() % 2;
+    _variant = rand() % 6;
 };
 
 // full constructor
 Square::Square(SquareType type):
     _type(type) {
-    _variant = rand() % 2;
+    _variant = rand() % 6;
 };
     
 /***** GETTERS/ACCESSORS *****/
