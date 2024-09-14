@@ -10,8 +10,9 @@ LawnTest:
     - create tests for bracket operator override
 
 LawnDisplay:
-    - draw lawn on screen in ascii with 2 char wide squares
+    x draw lawn on screen in ascii with 2 char wide squares
     x redraw lawn square after mower movement
+    - implement drawStats
     - colorize lawn
     - display mower stats below lawn
 
