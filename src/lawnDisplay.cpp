@@ -15,7 +15,7 @@ const std::string LawnDisplay::_stats_layout[7] = {
     "+-------+-------+-------+-------+",
     "|       |       |       |       |",
     "+-------------------------------+",
-    "|      Position:   (  ,  )      |",
+    "|     Facing       at   ,       |",
     "+===============================+"
 };
 
@@ -191,14 +191,16 @@ bool LawnDisplay::mowerForward() {
 
 void LawnDisplay::mowerTurnLeft() {
     _mower->turnLeft();
-    updateMowerTurns();
     drawSquare(_mower->getLawnPos());
+    updateMowerTurns();
+    updateMowerPosition();
 }
 
 void LawnDisplay::mowerTurnRight() {
     _mower->turnRight();
-    updateMowerTurns();
     drawSquare(_mower->getLawnPos());
+    updateMowerTurns();
+    updateMowerPosition();
 }
 
 /***** PRIVATE DRAW FUNCTIONS *****/
@@ -312,10 +314,15 @@ void LawnDisplay::updateMowerTotal() {
 }
 
 void LawnDisplay::updateMowerPosition() {
+    // update direction
+    moveCursor(_mower_dir_pos);
+    printf("%-5s", getDirectionString(_mower->getFacing()).c_str());
+
+    // update x,y coordinates
     moveCursor(_mower_x_pos);
     printf("%2d", _mower->getLawnPos().getX());
     moveCursor(_mower_y_pos);
-    printf("%2d", _mower->getLawnPos().getY());
+    printf("%-2d", _mower->getLawnPos().getY());
 }
 
 /***** PRIVATE CURSOR FUNCTIONS *****/
@@ -404,12 +411,13 @@ void LawnDisplay::init() {
     int stats_pos_x = _margin_offsets[0] + _stats_offsets[0];
 
     // set all stats positions, using x relative to stats_pos_x
-    _peeks_pos   = Position(stats_pos_x +  3, stats_pos_y);
-    _turns_pos   = Position(stats_pos_x + 11, stats_pos_y);
-    _steps_pos   = Position(stats_pos_x + 19, stats_pos_y);
-    _total_pos   = Position(stats_pos_x + 27, stats_pos_y);
-    _mower_x_pos = Position(stats_pos_x + 20, stats_pos_y + 2);
-    _mower_y_pos = Position(stats_pos_x + 23, stats_pos_y + 2);
+    _peeks_pos     = Position(stats_pos_x +  3, stats_pos_y);
+    _turns_pos     = Position(stats_pos_x + 11, stats_pos_y);
+    _steps_pos     = Position(stats_pos_x + 19, stats_pos_y);
+    _total_pos     = Position(stats_pos_x + 27, stats_pos_y);
+    _mower_dir_pos = Position(stats_pos_x + 13, stats_pos_y + 2);
+    _mower_x_pos   = Position(stats_pos_x + 22, stats_pos_y + 2);
+    _mower_y_pos   = Position(stats_pos_x + 25, stats_pos_y + 2);
 
     // hide cursor
     hideCursor();
