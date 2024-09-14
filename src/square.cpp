@@ -16,13 +16,13 @@ const std::string Square::_mowed_string = " .";
 // defaults to error type
 Square::Square():
     _type(SquareType::error) {
-    _variant = rand() % 6;
+    rollVariant();
 };
 
 // full constructor
 Square::Square(SquareType type):
     _type(type) {
-    _variant = rand() % 6;
+    rollVariant();
 };
     
 /***** GETTERS/ACCESSORS *****/
@@ -60,4 +60,12 @@ std::string Square::getString() const {
 /***** SETTERS/MUTATORS *****/
 
 // sets SquareType with no error checking
-void Square::setType(SquareType type) { _type = type; }
+void Square::setType(SquareType type) {
+    _type = type;
+    rollVariant();
+}
+
+
+/***** PRIVATE HELPER FUNCTIONS *****/
+
+void Square::rollVariant() { _variant = rand() % 6; }

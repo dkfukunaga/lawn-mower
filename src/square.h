@@ -28,6 +28,8 @@ private:
     SquareType      _type;
     int             _variant;   // only used by unmowed squares
 
+    void            rollVariant();
+
     static const std::string _error_string;         // "??"
     static const std::string _wall_string;          // "##"
     static const std::string _unmowed_string[6];    // ", ," ;' '; ;" ";
