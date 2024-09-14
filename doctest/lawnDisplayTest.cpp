@@ -21,11 +21,6 @@ int main() {
     LawnDisplay *lawn_display = new LawnDisplay(lawn);
     lawn_display->drawScreen();
 
-    while(lawn_display->mowerPeek() != SquareType::wall) {
-        wait(lawn_display);
-        lawn_display->mowerTurnRight();
-    }
-
     while(lawn_display->mowerPeek() == SquareType::wall) {
         wait(lawn_display);
         lawn_display->mowerTurnRight();
@@ -39,13 +34,26 @@ int main() {
     wait(lawn_display);
     lawn_display->mowerTurnRight();
 
-    for (int i = 0; i < 2; ++i) {
+    bool turn_left = false;
+
+    wait(lawn_display);
+    if (!lawn_display->mowerForward()) {
+        turn_left = true;
+        wait(lawn_display);
+        lawn_display->mowerTurnLeft();
+        wait(lawn_display);
+        lawn_display->mowerTurnLeft();
         wait(lawn_display);
         lawn_display->mowerForward();
     }
+    wait(lawn_display);
+    lawn_display->mowerForward();
 
     wait(lawn_display);
-    lawn_display->mowerTurnRight();
+    if (turn_left)
+        lawn_display->mowerTurnLeft();
+    else
+        lawn_display->mowerTurnRight();
 
     for (int i = 0; i < 3; ++i) {
         wait(lawn_display);
@@ -53,13 +61,19 @@ int main() {
     }
 
     wait(lawn_display);
-    lawn_display->mowerTurnRight();
+    if (turn_left)
+        lawn_display->mowerTurnLeft();
+    else
+        lawn_display->mowerTurnRight();
 
     wait(lawn_display);
     lawn_display->mowerForward();
 
     wait(lawn_display);
-    lawn_display->mowerTurnRight();
+    if (turn_left)
+        lawn_display->mowerTurnLeft();
+    else
+        lawn_display->mowerTurnRight();
 
     for (int i = 0; i < 3; ++i) {
         wait(lawn_display);
