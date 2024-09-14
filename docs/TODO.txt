@@ -46,3 +46,14 @@ General:
     - remove all srand function calls and call once in main
         - probably will be in LawnDriver?
     - create function in Lawn to convert to array index
+
+Settings:
+    - create parser for simple settings file
+    - use settings file to configure colors, square sizes
+    - define layout variables (margins etc)
+    - define default lawn size
+
+Future:
+    - different lawn shapes
+    - run all algorithms in sequence and display results
+    - calculate interesting stats
