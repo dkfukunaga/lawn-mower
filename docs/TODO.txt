@@ -1,11 +1,18 @@
+Square:
+    x add more unmowed variants
+    x add wall variants ([# ] and [ #] for left and right walls)
 
+SquareTest:
+    x update tests to check for wall variants
 
 Lawn:
+    x update to use wall variants
     - add min/max range constructor
     - override bracket operator
 
 LawnTest:
     x create setLawn test
+    x modify to check for wall variants
     - create tests for min/max range constructor
     - create tests for bracket operator override
 
@@ -20,7 +27,7 @@ LawnDisplayTest:
     - figure out how to unit test the ascii display
         - possibly print to file and then compare specific lines to test cases
           in another file
-    - test moveMower
+    x test moveMower
 
 General:
     - remove all srand function calls and call once in main
