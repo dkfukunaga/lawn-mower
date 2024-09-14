@@ -3,13 +3,8 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-// cardinal direction on lawn
-enum class Direction {
-    north,
-    west,
-    south,
-    east
-};
+#include "direction.h"
+
 
 class Position {
 public:

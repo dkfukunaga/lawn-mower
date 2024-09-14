@@ -6,6 +6,7 @@
 
 #include "lawn.h"
 #include "position.h"
+#include "direction.h"
 #include <random>
 #include <time.h>
 

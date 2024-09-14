@@ -5,6 +5,7 @@
 #include "lawn.h"
 #include "mower.h"
 #include "position.h"
+#include "direction.h"
 #include <windows.h>
 
 class LawnDisplay {
@@ -51,9 +52,9 @@ private:
     Position    _turns_pos;
     Position    _steps_pos;
     Position    _total_pos;
+    Position    _mower_dir_pos;
     Position    _mower_x_pos;
     Position    _mower_y_pos;
-
     Position    _bottom_pos;
 
     void        drawSquare(LawnPos position);
