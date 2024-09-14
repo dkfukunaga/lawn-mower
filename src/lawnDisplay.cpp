@@ -3,7 +3,6 @@
 
 /***** STATIC CONSTANTS *****/
 
-const std::string LawnDisplay::_title = "Lawn Mower Simulation";
 
 /***** CONSTRUCTORS *****/
 
@@ -204,7 +203,7 @@ void LawnDisplay::moveCursorToLawnPos(LawnPos position) {
 
     // adjust for top margin, title, and title offset
     // assumes title is 1 line
-    y = y + _title_offsets[1] + 1 + _margin_offsets[1];
+    y = y + _margin_offsets[1] + _title_offsets[1] + _title_height;
 
     // move cursor using ANSI escape code
     printf("\033[%d;%dH", y, x);

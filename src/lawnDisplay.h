@@ -27,7 +27,7 @@ public:
     bool        refreshLawn();
     void        moveMower();
 private:
-    static const std::string _title;
+    std::string _title = "Lawn Mower Simulation";
 
     Mower*      _mower;
     int         _margin_offsets[2]   = {8, 2};  // offsets relative to left, top of console default {8, 4}
@@ -35,7 +35,9 @@ private:
     int         _lawn_offsets[2]     = {0, 2};  // offsets relative to margin, title default {0, 3}
     int         _stats_offsets[2]    = {4, 2};  // offsets relative to margin, lawn default {0, 3}
     int         _square_dimension[2] = {2, 1};  // square size (2 chars) default {2, 1}
-    
+    int         _title_height        = 1;       // currently single line title
+    int         _stats_height        = 0;       // stats display not yet implemented
+
     void        drawSquare(LawnPos position);
     void        drawStats();
     void        updateMowerPosition();
