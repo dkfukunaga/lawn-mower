@@ -141,17 +141,20 @@ SquareType LawnDisplay::mowerPeek() {
     return _mower->peek();
 }
 
-void LawnDisplay::mowerForward() {
+bool LawnDisplay::mowerForward() {
     // save old mower position
     LawnPos old_pos = _mower->getLawnPos();
 
     // move mower
-    _mower->forward();
-
-    // redraw old square
-    drawSquare(old_pos);
-    // draw new square
-    drawSquare(_mower->getLawnPos());
+    if (_mower->forward()) {
+        // redraw old square
+        drawSquare(old_pos);
+        // draw new square
+        drawSquare(_mower->getLawnPos());
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void LawnDisplay::mowerTurnLeft() {

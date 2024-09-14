@@ -29,7 +29,7 @@ public:
     void        moveToBottom();
 
     SquareType  mowerPeek();
-    void        mowerForward();
+    bool        mowerForward();
     void        mowerTurnLeft();
     void        mowerTurnRight();
 private:
