@@ -79,7 +79,7 @@ int main() {
         wait(lawn_display);
         lawn_display->mowerForward();
     }
-
+    wait(lawn_display);
 
     // delete lawn;
 
