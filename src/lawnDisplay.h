@@ -12,6 +12,7 @@ public:
     LawnDisplay();
     LawnDisplay(Mower *mower);
     LawnDisplay(Lawn *lawn);
+    ~LawnDisplay();
 
     int*        getMarginOffsets();
     int*        getTitleOffsets();
@@ -57,6 +58,8 @@ private:
     void        moveCursorToLawnPos(LawnPos position);
     void        hideCursor();
     void        showCursor();
+
+    void        init();
 
     // LawnPos     convertToLawnPos(Position position);
 };

@@ -4,18 +4,14 @@
 /***** STATIC CONSTANTS *****/
 
 
-/***** CONSTRUCTORS *****/
+/***** CONSTRUCTORS/DESTRUCTORS *****/
 
 // default constructor
 // creates default mower and lawn
 LawnDisplay::LawnDisplay() {
     _mower = new Mower();
 
-    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
-                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
-                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
-
-    _bottom_pos.set(0, bottom_y);
+    init();
 }
 
 // mower constructor
@@ -23,11 +19,7 @@ LawnDisplay::LawnDisplay() {
 LawnDisplay::LawnDisplay(Mower *mower) {
     _mower = mower;
 
-    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
-                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
-                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
-
-    _bottom_pos.set(0, bottom_y);
+    init();
 }
 
 // lawn constructor
@@ -36,11 +28,13 @@ LawnDisplay::LawnDisplay(Lawn *lawn) {
     _mower = new Mower;
     _mower->setLawn(lawn);
 
-    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
-                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
-                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
+    init();
+}
 
-    _bottom_pos.set(0, bottom_y);
+LawnDisplay::~LawnDisplay() {
+    moveToBottom();
+    showCursor();
+    delete _mower;
 }
 
 /***** GETTERS/ACCESSORS *****/
@@ -263,6 +257,17 @@ void LawnDisplay::showCursor() {
     GetConsoleCursorInfo(consoleHandle, &cursorInfo);
     cursorInfo.bVisible = true; // Set cursor visibility to true
     SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+}
+
+
+void LawnDisplay::init() {
+    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
+                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
+                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
+
+    _bottom_pos.set(0, bottom_y);
+
+    hideCursor();
 }
 
 
