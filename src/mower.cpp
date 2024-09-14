@@ -105,6 +105,9 @@ void Mower::setLawn(Lawn *lawn) {
     // reset to lower left corner
     _lawn_pos.set(1, 1);
 
+    // mow current position
+    _lawn->mowSquare(_lawn_pos);
+
     // set stats to 0
     _peeks = 0;
     _turns = 0;
