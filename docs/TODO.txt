@@ -1,8 +1,12 @@
 MowerLogic:
     - create framework for controlling mower
     - create basic mower logic routine
+        - see mowerlogic.txt
+    - research/brainstorm other algorithms
 
 Lawn:
+    - add reset function
+        - return squares to default
     - add min/max range constructor
     - override bracket operator
 
@@ -10,13 +14,33 @@ LawnTest:
     - create tests for min/max range constructor
     - create tests for bracket operator override
 
+Mower:
+    - add wrapper for lawn reset function
+        - lawn::reset
+        - move mower to 1,1
+
 LawnDisplay:
+    - add wrapper for mower reset function
+        - mower::reset
     - colorize lawn
 
 LawnDisplayTest:
     - figure out how to unit test the ascii display
         - possibly print to file and then compare specific lines to test cases
           in another file
+
+LawnDriver:
+    - create new LawnDisplay instance
+    - initiate MowerLogic
+    - allow choice between algorithms
+    - allow reset or quit on finish
+    - allow interrupt to pause
+    - option to step through each action
+    - option to change delay
+    - menu to choose lawn generation
+        - default 14x12
+        - random
+        - custom (limits?)
 
 General:
     - remove all srand function calls and call once in main
