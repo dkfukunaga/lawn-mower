@@ -68,7 +68,60 @@ void LawnDisplay::setStatsOffsets(int x_margin,int  y_margin) {
     _stats_offsets[1] = y_margin;
 }
 
-/***** PUBLIC FUNCTIONS *****/
+/***** PUBLIC DISPLAY FUNCTIONS *****/
+
+void LawnDisplay::drawScreen() {
+    // clear console
+    system("cls");
+
+    // skip top margin
+    for (int i = 0; i < _margin_offsets[1]; ++i)
+        printf("\n");
+    
+    // create side margin string
+    std::string left_margin(_margin_offsets[0], ' ');
+    
+    // creat title_margin
+    std::string title_margin = left_margin + std::string(_title_offsets[0], ' ');
+
+    // draw title
+    printf("%s%s\n", title_margin.c_str(), _title.c_str());
+
+    // skip lawn offset
+    for (int i = 0; i < _lawn_offsets[1]; ++i)
+        printf("\n");
+
+    // create lawn_margin
+    std::string lawn_margin = left_margin + std::string(_lawn_offsets[0], ' ');
+    
+    // draw lawn
+    // loop through rows
+    for (int lawn_y = _mower->getLawn()->getHeight() - 1; lawn_y >= 0; --lawn_y) {
+        // skip margin
+        printf("%s", lawn_margin.c_str());
+        // loop through columns
+        for (int lawn_x = 0; lawn_x < _mower->getLawn()->getWidth(); ++lawn_x) {
+            drawSquare(LawnPos(lawn_x, lawn_y));
+        }
+        printf("\n");
+    }
+
+    // skip stats offset
+    for (int i = 0; i < _stats_offsets[1]; ++i)
+        printf("\n");
+
+    // create stats_margin
+    std::string stats_margin = left_margin + std::string(_stats_offsets[0], ' ');
+    
+    // print stats
+    printf("%s[MOWER STATS GO HERE]\n", stats_margin.c_str());
+
+    // skip bottom margin
+    for (int i = 0; i < _margin_offsets[1]; ++i)
+        printf("\n");
+        
+    printf("%s", _mower->getLawn()->getSquare(LawnPos(1,1)).getString().c_str());
+}
 
 void LawnDisplay::moveMower() {
     // save old mower position
@@ -85,17 +138,28 @@ void LawnDisplay::moveMower() {
 
 /***** PRIVATE DRAW FUNCTIONS *****/
 
-void LawnDisplay::drawSquare(LawnPos position) {
+// void LawnDisplay::drawSquare() {
+//     // check if mower is on the square
+//     if (_mower->getLawnPos() == convertToLawnPos(_position)) {
+//         // print square string with mower char on left
+//         printf("%c%c", _mower->getMowerChar(), _mower->getSquare().getString().at(1));
+//     } else {
+//         // print square string
+//         printf("%s", _mower->getSquare().getString());
+//     }
+// }
+
+void LawnDisplay::drawSquare(LawnPos lawn_pos) {
     // move to lawn position
-    moveCursorToLawnPos(position);
+    // moveCursorToLawnPos(position);
 
     // check if mower is on the square
-    if (_mower->getLawnPos() == position) {
+    if (_mower->getLawnPos() == lawn_pos) {
         // print square string with mower char on left
-        printf("%c%c", _mower->getMowerChar(), _mower->getSquare().getString().at(1));
+        printf("%c%c", _mower->getMowerChar(), _mower->getLawn()->getSquare(lawn_pos).getString().at(1));
     } else {
         // print square string
-        printf("%s", _mower->getSquare().getString());
+        printf("%s", _mower->getLawn()->getSquare(lawn_pos).getString().c_str());
     }
 }
 
@@ -112,6 +176,10 @@ void LawnDisplay::moveCursor(Position position) {
 void LawnDisplay::moveCursor(int x, int y) {
     char x_direction = (x > 0 ? 'C' : 'D');
     char y_direction = (y > 0 ? 'A' : 'B');
+    if (x < 0) 
+        x *= -1;
+    if (y < 0)
+        y *= -1;
 
     if (x != 0)
         printf("\033[%d%c", x, x_direction);
@@ -162,3 +230,23 @@ void LawnDisplay::showCursor() {
     cursorInfo.bVisible = true; // Set cursor visibility to true
     SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
+
+
+
+// LawnPos LawnDisplay::convertToLawnPos(Position position) {
+//     // check lawn bounds
+//     int lawn_left = _margin_offsets[0] + _lawn_offsets[0];
+//     int lawn_right = lawn_left + 2 * _mower->getLawn()->getWidth();
+//     int lawn_top = _margin_offsets[1] + _title_offsets[1] + _lawn_offsets[1] + 1;
+//     int lawn_bottom = lawn_top + _mower->getLawn()->getHeight();
+//     if (position.getX() < lawn_left || position.getX() > lawn_right ||
+//         position.getY() < lawn_top  || position.getY() > lawn_bottom) {
+//         return LawnPos(-1, -1); // indicate error
+//     }
+
+//     // convert to lawnPos
+//     int lawn_x = (position.getX() - lawn_left) / 2;
+//     int lawn_y = position.getY() - lawn_top;
+
+//     return LawnPos(lawn_x, lawn_y);
+// }
