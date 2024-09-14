@@ -9,6 +9,9 @@
 #include "..\src\lawnDisplay.h"
 #include <conio.h>
 
+void wait(LawnDisplay lawn_display);
+void quit(LawnDisplay lawn_display);
+
 int main() {
 
     srand(time(NULL));
@@ -18,7 +21,41 @@ int main() {
     LawnDisplay lawn_display(lawn);
     lawn_display.drawScreen();
 
+    while(lawn_display.mowerPeek() != SquareType::wall) {
+        wait(lawn_display);
+        lawn_display.mowerTurnRight();
+    }
+
+    while(lawn_display.mowerPeek() == SquareType::wall) {
+        wait(lawn_display);
+        lawn_display.mowerTurnRight();
+    }
+    
+    for (int i = 0; i < 3; ++i) {
+        wait(lawn_display);
+        lawn_display.mowerForward();
+    }
+
+    wait(lawn_display);
+    lawn_display.mowerTurnRight();
+
+    for (int i = 0; i < 2; ++i) {
+        wait(lawn_display);
+        lawn_display.mowerForward();
+    }
+
+    wait(lawn_display);
+    lawn_display.mowerTurnRight();
+
+    for (int i = 0; i < 2; ++i) {
+        wait(lawn_display);
+        lawn_display.mowerForward();
+    }
+
+
     delete lawn;
+
+    quit(lawn_display);
 
     // system("cls");
     // printf("\n\n");
@@ -39,4 +76,15 @@ int main() {
     // printf("\033[11B");
 
     return 0;
+}
+
+void wait(LawnDisplay lawn_display) {
+    char c = getch();
+    if (c == 'q')
+        quit(lawn_display);
+}
+
+void quit(LawnDisplay lawn_display) {
+    lawn_display.moveToBottom();
+    exit(0);
 }
