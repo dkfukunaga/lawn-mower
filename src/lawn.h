@@ -13,7 +13,7 @@ class Lawn {
 public:
     Lawn(int width, int height);
     Lawn();
-    ~Lawn() { delete _field; };
+    ~Lawn();
 
     int         getWidth() const;
     int         getHeight() const;

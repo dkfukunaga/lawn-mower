@@ -1,7 +1,7 @@
 
 #include "lawn.h"
 
-/***** CONSTRUCTORS *****/
+/***** CONSTRUCTORS/DESTRUCTORS *****/
 
 // Construct new Lawn object with width and height specified
 Lawn::Lawn(int width, int height):
@@ -26,6 +26,9 @@ Lawn::Lawn() {
     // initialize field
     initField();
 }
+
+// delete _field pointer upon object destruction
+Lawn::~Lawn() { delete _field; }
 
 /***** GETTERS/ACCESSORS *****/
 
