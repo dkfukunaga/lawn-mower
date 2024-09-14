@@ -25,7 +25,12 @@ public:
 
     void        drawScreen();
     bool        refreshLawn();
-    void        moveMower();
+    void        moveToBottom();
+
+    SquareType  mowerPeek();
+    void        mowerForward();
+    void        mowerTurnLeft();
+    void        mowerTurnRight();
 private:
     std::string _title = "Lawn Mower Simulation";
 
@@ -37,6 +42,7 @@ private:
     int         _square_dimension[2] = {2, 1};  // square size (2 chars) default {2, 1}
     int         _title_height        = 1;       // currently single line title
     int         _stats_height        = 0;       // stats display not yet implemented
+    Position    _bottom_pos;
 
     void        drawSquare(LawnPos position);
     void        drawStats();

@@ -10,12 +10,24 @@
 // creates default mower and lawn
 LawnDisplay::LawnDisplay() {
     _mower = new Mower();
+
+    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
+                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
+                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
+
+    _bottom_pos.set(0, bottom_y);
 }
 
 // mower constructor
 // takes provided mower and its lawn
 LawnDisplay::LawnDisplay(Mower *mower) {
     _mower = mower;
+
+    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
+                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
+                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
+
+    _bottom_pos.set(0, bottom_y);
 }
 
 // lawn constructor
@@ -23,6 +35,12 @@ LawnDisplay::LawnDisplay(Mower *mower) {
 LawnDisplay::LawnDisplay(Lawn *lawn) {
     _mower = new Mower;
     _mower->setLawn(lawn);
+
+    int bottom_y = _margin_offsets[1] + _title_height + _title_offsets[1] +
+                   _lawn_offsets[1] + _mower->getLawn()->getHeight() +
+                   _stats_offsets[1] + _stats_height + _margin_offsets[1];
+
+    _bottom_pos.set(0, bottom_y);
 }
 
 /***** GETTERS/ACCESSORS *****/
@@ -121,7 +139,15 @@ void LawnDisplay::drawScreen() {
         
 }
 
-void LawnDisplay::moveMower() {
+void LawnDisplay::moveToBottom() {
+    moveCursor(_bottom_pos);
+}
+
+SquareType LawnDisplay::mowerPeek() {
+    return _mower->peek();
+}
+
+void LawnDisplay::mowerForward() {
     // save old mower position
     LawnPos old_pos = _mower->getLawnPos();
 
@@ -131,6 +157,16 @@ void LawnDisplay::moveMower() {
     // redraw old square
     drawSquare(old_pos);
     // draw new square
+    drawSquare(_mower->getLawnPos());
+}
+
+void LawnDisplay::mowerTurnLeft() {
+    _mower->turnLeft();
+    drawSquare(_mower->getLawnPos());
+}
+
+void LawnDisplay::mowerTurnRight() {
+    _mower->turnRight();
     drawSquare(_mower->getLawnPos());
 }
 
@@ -149,7 +185,7 @@ void LawnDisplay::moveMower() {
 
 void LawnDisplay::drawSquare(LawnPos lawn_pos) {
     // move to lawn position
-    // moveCursorToLawnPos(position);
+    moveCursorToLawnPos(lawn_pos);
 
     // check if mower is on the square
     if (_mower->getLawnPos() == lawn_pos) {
@@ -187,10 +223,10 @@ void LawnDisplay::moveCursor(int x, int y) {
 
 // moves cursor to provided lawn position
 // (0,0) is the top left corner of the console
-void LawnDisplay::moveCursorToLawnPos(LawnPos position) {
+void LawnDisplay::moveCursorToLawnPos(LawnPos lawn_pos) {
     // convert lawn position to absolute position
-    int x = position.getX();
-    int y = position.getY();
+    int x = lawn_pos.getX();
+    int y = lawn_pos.getY();
 
     // adjust for square width
     x = x * _square_dimension[0];
