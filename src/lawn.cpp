@@ -65,10 +65,16 @@ void Lawn::initField() {
 
     for (int y = 0; y < _height; y++) {
         for (int x = 0; x < _width; x++) {
-            if ((y == 0 || y == _height - 1) || 
-                (x == 0 || x == _width - 1))
+            if (y == 0 || y == _height - 1) {
                 _field[(y * _width) + x].setType(SquareType::wall);
-            else
+                _field[(y * _width) + x].setVariant(0);
+            } else if (x == 0) {
+                _field[(y * _width) + x].setType(SquareType::wall);
+                _field[(y * _width) + x].setVariant(1);
+            } else if (x == _width - 1) {
+                _field[(y * _width) + x].setType(SquareType::wall);
+                _field[(y * _width) + x].setVariant(2);
+            } else
                 _field[(y * _width) + x].setType(SquareType::unmowed);
         } // end column loop
     } // end row loop
