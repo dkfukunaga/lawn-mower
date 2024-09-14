@@ -33,25 +33,38 @@ public:
     void        mowerTurnLeft();
     void        mowerTurnRight();
 private:
-    std::string _title = "Lawn Mower Simulation";
+    static const std::string _title[3];
+    static const std::string _stats_layout[7];
 
     Mower*      _mower;
+
     int         _margin_offsets[2]   = {8, 2};  // offsets relative to left, top of console default {8, 4}
-    int         _title_offsets[2]    = {4, 0};  // offsets relative to margin, border default {0, 0}
-    int         _lawn_offsets[2]     = {0, 2};  // offsets relative to margin, title default {0, 3}
-    int         _stats_offsets[2]    = {4, 2};  // offsets relative to margin, lawn default {0, 3}
+    int         _title_offsets[2]    = {0, 0};  // offsets relative to margin, border default {0, 0}
+    int         _lawn_offsets[2]     = {2, 1};  // offsets relative to margin, title default {0, 3}
+    int         _stats_offsets[2]    = {0, 1};  // offsets relative to margin, lawn default {0, 3}
     int         _square_dimension[2] = {2, 1};  // square size (2 chars) default {2, 1}
-    int         _title_height        = 1;       // currently single line title
-    int         _stats_height        = 1;       // stats display not yet implemented
+
+    int         _title_height        = 3;       // currently single line title
+    int         _stats_height        = 7;       // ASCII table
+
+    Position    _peeks_pos;
+    Position    _turns_pos;
+    Position    _steps_pos;
+    Position    _total_pos;
+    Position    _mower_x_pos;
+    Position    _mower_y_pos;
+
     Position    _bottom_pos;
 
     void        drawSquare(LawnPos position);
-    void        drawStats();
-    void        updateMowerPosition();
+    void        drawTitle(int margin);
+    void        drawLawn(int margin);
+    void        drawStats(int margin);
     void        updateMowerPeeks();
     void        updateMowerTurns();
     void        updateMowerSteps();
     void        updateMowerTotal();
+    void        updateMowerPosition();
     
     void        moveCursor(Position position);
     void        moveCursor(int x, int y);

@@ -16,11 +16,12 @@ int main() {
 
     srand(time(NULL));
 
-    Lawn *lawn = new Lawn(15,12);
+    Lawn *lawn = new Lawn(14,12);
 
     LawnDisplay *lawn_display = new LawnDisplay(lawn);
     lawn_display->drawScreen();
 
+    wait(lawn_display);
     while(lawn_display->mowerPeek() == SquareType::wall) {
         wait(lawn_display);
         lawn_display->mowerTurnRight();

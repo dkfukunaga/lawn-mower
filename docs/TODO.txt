@@ -19,9 +19,8 @@ LawnTest:
 LawnDisplay:
     x draw lawn on screen in ascii with 2 char wide squares
     x redraw lawn square after mower movement
-    - implement drawStats
+    x implement drawStats
     - colorize lawn
-    - display mower stats below lawn
 
 LawnDisplayTest:
     - figure out how to unit test the ascii display
