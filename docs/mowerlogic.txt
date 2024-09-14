@@ -1,0 +1,43 @@
+a. available actions
+    - peek type of square in front
+    - forward unless run into wall
+    - turn right
+    - turn left
+
+1. zigzag
+    - orient north
+        - if peek wall, turn right until peek grass
+        - if peek grass, turn left
+        - if peek grass, done
+        - else, turn right and done
+    - forward until wall
+        - count steps
+    - loop
+        - turn right
+        - go forward
+            - if wall, done
+        - turn right
+        - go forward count times
+        - turn left
+        - go forward
+            - if wall, done
+        - turn left
+        - go forward count times
+
+2. spiral
+    - orient north
+    - forward until wall
+        - count y squares
+    - turn right
+    - forward until wall
+        - count x squares
+    - turn right
+    - forward y squares
+    - loop
+        - turn right
+        - forward --x squares
+            - if y == 1, done
+        - turn right
+        - forward --y squares
+            - if x == 1, done
+
