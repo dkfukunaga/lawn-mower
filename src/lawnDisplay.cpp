@@ -120,7 +120,6 @@ void LawnDisplay::drawScreen() {
     for (int i = 0; i < _margin_offsets[1]; ++i)
         printf("\n");
         
-    printf("%s", _mower->getLawn()->getSquare(LawnPos(1,1)).getString().c_str());
 }
 
 void LawnDisplay::moveMower() {
