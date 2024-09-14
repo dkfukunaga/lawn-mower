@@ -47,7 +47,21 @@ int main() {
     wait(lawn_display);
     lawn_display->mowerTurnRight();
 
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
+        wait(lawn_display);
+        lawn_display->mowerForward();
+    }
+
+    wait(lawn_display);
+    lawn_display->mowerTurnRight();
+
+    wait(lawn_display);
+    lawn_display->mowerForward();
+
+    wait(lawn_display);
+    lawn_display->mowerTurnRight();
+
+    for (int i = 0; i < 3; ++i) {
         wait(lawn_display);
         lawn_display->mowerForward();
     }

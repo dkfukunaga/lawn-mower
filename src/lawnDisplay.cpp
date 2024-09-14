@@ -92,7 +92,7 @@ void LawnDisplay::drawScreen() {
     // create side margin string
     std::string left_margin(_margin_offsets[0], ' ');
     
-    // creat title_margin
+    // create title_margin
     std::string title_margin = left_margin + std::string(_title_offsets[0], ' ');
 
     // draw title
@@ -231,9 +231,9 @@ void LawnDisplay::moveCursorToLawnPos(LawnPos lawn_pos) {
     // adjust for lawn y axis being reversed
     y = _mower->getLawn()->getHeight() - y;
 
-    // adjust for top margin, title, and title offset
+    // adjust for top margin, title offset, title, lawn offset
     // assumes title is 1 line
-    y = y + _margin_offsets[1] + _title_offsets[1] + _title_height;
+    y = y + _margin_offsets[1] + _title_height + _title_offsets[1] + _lawn_offsets[1];
 
     // move cursor using ANSI escape code
     printf("\033[%d;%dH", y, x);
