@@ -42,7 +42,7 @@ private:
     int         _stats_offsets[2]    = {4, 2};  // offsets relative to margin, lawn default {0, 3}
     int         _square_dimension[2] = {2, 1};  // square size (2 chars) default {2, 1}
     int         _title_height        = 1;       // currently single line title
-    int         _stats_height        = 0;       // stats display not yet implemented
+    int         _stats_height        = 1;       // stats display not yet implemented
     Position    _bottom_pos;
 
     void        drawSquare(LawnPos position);
