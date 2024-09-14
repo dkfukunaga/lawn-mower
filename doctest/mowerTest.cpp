@@ -81,6 +81,16 @@ TEST_CASE("Test movement functionality and stats") {
         CHECK(mower.getSteps() == 0);
     }
 
+    SUBCASE("setlawn()") {
+        Lawn *new_lawn = new Lawn();
+        mower.setLawn(new_lawn);
+
+        CHECK(mower.getLawn() == new_lawn);
+        CHECK_FALSE(mower.getLawn() == lawn);
+        CHECK(mower.getSquare().getType() == SquareType::mowed);
+
+    }
+
     SUBCASE("getSquare(), forward(), turnLeft(), turnRight(), steps, lawnmowing test") {
         // make sure starting square is mowed
         REQUIRE(mower.getSquare().getType() == SquareType::mowed);
