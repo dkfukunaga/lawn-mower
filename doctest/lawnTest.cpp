@@ -7,15 +7,36 @@ TEST_CASE("Test Lawn object") {
     Lawn test_lawn(10,10);
 
     SUBCASE("Test Lawn initialization") {
+        // top wall
         CHECK(test_lawn.getSquare(LawnPos{0,0}).getType() == SquareType::wall);
-        CHECK(test_lawn.getSquare(LawnPos{0,5}).getType() == SquareType::wall);
-        CHECK(test_lawn.getSquare(LawnPos{0,9}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{0,0}).getVariant() == 0);
         CHECK(test_lawn.getSquare(LawnPos{5,0}).getType() == SquareType::wall);
-        CHECK(test_lawn.getSquare(LawnPos{5,5}).getType() == SquareType::unmowed);
-        CHECK(test_lawn.getSquare(LawnPos{5,9}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{5,0}).getVariant() == 0);
         CHECK(test_lawn.getSquare(LawnPos{9,0}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{9,0}).getVariant() == 0);
+        
+        // left wall
+        CHECK(test_lawn.getSquare(LawnPos{0,1}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{0,1}).getVariant() == 1);
+        CHECK(test_lawn.getSquare(LawnPos{0,5}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{0,5}).getVariant() == 1);
+        CHECK(test_lawn.getSquare(LawnPos{0,8}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{0,8}).getVariant() == 1);
+        
+        // right wall
+        CHECK(test_lawn.getSquare(LawnPos{9,1}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{9,1}).getVariant() == 2);
         CHECK(test_lawn.getSquare(LawnPos{9,5}).getType() == SquareType::wall);
-        CHECK(test_lawn.getSquare(LawnPos{9,9}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{9,5}).getVariant() == 2);
+        CHECK(test_lawn.getSquare(LawnPos{9,8}).getType() == SquareType::wall);
+        CHECK(test_lawn.getSquare(LawnPos{9,8}).getVariant() == 2);
+
+        // unmowed
+        CHECK(test_lawn.getSquare(LawnPos{1,1}).getType() == SquareType::unmowed);
+        CHECK(test_lawn.getSquare(LawnPos{8,1}).getType() == SquareType::unmowed);
+        CHECK(test_lawn.getSquare(LawnPos{5,5}).getType() == SquareType::unmowed);
+        CHECK(test_lawn.getSquare(LawnPos{1,8}).getType() == SquareType::unmowed);
+        CHECK(test_lawn.getSquare(LawnPos{8,8}).getType() == SquareType::unmowed);
     }
     SUBCASE("Test mowSquare()") {
         test_lawn.mowSquare(LawnPos{1,1});
