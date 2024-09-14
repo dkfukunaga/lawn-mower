@@ -1,17 +1,11 @@
-Position:
-    x rewrite Position as a class of its own
 
-PositionTest:
-    x test constructors
-    x test north(), west(), south(), east()
-    x test move functions
-    x test operator overloads
 
 Lawn:
     - add min/max range constructor
     - override bracket operator
 
 LawnTest:
+    x create setLawn test
     - create tests for min/max range constructor
     - create tests for bracket operator override
 
@@ -23,8 +17,12 @@ LawnDisplay:
 
 LawnDisplayTest:
     - figure out how to unit test the ascii display
+        - possibly print to file and then compare specific lines to test cases
+          in another file
+    - test moveMower
 
 General:
     - remove all srand function calls and call once in main
-    - Postion typedefs for LawnPos, ArrayPos, ScreenPos
+    x Position typedefs for LawnPos, ArrayPos, ScreenPos
+        x made into class with LawnPos typedef
     - create function in Lawn to convert to array index
