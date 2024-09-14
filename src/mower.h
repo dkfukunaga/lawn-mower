@@ -14,6 +14,7 @@ class Mower {
 public:
     Mower(Lawn *lawn);
     Mower();
+    ~Mower();
 
     Direction   getFacing() const;
     LawnPos     getLawnPos() const;

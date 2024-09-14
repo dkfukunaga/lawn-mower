@@ -3,7 +3,7 @@
 
 #include "mower.h"
 
-/***** CONSTRUCTORS *****/
+/***** CONSTRUCTORS/DESTRUCTORS *****/
 
 // create a mower on the provided lawn
 Mower::Mower(Lawn *lawn) {
@@ -46,6 +46,8 @@ Mower::Mower() {
     _turns = 0;
     _steps = 0;
 }
+
+Mower::~Mower() { delete _lawn; }
 
 /***** GETTERS/ACCESSORS *****/
 
