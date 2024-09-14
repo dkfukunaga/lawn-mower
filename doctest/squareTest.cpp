@@ -35,42 +35,85 @@ TEST_CASE("Test Square strings") {
     CHECK(wall_square.getString() == "##");
     CHECK(mowed_square.getString() == " .");
 
-    // create array of unmowed squares to make sure both
-    // randomized strings are tested
-    int unmowed_count = 15;
-    Square unmowed_squares[unmowed_count];
+    std::cout << "Square strings:\n";
+    std::cout << "  " << "error:   [" << error_square.getString() << "]" << std::endl;
+    std::cout << "  " << "wall:    [" << wall_square.getString() << "]" << std::endl;
+    std::cout << "  " << "mowed:   [" << mowed_square.getString() << "]" << std::endl;
 
-    // create unmowed squares
-    // print for visual confirmation both variants were tested
-    std::cout << "unmowed square strings:\n";
-    for (int i = 0; i < unmowed_count; ++i) {
-        unmowed_squares[i].setType(SquareType::unmowed);
-        printf("  %2d: \"%s\"\n", i, unmowed_squares[i].getString().c_str());
-        // std::cout << "  " << i << ": \"" << unmowed_squares[i].getString() << "\"\n";
-    }
-    std::cout << std::endl;
+    // // create array of unmowed squares to make sure both
+    // // randomized strings are tested
+    // int unmowed_count = 15;
+    // Square unmowed_squares[unmowed_count];
 
-    // test unmowed square strings
-    for (int i = 0; i < unmowed_count; ++i) {
-        switch (unmowed_squares[i].getVariant()) {
+    // // create unmowed squares
+    // // print for visual confirmation both variants were tested
+    // std::cout << "unmowed square strings:\n";
+    // for (int i = 0; i < unmowed_count; ++i) {
+    //     unmowed_squares[i].setType(SquareType::unmowed);
+    //     printf("  %2d: \"%s\"\n", i, unmowed_squares[i].getString().c_str());
+    //     // std::cout << "  " << i << ": \"" << unmowed_squares[i].getString() << "\"\n";
+    // }
+    // std::cout << std::endl;
+
+    
+    char variants[6] = {0b00000001,     // variant 0
+                        0b00000010,     // variant 1
+                        0b00000100,     // variant 2
+                        0b00001000,     // variant 3
+                        0b00010000,     // variant 4
+                        0b00100000};    // variant 5
+    char variant_mask = 0b00111111;
+    char variant_flags = 0b00000000;
+    
+    std::cout << "  " << "unmowed: ";
+    
+    while ((variant_flags & variant_mask) != variant_mask) {
+        Square unmowed_square(SquareType::unmowed);
+        int variant = unmowed_square.getVariant();
+        switch (variant) {
             case 0:
-                CHECK(unmowed_squares[i].getString() == "\",");
+                if ((variant_flags & variants[variant]) == 0) {
+                    variant_flags |= variants[variant];
+                    CHECK(unmowed_square.getString() == "\",");
+                    std::cout << "[" << unmowed_square.getString() << "]";
+                }
                 break;
             case 1:
-                CHECK(unmowed_squares[i].getString() == ",\"");
+                if ((variant_flags & variants[variant]) == 0) {
+                    variant_flags |= variants[variant];
+                    CHECK(unmowed_square.getString() == ",\"");
+                    std::cout << "[" << unmowed_square.getString() << "]";
+                }
                 break;
             case 2:
-                CHECK(unmowed_squares[i].getString() == ";'");
+                if ((variant_flags & variants[variant]) == 0) {
+                    variant_flags |= variants[variant];
+                    CHECK(unmowed_square.getString() == ";'");
+                    std::cout << "[" << unmowed_square.getString() << "]";
+                }
                 break;
             case 3:
-                CHECK(unmowed_squares[i].getString() == "';");
+                if ((variant_flags & variants[variant]) == 0) {
+                    variant_flags |= variants[variant];
+                    CHECK(unmowed_square.getString() == "';");
+                    std::cout << "[" << unmowed_square.getString() << "]";
+                }
                 break;
             case 4:
-                CHECK(unmowed_squares[i].getString() == ";\"");
+                if ((variant_flags & variants[variant]) == 0) {
+                    variant_flags |= variants[variant];
+                    CHECK(unmowed_square.getString() == ";\"");
+                    std::cout << "[" << unmowed_square.getString() << "]";
+                }
                 break;
             case 5:
-                CHECK(unmowed_squares[i].getString() == "\";");
+                if ((variant_flags & variants[variant]) == 0) {
+                    variant_flags |= variants[variant];
+                    CHECK(unmowed_square.getString() == "\";");
+                    std::cout << "[" << unmowed_square.getString() << "]";
+                }
                 break;
         }
     }
+    std::cout << std::endl;
 }
