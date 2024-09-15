@@ -26,11 +26,13 @@ public:
     Position    east() const;
     
     Position    set(int x, int y);
+    Position    set(Position position);
     Position    move(int x, int y);
     Position    move(Direction direction);
 
-    bool        operator==(Position &rhs);
-    bool        operator!=(Position &rhs);
+    Position&   operator=(const Position &rhs);
+    bool        operator==(const Position &rhs);
+    bool        operator!=(const Position &rhs);
 private:
     int         _x;
     int         _y;

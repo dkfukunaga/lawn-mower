@@ -51,10 +51,18 @@ Position Position::east() const {
 /***** SETTERS/MUTATORS *****/
 
 // sets x and y coordinates to new values
+// default to 0
 // returns new position
-Position Position::set(int x, int y) {
+Position Position::set(int x = 0, int y = 0) {
     _x = x;
     _y = y;
+    return *this;
+}
+
+// set x and y coordinates to new position
+// returns new position
+Position Position::set(Position position) {
+    set(position.getX(), position.getY());
     return *this;
 }
 
@@ -89,12 +97,20 @@ Position Position::move(Direction direction) {
 
 /***** OPERATOR OVERRIDES *****/
 
+// assigns new position
+Position& Position::operator=(const Position &rhs) {
+    if (this != &rhs) {
+        set(rhs);
+    }
+    return *this;
+}
+
 // returns true if x and y are the same, false otherwise
-bool Position::operator==(Position &rhs) {
+bool Position::operator==(const Position &rhs) {
     return this->_x == rhs._x && this->_y == rhs._y;
 }
 
 // returns true if x or y are different, false otherwise
-bool Position::operator!=(Position &rhs) {
+bool Position::operator!=(const Position &rhs) {
     return !(*this == rhs);
 }
