@@ -7,8 +7,6 @@
 
 
 enum class Algorithm {
-    naive,
-    blind,
     zigzag,
     spiral,
 };
@@ -24,11 +22,13 @@ private:
     LawnDisplay     *_lawn_display;
     Algorithm       _algorithm;
 
-    int             orient(Direction direction);
     SquareType      peek();
-    int             forward(int steps);
+    bool            forward();
     void            turnRight();
     void            turnLeft();
+
+    int             forwardNSteps(int steps);
+    int             orientNorthFromStart(Direction direction);
 };
 
 
