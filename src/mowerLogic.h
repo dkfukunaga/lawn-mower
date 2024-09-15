@@ -1,6 +1,6 @@
 
 #ifndef MOWER_LOGIC_H
-#define MOWEr_LOGIC_H
+#define MOWER_LOGIC_H
 
 #include "lawnDisplay.h"
 #include <string>
