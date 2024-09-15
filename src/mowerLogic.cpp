@@ -5,12 +5,13 @@
 
 
 
+const Algorithm MowerLogic::_default_algorithm = Algorithm::zigzag;
 
-MowerLogic::MowerLogic() {
+MowerLogic::MowerLogic(LawnDisplay *lawn_display):
+    _lawn_display(lawn_display),
+    _algorithm(_default_algorithm) { };
 
-}
-
-MowerLogic::MowerLogic(LawnDisplay *lawn_display, Algorithm algorithm = Algorithm::zigzag):
+MowerLogic::MowerLogic(LawnDisplay *lawn_display, Algorithm algorithm):
     _lawn_display(lawn_display),
     _algorithm(algorithm) { };
 
@@ -18,6 +19,23 @@ MowerLogic::MowerLogic(LawnDisplay *lawn_display, Algorithm algorithm = Algorith
 Algorithm MowerLogic::getAlgorithm() { return _algorithm; }
 
 void MowerLogic::setAlogrithm(Algorithm algorithm) { _algorithm = algorithm; }
+
+void MowerLogic::runAlgorithm(Algorithm algorithm = _default_algorithm) {
+    switch (algorithm) {
+        case Algorithm::manual:
+            manualControl();
+            break;
+        case Algorithm::zigzag:
+            zigzagAlgorithm();
+            break;
+        case Algorithm::spiral:
+            spiralAlgorithm();
+            break;
+        default:
+            return;
+            break;
+    }
+}
 
 /***** BASIC MOWER ACTIONS *****/
 
@@ -92,6 +110,20 @@ int MowerLogic::orientNorthFromStart(Direction direction) {
     return counter;
 }
 
+
+/***** MOWER ALGORITHMS *****/
+
+void MowerLogic::zigzagAlgorithm() {
+
+}
+
+void MowerLogic::spiralAlgorithm() {
+
+}
+
+void MowerLogic::manualControl() {
+
+}
 
 
 
