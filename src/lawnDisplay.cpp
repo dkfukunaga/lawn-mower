@@ -316,7 +316,7 @@ void LawnDisplay::updateMowerTotal() {
 void LawnDisplay::updateMowerPosition() {
     // update direction
     moveCursor(_mower_dir_pos);
-    printf("%-5s", getDirectionString(_mower->getFacing()).c_str());
+    printf("%-5s", getDirectionString(_mower->getFacing(), LetterCase::upper).c_str());
 
     // update x,y coordinates
     moveCursor(_mower_x_pos);
