@@ -98,6 +98,7 @@ TEST_CASE("Test operator overloads") {
     REQUIRE(pos3.getY() == 4);
 
     // test comparison operators
+    // test comparison operators
     bool pos1_pos2 = pos1 == pos2;  // true
     bool pos1_pos3 = pos1 == pos3;  // false
     bool pos2_pos3 = pos2 != pos3;  // true

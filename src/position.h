@@ -22,6 +22,7 @@ public:
     
     Position    set(int x, int y);
     Position    set(Position position);
+    Position    set(Position position);
     Position    move(int x, int y);
     Position    move(Direction direction);
 
