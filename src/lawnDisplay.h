@@ -10,16 +10,19 @@
 
 class LawnDisplay {
 public:
-    LawnDisplay();
+    LawnDisplay(Mower *mower, Lawn *lawn);
     LawnDisplay(Mower *mower);
     LawnDisplay(Lawn *lawn);
+    LawnDisplay();
     ~LawnDisplay();
 
+    int         getLawnHeight();
+    int         getLawnWidth();
+    Square      getLawnSquare(LawnPos lawn_pos);
     int*        getMarginOffsets();
     int*        getTitleOffsets();
     int*        getLawnOffsets();
     int*        getStatsOffsets();
-
     Direction   getMowerFacing();
     LawnPos     getMowerLawnPos();
     Square      getMowerSquare();
@@ -27,9 +30,6 @@ public:
     int         getMowerTurns();
     int         getMowerSteps();
     int         getMowerTotal();
-    int         getLawnHeight();
-    int         getLawnWidth();
-    Square      getLawnSquare(LawnPos lawn_pos);
 
     void        setMarginOffsets(int x_offset, int y_offset);
     void        setTitleOffsets(int x_offset, int y_offset);
