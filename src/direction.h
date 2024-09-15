@@ -21,9 +21,11 @@ enum class LetterCase {
 };
 
 // returns string of cardinal direction with option for letter case
+//
 // LetterCase::lower - all lower case
 // LetterCase::upper - all upper case
 // LetterCase::firstUpper - first upper case rest lower case
+//
 // defaults to LetterCase::lower
 static std::string getDirectionString(Direction direction, LetterCase letter_case = LetterCase::lower) {
     std::string label;
