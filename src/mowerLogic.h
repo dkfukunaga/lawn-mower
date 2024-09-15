@@ -7,18 +7,23 @@
 
 
 enum class Algorithm {
+    manual,
     zigzag,
     spiral,
 };
 
 class MowerLogic {
 public:
-    MowerLogic();
+    MowerLogic() = delete;
+    MowerLogic(LawnDisplay *lawn_display);
     MowerLogic(LawnDisplay *lawn_display, Algorithm algorithm);
 
     Algorithm       getAlgorithm();
     void            setAlogrithm(Algorithm algorithm);
+
+    void            runAlgorithm(Algorithm algorithm);
 private:
+    static const Algorithm _default_algorithm;
     LawnDisplay     *_lawn_display;
     Algorithm       _algorithm;
 
@@ -29,6 +34,10 @@ private:
 
     int             forwardNSteps(int steps);
     int             orientNorthFromStart(Direction direction);
+
+    void            zigzagAlgorithm();
+    void            spiralAlgorithm();
+    void            manualControl();
 };
 
 
