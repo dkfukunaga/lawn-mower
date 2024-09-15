@@ -10,6 +10,22 @@ enum class Algorithm {
     manual,
     zigzag,
     spiral,
+    test,
+};
+
+enum class Command {
+    peek,
+    forward,
+    turnRight,
+    turnLeft,
+    forwardNSteps,
+    orientNorthFromStart,
+};
+
+union CommandReturn {
+    SquareType      type;
+    int             count;
+    bool            success;
 };
 
 class MowerLogic {
@@ -22,6 +38,7 @@ public:
     void            setAlogrithm(Algorithm algorithm);
 
     void            runAlgorithm(Algorithm algorithm);
+    CommandReturn   testAlgorithm(Command command, int arg);
 private:
     static const Algorithm _default_algorithm;
     LawnDisplay     *_lawn_display;
@@ -33,7 +50,7 @@ private:
     void            turnLeft();
 
     int             forwardNSteps(int steps);
-    int             orientNorthFromStart(Direction direction);
+    int             orientNorthFromStart();
 
     void            zigzagAlgorithm();
     void            spiralAlgorithm();

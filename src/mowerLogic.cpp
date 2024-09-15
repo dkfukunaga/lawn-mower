@@ -88,7 +88,7 @@ int MowerLogic::forwardNSteps(int steps) {
 // Uses peeks and turns to orient mower north from 1,1.
 //
 // returns number of actions taken.
-int MowerLogic::orientNorthFromStart(Direction direction) {
+int MowerLogic::orientNorthFromStart() {
     int counter = 0;
     SquareType next = peek();
     counter++;
@@ -111,6 +111,35 @@ int MowerLogic::orientNorthFromStart(Direction direction) {
 }
 
 
+CommandReturn MowerLogic::testAlgorithm(Command command, int arg = 0) {
+    CommandReturn result;
+    switch (command) {
+        case Command::peek:
+            result.type = peek();
+            break;
+        case Command::forward:
+            result.success = forward();
+            break;
+        case Command::turnLeft:
+            turnLeft();
+            result.success = true;
+            break;
+        case Command::turnRight:
+            turnRight();
+            result.success = true;
+            break;
+        case Command::forwardNSteps:
+            result.count = forwardNSteps(arg);
+            break;
+        case Command::orientNorthFromStart:
+            result.count = orientNorthFromStart();
+            break;
+    }
+
+    return result;
+}
+
+
 /***** MOWER ALGORITHMS *****/
 
 void MowerLogic::zigzagAlgorithm() {
@@ -124,6 +153,4 @@ void MowerLogic::spiralAlgorithm() {
 void MowerLogic::manualControl() {
 
 }
-
-
 
