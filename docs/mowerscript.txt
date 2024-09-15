@@ -1,0 +1,32 @@
+peek
+forward [x/wall]
+right [x]
+left [x]
+
+if [expression] 
+	// do stuff
+else if [expression]
+	// do other stuff
+else
+	// do other stuff
+end if
+
+do while/until [expression]
+	// do stuff
+loop
+
+do
+	// do stuff
+loop while/until [expression]
+
+operator
+	()			// grouping
+	! + -		// unary (right associative)
+	* / %		// left associative
+	+ -			// left associative
+	> >= < <=	// comparison
+	== <>		// comparison
+	&&			// logical and
+	||			// logical or
+
+
