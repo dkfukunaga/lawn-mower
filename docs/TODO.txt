@@ -1,4 +1,10 @@
 General:
+    - create exceptions
+        - exception classes:
+            - Lawn missing
+            - Mower missing
+        - throw exceptions where reasonable to do so
+        - figure out where best to handle exceptions
     - convert to using smart pointers to handle object ownership
         - maybe LawnDisplay should be a unique_ptr, since there should only ever be
           a single LawnDisplay instance?
