@@ -57,3 +57,7 @@ Future:
     - different lawn shapes
     - run all algorithms in sequence and display results
     - calculate interesting stats
+        - cells revisited
+        - actions without changing squares
+        - actions to squares ratio
+        
