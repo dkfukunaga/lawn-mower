@@ -17,8 +17,9 @@ int main() {
     srand(time(NULL));
 
     Lawn *lawn = new Lawn(14,12);
+    Mower *mower = new Mower(lawn);
 
-    LawnDisplay *lawn_display = new LawnDisplay(lawn);
+    LawnDisplay *lawn_display = new LawnDisplay(mower);
     lawn_display->drawScreen();
 
     wait(lawn_display);

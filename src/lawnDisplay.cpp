@@ -26,8 +26,7 @@ const std::string LawnDisplay::_stats_layout[7] = {
 LawnDisplay::LawnDisplay(Mower *mower, Lawn *lawn) {
     _lawn = lawn;
     _mower = mower;
-    if (lawn != _mower->getLawn())
-        _mower->setLawn(lawn);
+    _mower->setLawn(lawn);
 
     init();
 }
@@ -35,14 +34,19 @@ LawnDisplay::LawnDisplay(Mower *mower, Lawn *lawn) {
 // mower constructor
 // takes provided mower and its lawn
 LawnDisplay::LawnDisplay(Mower *mower) {
-    LawnDisplay(mower, mower->getLawn());
+    _mower = mower;
+    _lawn = _mower->getLawn();
+
+    init();
 }
 
 // lawn constructor
 // creates new mower and assigns provided lawn
 LawnDisplay::LawnDisplay(Lawn *lawn) {
-    Mower *mower = new Mower();
-    LawnDisplay(mower, lawn);
+    _lawn = lawn;
+    _mower = new Mower(_lawn);
+
+    init();
 }
 
 // default constructor
