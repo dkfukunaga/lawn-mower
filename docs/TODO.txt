@@ -54,6 +54,9 @@ Settings:
     - define default lawn size
 
 Future:
+    - create script parser to parse text file mower scripts
+        - possibly convert algorithms to scripts
+        - maybe keep simple ones hard coded
     - different lawn shapes
     - run all algorithms in sequence and display results
     - calculate interesting stats
