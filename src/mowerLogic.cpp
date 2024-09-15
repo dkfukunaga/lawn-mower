@@ -6,9 +6,13 @@
 
 
 
+MowerLogic::MowerLogic() {
 
+}
 
-
+MowerLogic::MowerLogic(LawnDisplay *lawn_display, Algorithm algorithm = Algorithm::naive):
+    _lawn_display(lawn_display),
+    _algorithm(algorithm) { };
 
 
 // return number of actions taken
@@ -21,24 +25,20 @@ SquareType MowerLogic::peek() {
 
 }
 
-// forward once
-// return true if successfully moved,
-// false if wall collision
-bool MowerLogic::forward() {
+Algorithm MowerLogic::getAlgorithm() { return _algorithm; }
 
-}
+void MowerLogic::setAlogrithm(Algorithm algorithm) { _algorithm = algorithm; }
 
-// forward n steps
-// if wall collision does not attempt more forward steps
+
+// moves forward n steps.
+// if a wall collision occurs, does not attempt more forward steps.
+//
+// negative value will step forward until a wall collision.
+// defaults to 1 step.
+//
 // return 0 for successful completion,
 // return negative int for difference between steps taken and steps attempted
-int MowerLogic::forward(int steps) {
-
-}
-
-// forward until wall collision
-// return number of steps taken, including last unsuccessful step
-int MowerLogic::forwardToWall() {
+int MowerLogic::forward(int steps = 1) {
 
 }
 

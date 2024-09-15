@@ -7,6 +7,8 @@
 
 
 enum class Algorithm {
+    naive,
+    blind,
     zigzag,
     spiral,
 };
@@ -14,18 +16,17 @@ enum class Algorithm {
 class MowerLogic {
 public:
     MowerLogic();
-    MowerLogic(Algorithm algorithm);
+    MowerLogic(LawnDisplay *lawn_display, Algorithm algorithm);
 
     Algorithm       getAlgorithm();
-    bool            setAlogrithm(Algorithm algorithm);
+    void            setAlogrithm(Algorithm algorithm);
 private:
-    Algorithm       _current_algorithm;
+    LawnDisplay     *_lawn_display;
+    Algorithm       _algorithm;
 
     int             orient(Direction direction);
     SquareType      peek();
-    bool            forward();
     int             forward(int steps);
-    int             forwardToWall();
     void            turnRight();
     void            turnLeft();
 };
