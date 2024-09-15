@@ -1,0 +1,45 @@
+LawnDriver
+    - shows menu
+        - choices are made
+    - creates Lawn
+    - creates Mower and passes pointer to Lawn
+    - creates LawnDisplay and passes pointers to Lawn and Mower
+    - creates MowerLogic and passes pointer to LawnDisplay
+    - runs MowerLogic
+
+
+Should default Mower be made with nullptr to Lawn and bool for whether it is on a lawn or not?
+Why does this matter?
+Maybe we'll have different mowers with different features or stats?
+
+
+Object      Owner       Accessed by             Has Access to
+========================================================
+Lawn        LawnDriver  Mower, LawnDisplay
+Mower       LawnDriver  LawnDisplay             Lawn
+LawnDisplay LawnDriver  MowerLogic              Mower, Lawn
+MowerLogic  LawnDriver                          LawnDisplay
+
+
+MowerLogic controls LawnDisplay
+LawnDisplay controls Mower and Lawn
+Mower interacts with Lawn
+
+Should LawnDriver be the only thing that creates new objects?
+That would probably simplify ownership - LawnDriver is the only creator of objects,
+    and is thus responsible for deleting them at the end.
+
+There should only ever be one LawnDisplay in existance
+There should only ever be one MowerLogic in existance?
+There can be many Lawns and Mowers in existance
+Why would there be more than one mower? Can we simulate multiple lawns and mowers?
+
+
+
+
+
+
+
+
+
+Why do I overcomplicate everything I ever touch?
