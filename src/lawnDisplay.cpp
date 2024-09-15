@@ -21,10 +21,13 @@ const std::string LawnDisplay::_stats_layout[7] = {
 
 /***** CONSTRUCTORS/DESTRUCTORS *****/
 
-// default constructor
-// creates default mower and lawn
-LawnDisplay::LawnDisplay() {
-    _mower = new Mower();
+// mower full constructor
+// takes provided lawn and assigns it to provided mower
+LawnDisplay::LawnDisplay(Mower *mower, Lawn *lawn) {
+    _lawn = lawn;
+    _mower = mower;
+    if (lawn != _mower->getLawn())
+        _mower->setLawn(lawn);
 
     init();
 }
@@ -32,16 +35,21 @@ LawnDisplay::LawnDisplay() {
 // mower constructor
 // takes provided mower and its lawn
 LawnDisplay::LawnDisplay(Mower *mower) {
-    _mower = mower;
-
-    init();
+    LawnDisplay(mower, mower->getLawn());
 }
 
 // lawn constructor
 // creates new mower and assigns provided lawn
 LawnDisplay::LawnDisplay(Lawn *lawn) {
-    _mower = new Mower;
-    _mower->setLawn(lawn);
+    Mower *mower = new Mower();
+    LawnDisplay(mower, lawn);
+}
+
+// default constructor
+// creates default mower and lawn
+LawnDisplay::LawnDisplay() {
+    _lawn = new Lawn();
+    _mower = new Mower(_lawn);
 
     init();
 }
@@ -49,10 +57,15 @@ LawnDisplay::LawnDisplay(Lawn *lawn) {
 LawnDisplay::~LawnDisplay() {
     moveToBottom();
     showCursor();
-    delete _mower;
 }
 
 /***** GETTERS/ACCESSORS *****/
+
+int         LawnDisplay::getLawnHeight() { return _lawn->getHeight(); }
+int         LawnDisplay::getLawnWidth() { return _lawn->getWidth(); }
+Square      LawnDisplay::getLawnSquare(LawnPos lawn_pos) {
+    return _lawn->getSquare(lawn_pos);
+}
 
 // returns array of x and y margin offsets
 int* LawnDisplay::getMarginOffsets() { return _margin_offsets; }
@@ -93,6 +106,14 @@ void LawnDisplay::setStatsOffsets(int x_margin,int  y_margin) {
     _stats_offsets[0] = x_margin;
     _stats_offsets[1] = y_margin;
 }
+
+Direction   LawnDisplay::getMowerFacing() { return _mower->getFacing(); }
+LawnPos     LawnDisplay::getMowerLawnPos() { return _mower->getLawnPos(); }
+Square      LawnDisplay::getMowerSquare() { return _mower->getSquare(); }
+int         LawnDisplay::getMowerPeeks() { return _mower->getPeeks(); }
+int         LawnDisplay::getMowerTurns() { return _mower->getTurns(); }
+int         LawnDisplay::getMowerSteps() { return _mower->getSteps(); }
+int         LawnDisplay::getMowerTotal() { return _mower->getTotal(); }
 
 /***** PUBLIC DISPLAY FUNCTIONS *****/
 

@@ -1,120 +1,58 @@
 
-// #include "tester.h"
-// #include "..\src\lawnDisplay.h"
 
-// TEST_CASE("Test default margin and offsets") {
-    
-// }
-
+#include "tester.h"
 #include "..\src\lawnDisplay.h"
-#include <conio.h>
 
-void wait(LawnDisplay *lawn_display);
-void quit(LawnDisplay *lawn_display);
-
-int main() {
-
-    srand(time(NULL));
-
+TEST_CASE("Test mower and lawn getters") {
     Lawn *lawn = new Lawn(14,12);
+    Mower *mower = new Mower(lawn);
+    LawnDisplay *display = new LawnDisplay(mower, lawn);
+    display->drawScreen();
 
-    LawnDisplay *lawn_display = new LawnDisplay(lawn);
-    lawn_display->drawScreen();
+    CHECK(display->getLawnHeight() == 12);
+    CHECK(display->getLawnWidth() == 14);
+    CHECK(display->getLawnSquare(LawnPos(0,0)).getType() == SquareType::wall);
+    CHECK(display->getLawnSquare(LawnPos(1,1)).getType() == SquareType::mowed);
+    CHECK(display->getLawnSquare(LawnPos(1,2)).getType() == SquareType::unmowed);
 
-    wait(lawn_display);
-    while(lawn_display->mowerPeek() == SquareType::wall) {
-        wait(lawn_display);
-        lawn_display->mowerTurnRight();
+    int turn_counter = 0;
+    SquareType next;
+
+    // orient north
+    while (mower->getFacing() != Direction::north) {
+        display->mowerTurnLeft();
+        turn_counter++;
     }
+    next = display->mowerPeek();
     
-    for (int i = 0; i < 3; ++i) {
-        wait(lawn_display);
-        lawn_display->mowerForward();
-    }
+    CHECK(next == SquareType::unmowed);
+    CHECK(display->getMowerFacing() == Direction::north);
+    CHECK(display->getMowerLawnPos().getX() == 1);
+    CHECK(display->getMowerLawnPos().getY() == 1);
+    CHECK(display->getMowerSquare().getType() == SquareType::mowed);
+    CHECK(display->getMowerPeeks() == 1);
+    CHECK(display->getMowerTurns() == turn_counter);
 
-    wait(lawn_display);
-    lawn_display->mowerTurnRight();
+    display->mowerTurnLeft();
+    next = display->mowerPeek();
 
-    bool turn_left = false;
+    CHECK(next == SquareType::wall);
+    CHECK(display->getMowerFacing() == Direction::west);
+    CHECK(display->getMowerPeeks() == 2);
+    CHECK(display->getMowerTurns() == turn_counter + 1);
+ 
+    display->mowerTurnRight();
+    display->mowerForward();
+    display->mowerForward();
 
-    wait(lawn_display);
-    if (!lawn_display->mowerForward()) {
-        turn_left = true;
-        wait(lawn_display);
-        lawn_display->mowerTurnLeft();
-        wait(lawn_display);
-        lawn_display->mowerTurnLeft();
-        wait(lawn_display);
-        lawn_display->mowerForward();
-    }
-    wait(lawn_display);
-    lawn_display->mowerForward();
+    CHECK(display->getMowerSquare().getType() == SquareType::mowed);
+    CHECK(display->getMowerLawnPos().getX() == 1);
+    CHECK(display->getMowerLawnPos().getY() == 3);
+    CHECK(display->getMowerPeeks() == 2);
+    CHECK(display->getMowerTurns() == turn_counter + 2);
+    CHECK(display->getMowerSteps() == 2);
+    CHECK(display->getMowerTotal() == turn_counter + 6);
 
-    wait(lawn_display);
-    if (turn_left)
-        lawn_display->mowerTurnLeft();
-    else
-        lawn_display->mowerTurnRight();
 
-    for (int i = 0; i < 3; ++i) {
-        wait(lawn_display);
-        lawn_display->mowerForward();
-    }
-
-    wait(lawn_display);
-    if (turn_left)
-        lawn_display->mowerTurnLeft();
-    else
-        lawn_display->mowerTurnRight();
-
-    wait(lawn_display);
-    lawn_display->mowerForward();
-
-    wait(lawn_display);
-    if (turn_left)
-        lawn_display->mowerTurnLeft();
-    else
-        lawn_display->mowerTurnRight();
-
-    for (int i = 0; i < 3; ++i) {
-        wait(lawn_display);
-        lawn_display->mowerForward();
-    }
-    wait(lawn_display);
-
-    // delete lawn;
-
-    quit(lawn_display);
-
-    // system("cls");
-    // printf("\n\n");
-    // for (int i = 1; i <= 10; ++i)
-    //     printf("test %2d: %s, %c\n", i, "####", static_cast<char>(96 + i));
-    
-    // // system("pause");
-    //     // std::cout << "\033[1A";
-    // printf("Press any key...");
-    // getch();
-
-    // for (int i = 11; i <= 20; ++i) {
-    //     // std::cout << "\033[2A";
-
-    //     printf("\033[%d%ctest %2d: %s\033[4C%c\n", 2, 'A', i, "&&", static_cast<char>(96 + i));
-    // }
-
-    // printf("\033[11B");
-
-    return 0;
-}
-
-void wait(LawnDisplay *lawn_display) {
-    char c = getch();
-    if (c == 'q')
-        quit(lawn_display);
-}
-
-void quit(LawnDisplay *lawn_display) {
-    // lawn_display->moveToBottom();
-    delete lawn_display;
-    exit(0);
+    delete display;
 }

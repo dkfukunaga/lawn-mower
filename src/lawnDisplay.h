@@ -10,15 +10,26 @@
 
 class LawnDisplay {
 public:
-    LawnDisplay();
+    LawnDisplay(Mower *mower, Lawn *lawn);
     LawnDisplay(Mower *mower);
     LawnDisplay(Lawn *lawn);
+    LawnDisplay();
     ~LawnDisplay();
 
+    int         getLawnHeight();
+    int         getLawnWidth();
+    Square      getLawnSquare(LawnPos lawn_pos);
     int*        getMarginOffsets();
     int*        getTitleOffsets();
     int*        getLawnOffsets();
     int*        getStatsOffsets();
+    Direction   getMowerFacing();
+    LawnPos     getMowerLawnPos();
+    Square      getMowerSquare();
+    int         getMowerPeeks();
+    int         getMowerTurns();
+    int         getMowerSteps();
+    int         getMowerTotal();
 
     void        setMarginOffsets(int x_offset, int y_offset);
     void        setTitleOffsets(int x_offset, int y_offset);
@@ -38,6 +49,7 @@ private:
     static const std::string _stats_layout[7];
 
     Mower*      _mower;
+    Lawn*       _lawn;
 
     int         _margin_offsets[2]   = {8, 2};  // offsets relative to left, top of console default {8, 4}
     int         _title_offsets[2]    = {0, 0};  // offsets relative to margin, border default {0, 0}
