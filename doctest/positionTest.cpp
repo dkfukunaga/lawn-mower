@@ -97,6 +97,7 @@ TEST_CASE("Test operator overloads") {
     REQUIRE(pos3.getX() == 7);
     REQUIRE(pos3.getY() == 4);
 
+    // test comparison operators
     bool pos1_pos2 = pos1 == pos2;  // true
     bool pos1_pos3 = pos1 == pos3;  // false
     bool pos2_pos3 = pos2 != pos3;  // true
@@ -104,6 +105,12 @@ TEST_CASE("Test operator overloads") {
     CHECK(pos1_pos2);
     CHECK_FALSE(pos1_pos3);
     CHECK(pos2_pos3);
+
+    pos1 = pos3;
+
+    // test assignment operator
+    CHECK(pos1.getX() == pos3.getX());
+    CHECK(pos1.getY() == pos3.getY());
 }
 
 TEST_CASE("Test good()") {
