@@ -5,6 +5,7 @@
 #include "lawn.h"
 #include "mower.h"
 #include "position.h"
+#include "lawnPos.h"
 #include "direction.h"
 #include <windows.h>
 

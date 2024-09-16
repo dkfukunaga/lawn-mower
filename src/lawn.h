@@ -2,7 +2,7 @@
 #define LAWN_H
 
 #include "square.h"
-#include "position.h"
+#include "lawnPos.h"
 #include <random>
 #include <time.h>
 

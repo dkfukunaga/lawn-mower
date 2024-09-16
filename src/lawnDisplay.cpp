@@ -320,9 +320,9 @@ void LawnDisplay::updateMowerPosition() {
 
     // update x,y coordinates
     moveCursor(_mower_x_pos);
-    printf("%2d", _mower->getLawnPos().getX());
+    printf("%2d", _mower->getLawnPos().x);
     moveCursor(_mower_y_pos);
-    printf("%-2d", _mower->getLawnPos().getY());
+    printf("%-2d", _mower->getLawnPos().y);
 }
 
 /***** PRIVATE CURSOR FUNCTIONS *****/
@@ -331,7 +331,7 @@ void LawnDisplay::updateMowerPosition() {
 // (0,0) is the top left corner of the console
 void LawnDisplay::moveCursor(Position position) {
     // move cursor using ANSI escape code
-    printf("\033[%d;%dH", position.getY(), position.getX());
+    printf("\033[%d;%dH", position.y, position.x);
 }
 
 // move cursor by absolute offset using ANSI escape codes
@@ -353,8 +353,8 @@ void LawnDisplay::moveCursor(int x, int y) {
 // (0,0) is the top left corner of the console
 void LawnDisplay::moveCursorToLawnPos(LawnPos lawn_pos) {
     // convert lawn position to absolute position
-    int x = lawn_pos.getX();
-    int y = lawn_pos.getY();
+    int x = lawn_pos.x;
+    int y = lawn_pos.y;
 
     // adjust for square width
     x = x * _square_dimension[0];
@@ -431,14 +431,14 @@ void LawnDisplay::init() {
 //     int lawn_right = lawn_left + 2 * _mower->getLawn()->getWidth();
 //     int lawn_top = _margin_offsets[1] + _title_offsets[1] + _lawn_offsets[1] + 1;
 //     int lawn_bottom = lawn_top + _mower->getLawn()->getHeight();
-//     if (position.getX() < lawn_left || position.getX() > lawn_right ||
-//         position.getY() < lawn_top  || position.getY() > lawn_bottom) {
+//     if (position.x < lawn_left || position.x > lawn_right ||
+//         position.y < lawn_top  || position.y > lawn_bottom) {
 //         return LawnPos(-1, -1); // indicate error
 //     }
 
 //     // convert to lawnPos
-//     int lawn_x = (position.getX() - lawn_left) / 2;
-//     int lawn_y = position.getY() - lawn_top;
+//     int lawn_x = (position.x - lawn_left) / 2;
+//     int lawn_y = position.y - lawn_top;
 
 //     return LawnPos(lawn_x, lawn_y);
 // }

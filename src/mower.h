@@ -5,7 +5,7 @@
 #define MOWER_H
 
 #include "lawn.h"
-#include "position.h"
+#include "lawnPos.h"
 #include "direction.h"
 #include <random>
 #include <time.h>
