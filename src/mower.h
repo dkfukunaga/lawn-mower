@@ -11,37 +11,24 @@
 #include <time.h>
 
 
-class Mower {
-public:
-    Mower(Lawn *lawn);
+struct Mower {
+    Lawn*       lawn;
+    Direction   facing;
+    LawnPos     lawn_pos;
+    int         peeks;
+    int         turns;
+    int         steps;
+
     Mower();
-    ~Mower();
+    Mower(Lawn *new_lawn);
 
-    Direction   getFacing() const;
-    LawnPos     getLawnPos() const;
-    Square      getSquare() const;
-    Lawn*       getLawn() const;
-    char        getMowerChar() const;
-    int         getPeeks() const;
-    int         getTurns() const;
-    int         getSteps() const;
-    int         getTotal() const;
-
-    void        setLawn(Lawn *lawn);
-
-    void        turnLeft();
-    void        turnRight();
     SquareType  peek();
     bool        forward();
-private:
-    Lawn        *_lawn;
-    Direction   _facing;
-    LawnPos     _lawn_pos;
-    int         _peeks;
-    int         _turns;
-    int         _steps;
+    void        turnLeft();
+    void        turnRight();
 
-    SquareType  checkNextSquare();
+    int         getTotal() const;
+    void        reset();
 };
 
 
