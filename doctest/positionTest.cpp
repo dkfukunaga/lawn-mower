@@ -20,6 +20,39 @@ TEST_CASE("Test constructors, set") {
     CHECK(copied_position.y == 7);
 }
 
+TEST_CASE("Test set") {
+    Position pos1(3,3);
+    Position pos2(2,5);
+    Position pos3(8,1);
+
+    // verify starting position
+    REQUIRE(pos1.x == 3);
+    REQUIRE(pos1.y == 3);
+
+    pos1.set(11,17);
+
+    CHECK(pos1.x == 11);
+    CHECK(pos1.y == 17);
+
+    // verify starting position
+    REQUIRE(pos2.x == 2);
+    REQUIRE(pos2.y == 5);
+    REQUIRE(pos3.x == 8);
+    REQUIRE(pos3.y == 1);
+
+    pos2.set(pos3);
+
+    CHECK(pos2.x == pos3.x);
+    CHECK(pos2.y == pos3.y);
+
+    pos3.x = 12;
+    pos3.y = 20;
+
+    CHECK_FALSE(pos2.x == 12);
+    CHECK_FALSE(pos2.y == 20);
+
+}
+
 TEST_CASE("Test operator overloads") {
     Position pos1(4, 7);
     Position pos2(4, 7);
