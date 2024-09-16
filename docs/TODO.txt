@@ -1,3 +1,25 @@
+Reorg:
+    x convert Position into a struct
+        x make LawnPos a subclass
+        x move cardinal direcion functions to LawnPos
+    x add operator overloads to Direction
+    - Reorganize how Lawn, Mower, and LawnDisplay interact
+        - Mower and LawnDisplay should be controlled by LawnDriver (to be created)
+        - Mower and LawnDisplay can access Lawn
+        - Mower can modify Lawn when it mows a square
+        - LawnDisplay:
+            - Accesses Lawn to get Square info WITHOUT modifying
+            - Accesses Mower to get Mower location and facing WITHOUT modifying
+            - Has functions for drawing and updating the whole display
+        - LawnDriver should only directly interact with Mower and LawnDisplay
+            - LawnDriver creates a new LawnDisplay
+            - LawnDriver calls LawnDisplay.drawScreen()
+            - LawnDriver controls Mower movement
+            - LawnDriver calls functions from LawnDisplay to update display after
+                moving Mower
+    - Square should stay class to prevent unchecked modifying of variant
+
+
 General:
     - create exceptions
         - exception classes:
