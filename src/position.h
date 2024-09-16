@@ -6,36 +6,22 @@
 #include "direction.h"
 
 
-class Position {
-public:
+struct Position {
+    int         x;
+    int         y;
+
     Position();
-    Position(int x, int y);
-    Position(const Position &that);
-
-    int         getX() const;
-    int         getY() const;
-
-    Position    north() const;
-    Position    west() const;
-    Position    south() const;
-    Position    east() const;
-    
-    Position    set(int x, int y);
-    Position    set(Position position);
-    Position    set(Position position);
-    Position    move(int x, int y);
-    Position    move(Direction direction);
+    Position(int new_x, int new_y);
+    Position(const Position &other);
 
     bool        good();
 
     Position&   operator=(const Position &rhs);
     bool        operator==(const Position &rhs);
     bool        operator!=(const Position &rhs);
-private:
-    int         _x;
-    int         _y;
 };
 
-typedef Position LawnPos;
+
+// typedef Position LawnPos;
 
 #endif
