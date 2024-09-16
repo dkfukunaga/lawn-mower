@@ -29,6 +29,31 @@ Position::Position(const Position &other) {
 // returns false otherwise
 bool Position::good() { return x >= 0 && y >= 0; }
 
+
+// Sets Position to new x,y coordinates
+// Checks for valid (non-negative) values. If invalid, does nothing.
+//
+// returns possibly updated Position
+Position Position::set(int new_x, int new_y) {
+    if (new_x > 0 && new_y > 0) {
+        x = new_x;
+        y = new_y;
+    }
+    return *this;
+}
+
+// Sets Position to new x,y coordinates from another Position object.
+// Checks for valid (non-negative) values. If invalid, does nothing.
+//
+// returns possibly updated Position
+Position Position::set(Position pos) {
+    if (pos.good()) {
+        x = pos.x;
+        y = pos.y;
+    }
+    return *this;
+}
+
 /***** OPERATOR OVERRIDES *****/
 
 // assigns new position

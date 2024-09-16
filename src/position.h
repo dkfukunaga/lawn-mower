@@ -16,6 +16,9 @@ struct Position {
 
     bool        good();
 
+    Position    set(int new_x, int new_y);
+    Position    set(Position pos);
+
     Position&   operator=(const Position &rhs);
     bool        operator==(const Position &rhs);
     bool        operator!=(const Position &rhs);
