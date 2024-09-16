@@ -14,6 +14,48 @@ LawnPos::LawnPos(const LawnPos &other) {
     }
 }
 
+// Sets LawnPos to new x,y coordinates
+// Checks for valid (non-negative) values. If invalid, does nothing.
+//
+// returns possibly updated LawnPos
+LawnPos LawnPos::set(int new_x, int new_y) {
+    if (new_x > 0 && new_y > 0) {
+        x = new_x;
+        y = new_y;
+    }
+    return *this;
+}
+
+// Sets lawnPos to new x,y coordinates from another LawnPos
+// Checks for valid (non-negative) values. If invalid, does nothing.
+//
+// returns possibly updated LawnPos
+LawnPos LawnPos::set(LawnPos lawn_pos) {
+    if (lawn_pos.good()) {
+        x = lawn_pos.x;
+        y = lawn_pos.y;
+    }
+    return *this;
+}
+
+LawnPos LawnPos::move(Direction direction) {
+    switch (direction) {
+        case Direction::north:
+            y++;
+            break;
+        case Direction::west:
+            x--;
+            break;
+        case Direction::south:
+            y--;
+            break;
+        case Direction::east:
+            x++;
+            break;
+    }
+    return *this;
+}
+
 // returns lawn position to the north (y + 1)
 LawnPos LawnPos::north() const {
     return LawnPos(x, y + 1);
