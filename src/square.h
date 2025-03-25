@@ -21,12 +21,18 @@ struct Coordinates {
 
 class Square {
 public:
-    Square(SquareType type, int x, int y):
+Square(SquareType type, int x, int y):
+    type_(type),
+    coordinates_(Coordinates{x, y}) { };
+    Square(SquareType type, Coordinates coordinates):
         type_(type),
-        coordinates_(Coordinates{x, y}) { };
+        coordinates_(coordinates) { };
+    Square(SquareType type):
+        type_(type),
+        coordinates_(Coordinates{-1, -1}) { };
     Square():
         type_(SquareType::unmowed),
-        coordinates_(Coordinates{-1,-1}) { };
+        coordinates_(Coordinates{-1, -1}) { };
     
     void            setType(SquareType type);
     void            setCoordinates(int x, int y);
