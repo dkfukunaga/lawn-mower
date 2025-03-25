@@ -75,21 +75,13 @@ bool Mower::forward() {
 
 // mower turns to the left and increments turn counter
 void Mower::turnLeft() {
-    int temp = static_cast<int>(facing);
-    temp = (temp + 1) % 4;
-
-    facing = static_cast<Direction>(temp);
-
+    ++facing;
     turns++;
 }
 
 // mower turns right and increments turn counter
 void Mower::turnRight() {
-    int temp = static_cast<int>(facing);
-    temp = (temp + 3) % 4;
-
-    facing = static_cast<Direction>(temp);
-
+    --facing;
     turns++;
 }
 
