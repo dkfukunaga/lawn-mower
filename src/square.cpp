@@ -3,6 +3,23 @@
 #include <string>
 #include <random>
 
+bool            Coordinates::operator==(const Coordinates& other) const {
+    return (this->x == other.x && this->y == other.y);
+}
+
+bool            Coordinates::operator!=(const Coordinates& other) const {
+     return !(*this == other);
+}
+
+Coordinates&    Coordinates::operator=(const Coordinates& other) {
+    if (this != &other) {
+        x = other.x;
+        y = other.y;
+    }
+    return *this;
+}
+
+
 void            Square::setType(SquareType type) { type_ = type; }
 void            Square::setCoordinates(int x, int y) { coordinates_ = Coordinates{x, y}; }
 void            Square::setCoordinates(Coordinates coordinates) {  coordinates_ = coordinates; }

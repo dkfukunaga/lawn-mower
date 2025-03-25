@@ -13,6 +13,10 @@ enum class SquareType {
 struct Coordinates {
     int             x;
     int             y;
+
+    bool            operator==(const Coordinates& other) const;
+    bool            operator!=(const Coordinates& other) const;
+    Coordinates&    operator=(const Coordinates& other);
 };
 
 class Square {
