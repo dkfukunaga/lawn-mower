@@ -1,22 +1,13 @@
 #ifndef SQUARE_H
 #define SQUARE_H
-#endif
 
+#include "coordinates.h"
 #include <string>
 
 enum class SquareType {
     unmowed,
     mowed,
     wall,
-};
-
-struct Coordinates {
-    int             x;
-    int             y;
-
-    bool            operator==(const Coordinates& other) const;
-    bool            operator!=(const Coordinates& other) const;
-    Coordinates&    operator=(const Coordinates& other);
 };
 
 class Square {
@@ -45,3 +36,6 @@ private:
     SquareType      type_;
     Coordinates     coordinates_;
 };
+
+
+#endif
