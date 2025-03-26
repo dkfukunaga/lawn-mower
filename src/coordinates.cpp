@@ -3,7 +3,7 @@
 #include "coordinates.h"
 
 
-Coordinates     Coordinates::getNext(Facing::Direction direction) const {
+Coordinates     Coordinates::getNext(Facing::Direction direction) {
     switch (direction) {
         case Facing::Direction::north:
             return Coordinates{x, y + 1};
@@ -18,6 +18,7 @@ Coordinates     Coordinates::getNext(Facing::Direction direction) const {
         return Coordinates{x - 1, y};
             break;
     }
+    return Coordinates{-1, -1};
 }
 
 

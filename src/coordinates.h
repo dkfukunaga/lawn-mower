@@ -1,4 +1,4 @@
-
+#pragma once
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
@@ -9,7 +9,7 @@ struct Coordinates {
     int             x;
     int             y;
 
-    Coordinates     getNext(Facing::Direction direction) const;
+    Coordinates     getNext(Facing::Direction direction);
 
     bool            operator==(const Coordinates& other) const;
     bool            operator!=(const Coordinates& other) const;

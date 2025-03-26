@@ -8,11 +8,11 @@ void            Square::setType(SquareType type) { type_ = type; }
 void            Square::setCoordinates(int x, int y) { coordinates_ = Coordinates{x, y}; }
 void            Square::setCoordinates(Coordinates coordinates) {  coordinates_ = coordinates; }
 
-SquareType      Square::getType() const { return type_; }
-Coordinates     Square::getCoordinates() const { return coordinates_; }
+SquareType      Square::getType() { return type_; }
+Coordinates     Square::getCoordinates() { return coordinates_; }
 
 
-std::string     Square::getString() const {
+std::string     Square::getString() {
     std::string str;
 
     switch (type_) {

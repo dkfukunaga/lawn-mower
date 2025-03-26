@@ -1,3 +1,4 @@
+#pragma once
 #ifndef MOWER_H
 #define MOWER_H
 
