@@ -2,11 +2,14 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
+#include "direction.h"
 
 
 struct Coordinates {
     int             x;
     int             y;
+
+    Coordinates     getNext(Direction direction) const;
 
     bool            operator==(const Coordinates& other) const;
     bool            operator!=(const Coordinates& other) const;
