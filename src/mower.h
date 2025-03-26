@@ -45,7 +45,7 @@ public:
     int                 getSteps() const;
     int                 getTurns() const;
     std::string         getMowerString() const;
-    std::string         getFacingnString() const;
+    std::string         getFacingString() const;
 private:
     Lawn&               lawn_;
     Coordinates         position_;

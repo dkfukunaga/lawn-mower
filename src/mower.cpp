@@ -69,7 +69,7 @@ int                 Mower::getTurns() const { return turns_; }
 
 std::string         Mower::getMowerString() const { return MOWER_STRINGS[static_cast<int>(facing_)]; }
 
-std::string         Mower::getFacingnString() const { return Facing::toString(facing_); }
+std::string         Mower::getFacingString() const { return Facing::toString(facing_); }
 
 // private helper functions
 
