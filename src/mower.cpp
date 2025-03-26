@@ -12,6 +12,7 @@ bool                Mower::forward() {
     if (lawn_.getSquare(position_, facing_).getType() != SquareType::error &&
         lawn_.getSquare(position_, facing_).getType() != SquareType::wall) {
         position_ = position_.getNext(facing_);
+        lawn_.mowSquare(position_);
         return true;
     }
     return false;
