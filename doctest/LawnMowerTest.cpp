@@ -10,7 +10,6 @@
 
 
 TEST_CASE("Square Test") {
-    srand(0);
     Coordinates testCoordinates{1,4};
 
     Square *defaultSquare = new Square();
@@ -67,7 +66,6 @@ TEST_CASE("Square Test") {
 }
 
 TEST_CASE("Lawn Default Constructor Tests") {
-    srand(0);
     Lawn* test_lawn = new Lawn();
 
     SUBCASE("Test Lawn initialization") {
