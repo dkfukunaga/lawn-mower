@@ -40,6 +40,8 @@ Lawn() {
     Square                  &getSquare(int x, int y, Facing::Direction direction);
     std::string             getString(Coordinates position);
     std::string             getString(int x, int y);
+    
+    bool                    isValidPosition(Coordinates position);
 private:
     int                     width_;
     int                     height_;
@@ -51,7 +53,6 @@ private:
 
     void                    setSquare(SquareType type, Coordinates position);
     void                    setSquare(SquareType type, int x, int y);
-    bool                    isValidPosition(Coordinates position);
 };
 
 

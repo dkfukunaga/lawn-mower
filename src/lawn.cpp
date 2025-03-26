@@ -89,6 +89,12 @@ std::string             Lawn::getString(int x, int y) {
     return getString(Coordinates{x, y});
 }
 
+bool                    Lawn::isValidPosition(Coordinates position) {
+    return (position.x >= 0 && position.x < width_) &&
+           (position.y >= 0 && position.y < height_);
+    // return true;
+}
+
 
 void                    Lawn::setSquare(SquareType type, Coordinates location) {
     getSquare(location).setType(type);
@@ -96,10 +102,4 @@ void                    Lawn::setSquare(SquareType type, Coordinates location) {
 
 void                    Lawn::setSquare(SquareType type, int x, int y) {
     setSquare(type, Coordinates{x, y});
-}
-
-bool                    Lawn::isValidPosition(Coordinates position) {
-    return (position.x >= 0 && position.x < width_) &&
-           (position.y >= 0 && position.y < height_);
-    // return true;
 }
