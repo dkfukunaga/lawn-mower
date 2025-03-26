@@ -1,3 +1,4 @@
+#pragma once
 #ifndef FACING_H
 #define FACING_H
 
@@ -11,7 +12,7 @@ namespace Facing {
         west
     };
 
-    std::string toString(Direction dir) {
+    static std::string toString(Direction dir) {
         switch (dir) {
             case north:
                 return "north";
