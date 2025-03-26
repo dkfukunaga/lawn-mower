@@ -8,13 +8,12 @@
 
 class Lawn {
 public:
-    Lawn(int width, int height):
+    Lawn(int width = 10, int height = 10):
         width_(width),
         height_(height),
         grid_(width * height) {
         resetLawn();
     };
-    Lawn() { Lawn(10, 10); };
 
     void                    resetLawn();
     bool                    mowSquare(Coordinates location);

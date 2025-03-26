@@ -12,19 +12,16 @@ enum class SquareType {
 
 class Square {
 public:
-Square(SquareType type, int x, int y):
-    type_(type),
-    coordinates_(Coordinates{x, y}) { };
-    Square(SquareType type, Coordinates coordinates):
+    Square(SquareType type = SquareType::unmowed, Coordinates coordinates = Coordinates{-1, -1}):
         type_(type),
         coordinates_(coordinates) { };
-    Square(SquareType type):
-        type_(type),
-        coordinates_(Coordinates{-1, -1}) { };
-    Square():
-        type_(SquareType::unmowed),
-        coordinates_(Coordinates{-1, -1}) { };
-    
+    Square(SquareType type, int x, int y) {
+        Square(type, Coordinates{x, y});
+    };
+    Square(SquareType type) {
+        Square(type, Coordinates{-1, -1});
+    };
+
     void            setType(SquareType type);
     void            setCoordinates(int x, int y);
     void            setCoordinates(Coordinates coordinates);
