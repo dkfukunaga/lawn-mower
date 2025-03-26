@@ -57,8 +57,8 @@ private:
 
     const std::string   MOWER_STRINGS[4] = {"^", ">", "v", "<"};
 
-    Facing::Direction   getRandomDirection() const;
-    bool                isValidPosition(Coordinates position) const;
+    Facing::Direction   getRandomDirection();
+    // bool                isValidPosition(Coordinates position) const;
 };
 
 

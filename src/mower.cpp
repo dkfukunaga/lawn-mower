@@ -46,7 +46,7 @@ void                Mower::resetStats() {
 }
 
 bool                Mower::setPosition(Coordinates position) {
-    if (isValidPosition(position)) {
+    if (lawn_.isValidPosition(position)) {
         position_ = position;
         return true;
     }
@@ -73,9 +73,9 @@ std::string         Mower::getFacingString() const { return Facing::toString(fac
 
 // private helper functions
 
-Facing::Direction   Mower::getRandomDirection() const { return static_cast<Facing::Direction>(rand() % 4); }
+Facing::Direction   Mower::getRandomDirection() { return static_cast<Facing::Direction>(rand() % 4); }
 
-bool                Mower::isValidPosition(Coordinates position) const {
-    return position.x >= 0 && position.x < lawn_.getWidth() &&
-           position.y >= 0 && position.y < lawn_.getHeight();
-}
+// bool                Mower::isValidPosition(Coordinates position) const {
+//     return position.x >= 0 && position.x < lawn_.getWidth() &&
+//            position.y >= 0 && position.y < lawn_.getHeight();
+// }
