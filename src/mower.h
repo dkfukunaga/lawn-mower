@@ -34,6 +34,7 @@ public:
     void                turnRight();
     void                turnLeft();
 
+    void                resetStats();
     bool                setPosition(Coordinates position);
     void                setFacing(Direction facing);
 
@@ -42,7 +43,8 @@ public:
     int                 getPeeks() const;
     int                 getSteps() const;
     int                 getTurns() const;
-    std::string         getString() const;
+    std::string         getMowerString() const;
+    std::string         getFacingnString() const;
 private:
     Lawn&               lawn_;
     Coordinates         position_;
@@ -52,9 +54,9 @@ private:
     int                 turns_;
 
     const std::string   MOWER_STRING = "^";
+    const std::string   FACING_STRINGS[4] = {"north", "east", "south", "west"};
 
     Direction           getRandomDirection() const;
-    void                resetStats();
     bool                isValidPosition(Coordinates position) const;
 };
 
