@@ -3,14 +3,15 @@
 
 #include "coordinates.h"
 #include "square.h"
-#include "direction.h"
+#include "facing.h"
 #include "lawn.h"
 #include <random>
 #include <string>
 
+
 class Mower {
 public:
-    Mower(Lawn& lawn, Coordinates position, Direction facing):
+    Mower(Lawn& lawn, Coordinates position, Facing::Direction facing):
         lawn_(lawn),
         position_(position),
         facing_(facing) {
@@ -36,10 +37,10 @@ public:
 
     void                resetStats();
     bool                setPosition(Coordinates position);
-    void                setFacing(Direction facing);
+    void                setFacing(Facing::Direction facing);
 
     Coordinates         getPosition() const;
-    Direction           getFacing() const;
+    Facing::Direction   getFacing() const;
     int                 getPeeks() const;
     int                 getSteps() const;
     int                 getTurns() const;
@@ -48,15 +49,14 @@ public:
 private:
     Lawn&               lawn_;
     Coordinates         position_;
-    Direction           facing_;
+    Facing::Direction   facing_;
     int                 peeks_;
     int                 steps_;
     int                 turns_;
 
     const std::string   MOWER_STRINGS[4] = {"^", ">", "v", "<"};
-    const std::string   FACING_STRINGS[4] = {"north", "east", "south", "west"};
 
-    Direction           getRandomDirection() const;
+    Facing::Direction   getRandomDirection() const;
     bool                isValidPosition(Coordinates position) const;
 };
 

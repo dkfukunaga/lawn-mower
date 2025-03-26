@@ -20,10 +20,7 @@ bool                Mower::forward() {
 void                Mower::turnRight() {
     ++turns_;
 
-    int temp = static_cast<int>(facing_);
-    temp = (temp + 1) % 4;
-    
-    facing_ = static_cast<Direction>(temp);   
+    facing_ = static_cast<Facing::Direction>((facing_ + 1) % 4);
 }
 
 void                Mower::turnLeft() {
@@ -37,10 +34,7 @@ void                Mower::turnLeft() {
      * in C/C++, % is actually remainder, not modulo.
      */
 
-    int temp = static_cast<int>(facing_);
-    temp = (temp + 3) % 4;
-
-    facing_ = static_cast<Direction>(temp); 
+     facing_ = static_cast<Facing::Direction>((facing_ + 3) % 4);
 }
 
 // setters
@@ -59,13 +53,13 @@ bool                Mower::setPosition(Coordinates position) {
     return false;
 }
 
-void                Mower::setFacing(Direction facing) { facing_ = facing; }
+void                Mower::setFacing(Facing::Direction facing) { facing_ = facing; }
 
 // getters
 
 Coordinates         Mower::getPosition() const { return position_; }
 
-Direction           Mower::getFacing() const { return facing_; }
+Facing::Direction   Mower::getFacing() const { return facing_; }
 
 int                 Mower::getPeeks() const { return peeks_; }
 
@@ -75,11 +69,11 @@ int                 Mower::getTurns() const { return turns_; }
 
 std::string         Mower::getMowerString() const { return MOWER_STRINGS[static_cast<int>(facing_)]; }
 
-std::string         Mower::getFacingnString() const { return FACING_STRINGS[static_cast<int>(facing_)]; }
+std::string         Mower::getFacingnString() const { return Facing::toString(facing_); }
 
 // private helper functions
 
-Direction           Mower::getRandomDirection() const { return static_cast<Direction>(rand() % 4); }
+Facing::Direction   Mower::getRandomDirection() const { return static_cast<Facing::Direction>(rand() % 4); }
 
 bool                Mower::isValidPosition(Coordinates position) const {
     return position.x >= 0 && position.x < lawn_.getWidth() &&

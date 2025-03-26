@@ -62,7 +62,7 @@ Square                  Lawn::getSquare(int x, int y) const {
     return getSquare(Coordinates{x, y});
 }
 
-Square                  Lawn::getSquare(Coordinates position, Direction direction) const {
+Square                  Lawn::getSquare(Coordinates position, Facing::Direction direction) const {
     Coordinates pos = position.getNext(direction);
     if (isValidPosition(pos)) {
         return getSquare(pos);
@@ -70,7 +70,7 @@ Square                  Lawn::getSquare(Coordinates position, Direction directio
     return Square(SquareType::error, pos);
 }
 
-Square                  Lawn::getSquare(int x, int y, Direction direction) const {
+Square                  Lawn::getSquare(int x, int y, Facing::Direction direction) const {
 
 }
 

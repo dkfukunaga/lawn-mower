@@ -3,7 +3,7 @@
 #define LAWN_H
 
 #include "square.h"
-#include "direction.h"
+#include "facing.h"
 #include <vector>
 #include <string>
 
@@ -28,8 +28,8 @@ public:
     int                     getHeight() const;
     Square                  getSquare(Coordinates position) const;
     Square                  getSquare(int x, int y) const;
-    Square                  getSquare(Coordinates position, Direction direction) const;
-    Square                  getSquare(int x, int y, Direction direction) const;
+    Square                  getSquare(Coordinates position, Facing::Direction direction) const;
+    Square                  getSquare(int x, int y, Facing::Direction direction) const;
     std::string             getString(Coordinates position) const;
     std::string             getString(int x, int y) const;
 private:
