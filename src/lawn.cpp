@@ -5,22 +5,26 @@
 #include "coordinates.h"
 
 
+const Square Lawn::ERROR_SQUARE = Square(SquareType::error);
 
 void                    Lawn::resetLawn() {
     for (int row  = 0; row < height_; ++row) {
         for (int col = 0; col < width_; ++col) {
             if (row == 0 || row == (height_ - 1) ||
                 col == 0 || col == (width_ - 1)) {
-                setSquare(SquareType::wall, Coordinates{col, row});
+                grid_.push_back(Square(SquareType::wall, Coordinates{col, row}));
+                // setSquare(SquareType::wall, Coordinates{col, row});
             } else {
-                setSquare(SquareType::unmowed, Coordinates{col, row});
+                grid_.push_back(Square(SquareType::unmowed, Coordinates{col, row}));
+                // setSquare(SquareType::unmowed, Coordinates{col, row});
             }
         }
     }
 }
 
 bool                    Lawn::mowSquare(Coordinates location) {
-    if (getSquare(location).getType() == SquareType::unmowed) {
+    if (isValidPosition(location) &&
+        getSquare(location).getType() == SquareType::unmowed) {
         setSquare(SquareType::mowed, location);
         return true;
     }
@@ -53,32 +57,35 @@ void                    Lawn::setHeight(int height) {
 
 int                     Lawn::getWidth() const { return width_; }
 int                     Lawn::getHeight() const { return height_; }
-Square                  Lawn::getSquare(Coordinates location) const {
-    int index = location.y * width_ + location.x;
-    return grid_[index];
+Square                  &Lawn::getSquare(Coordinates location) {
+    if (isValidPosition(location)) {
+        int index = location.y * width_ + location.x;
+        return grid_.at(index);
+    }
+    return *const_cast<Square*>(&ERROR_SQUARE);
 }
 
-Square                  Lawn::getSquare(int x, int y) const {
+Square                  &Lawn::getSquare(int x, int y) {
     return getSquare(Coordinates{x, y});
 }
 
-Square                  Lawn::getSquare(Coordinates position, Facing::Direction direction) const {
+Square                  &Lawn::getSquare(Coordinates position, Facing::Direction direction) {
     Coordinates pos = position.getNext(direction);
     if (isValidPosition(pos)) {
         return getSquare(pos);
     }
-    return Square(SquareType::error, pos);
+    return *const_cast<Square*>(&ERROR_SQUARE);
 }
 
-Square                  Lawn::getSquare(int x, int y, Facing::Direction direction) const {
-
+Square                  &Lawn::getSquare(int x, int y, Facing::Direction direction) {
+    return getSquare(Coordinates{x, y}, direction);
 }
 
-std::string             Lawn::getString(Coordinates location) const {
+std::string             Lawn::getString(Coordinates location) {
     return getSquare(location).getString();
 }
 
-std::string             Lawn::getString(int x, int y) const {
+std::string             Lawn::getString(int x, int y) {
     return getString(Coordinates{x, y});
 }
 
@@ -91,7 +98,8 @@ void                    Lawn::setSquare(SquareType type, int x, int y) {
     setSquare(type, Coordinates{x, y});
 }
 
-bool                    Lawn::isValidPosition(Coordinates position) const {
+bool                    Lawn::isValidPosition(Coordinates position) {
     return (position.x >= 0 && position.x < width_) &&
            (position.y >= 0 && position.y < height_);
+    // return true;
 }
