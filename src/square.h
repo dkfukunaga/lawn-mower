@@ -19,9 +19,6 @@ public:
     Square(SquareType type, int x, int y) {
         Square(type, Coordinates{x, y});
     };
-    Square(SquareType type) {
-        Square(type, Coordinates{-1, -1});
-    };
 
     void            setType(SquareType type);
     void            setCoordinates(int x, int y);
