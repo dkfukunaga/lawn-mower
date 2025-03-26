@@ -53,7 +53,7 @@ private:
     int                 steps_;
     int                 turns_;
 
-    const std::string   MOWER_STRING = "^";
+    const std::string   MOWER_STRINGS[4] = {"^", ">", "v", "<"};
     const std::string   FACING_STRINGS[4] = {"north", "east", "south", "west"};
 
     Direction           getRandomDirection() const;
