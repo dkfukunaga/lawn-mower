@@ -8,6 +8,7 @@ enum class SquareType {
     unmowed,
     mowed,
     wall,
+    error,
 };
 
 class Square {

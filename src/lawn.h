@@ -3,6 +3,7 @@
 #define LAWN_H
 
 #include "square.h"
+#include "direction.h"
 #include <vector>
 #include <string>
 
@@ -16,7 +17,7 @@ public:
     };
 
     void                    resetLawn();
-    bool                    mowSquare(Coordinates location);
+    bool                    mowSquare(Coordinates position);
     bool                    mowSquare(int x, int y);
     
     void                    setLawn(int width, int height);
@@ -25,17 +26,20 @@ public:
 
     int                     getWidth() const;
     int                     getHeight() const;
-    Square                  getSquare(Coordinates location) const;
+    Square                  getSquare(Coordinates position) const;
     Square                  getSquare(int x, int y) const;
-    std::string             getString(Coordinates location) const;
+    Square                  getSquare(Coordinates position, Direction direction) const;
+    Square                  getSquare(int x, int y, Direction direction) const;
+    std::string             getString(Coordinates position) const;
     std::string             getString(int x, int y) const;
 private:
     int                     width_;
     int                     height_;
     std::vector<Square>     grid_;
 
-    void                    setSquare(SquareType type, Coordinates location);
+    void                    setSquare(SquareType type, Coordinates position);
     void                    setSquare(SquareType type, int x, int y);
+    bool                    isValidPosition(Coordinates position) const;
 };
 
 
