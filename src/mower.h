@@ -58,7 +58,7 @@ private:
     int                 steps_;
     int                 turns_;
 
-    const std::string   MOWER_STRINGS[4] = {"^", ">", "v", "<"};
+    static const std::string   MOWER_STRINGS[4];
 
     Facing::Direction   getRandomDirection();
     // bool                isValidPosition(Coordinates position) const;

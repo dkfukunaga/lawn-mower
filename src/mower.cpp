@@ -1,5 +1,7 @@
 #include "mower.h"
 
+const std::string Mower::MOWER_STRINGS[] = {"^", ">", "v", "<"};
+
 // mower commands
 
 SquareType          Mower::peek() {
