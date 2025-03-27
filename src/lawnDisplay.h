@@ -13,11 +13,18 @@
 using LawnPos = Coordinates;
 
 namespace ANSI {
-    const std::string           ESC = "\033[";
-    const std::string           RESET = ESC + "0m";
-    const std::string           WALL = ESC + "37;41m";
-    const std::string           GRASS = ESC + "93;41m";
-    const std::string           MOWER = ESC + "37;42m";
+    inline const std::string    esc = "\033";               // ESC key
+    inline const std::string    csi = esc + "[";            // Control Sequence Introducer
+
+    inline const std::string    advance = csi + "1C";       // forward one character
+    inline const std::string    savePos = csi + "s";        // save curent cursor position
+    inline const std::string    restorePos = csi + "u";     // restore saved cursor position
+
+    inline const std::string    reset = csi + "0m";
+    inline const std::string    wall = csi + "37;41m";      // white on red
+    inline const std::string    grass = csi + "93;41m";     // bright yellow on green
+    inline const std::string    mower = csi + "30;42m";     // black on green
+    inline const std::string    error = csi + "31;103m";    // red on bright yellow
 };
 
 
@@ -25,25 +32,35 @@ class LawnDisplay {
 public:
     LawnDisplay(Lawn &lawn, Mower &mower):
         lawn_(lawn),
-        mower_(mower) { };
+        mower_(mower) {
+            init();
+        };
+    ~LawnDisplay();
 
     void                        draw();
     void                        update();
     void                        drawLawn();
     void                        drawStats();
-    void                        drawSquare(LawnPos lawn_pos);
+    void                        drawSquare(Square square);
+    void                        drawSquare(Square square, LawnPos lawn_pos);
     void                        drawMower();
 
 private:
-    Lawn                        &lawn_;
-    Mower                       &mower_;
+    Lawn&                       lawn_;
+    Mower&                      mower_;
     LawnPos                     last_pos_;
+    bool                        cursor_hidden_;
+    int                         margins_[2];
 
+    static const int            DEFAULT_MARGINS[2];
+
+    void                        init();
     void                        moveCursor(Coordinates position);
-    void                        moveCursor(int x, int y);
-    void                        advanceCursor();
+    void                        moveLawnCursor(LawnPos lawn_pos);
     void                        savePosition();
     void                        restorePosition();
+
+    Coordinates                 toCoordinates(LawnPos lawn_pos);
 
     void                        hideCursor();
     void                        showCursor();
