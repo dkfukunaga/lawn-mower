@@ -11,12 +11,17 @@ SquareType          Mower::peek() {
 
 bool                Mower::forward() {
     ++steps_;
-    if (lawn_.getSquare(position_, facing_).getType() != SquareType::error &&
-        lawn_.getSquare(position_, facing_).getType() != SquareType::wall) {
+
+    // Get the square in front of the mower at its current position
+    SquareType nextSquareType = lawn_.getSquare(position_, facing_).getType();
+
+    // Check if the square is valid and not a wall or error
+    if (nextSquareType != SquareType::error && nextSquareType != SquareType::wall) {
         position_ = position_.getNext(facing_);
         lawn_.mowSquare(position_);
         return true;
     }
+
     return false;
 }
 
