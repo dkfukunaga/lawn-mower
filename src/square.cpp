@@ -30,6 +30,7 @@ std::string     Square::getString() {
     case SquareType::wall:
         str = "  ";
         break;
+    case SquareType::error:
     default:
         str = "??";
         break;
