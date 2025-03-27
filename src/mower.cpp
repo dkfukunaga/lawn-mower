@@ -83,7 +83,3 @@ std::string         Mower::getFacingString() const { return Facing::toString(fac
 
 Facing::Direction   Mower::getRandomDirection() { return static_cast<Facing::Direction>(rand() % 4); }
 
-// bool                Mower::isValidPosition(Coordinates position) const {
-//     return position.x >= 0 && position.x < lawn_.getWidth() &&
-//            position.y >= 0 && position.y < lawn_.getHeight();
-// }

@@ -61,7 +61,6 @@ private:
     static const std::string   MOWER_STRINGS[4];
 
     Facing::Direction   getRandomDirection();
-    // bool                isValidPosition(Coordinates position) const;
 };
 
 
