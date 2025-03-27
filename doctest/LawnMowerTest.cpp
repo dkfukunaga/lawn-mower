@@ -119,3 +119,22 @@ TEST_CASE("Lawn Default Constructor Tests") {
 
     delete test_lawn;
 }
+
+TEST_CASE("Test lawn with set size") {
+    // Lawn *test_lawn = new Lawn();
+    int width = 15;
+    int height = 12;
+    Lawn test_lawn(15, 12);
+
+    CHECK(test_lawn.getSquare(Coordinates{0, 0}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{0, (height - 1) / 2}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{0, (height - 1)}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{(width - 1) / 2, 0}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{(width - 1) / 2, (height - 1) / 2}).getType()  == SquareType::unmowed);
+    CHECK(test_lawn.getSquare(Coordinates{(width - 1) / 2, (height - 1)}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{(width - 1),0}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{(width - 1), (height - 1) / 2}).getType()  == SquareType::wall);
+    CHECK(test_lawn.getSquare(Coordinates{(width - 1), (height - 1)}).getType()  == SquareType::wall);
+}
+
+
