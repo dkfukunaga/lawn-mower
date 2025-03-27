@@ -34,10 +34,10 @@ Lawn() {
 
     int                     getWidth() const;
     int                     getHeight() const;
-    Square                  &getSquare(Coordinates position);
-    Square                  &getSquare(int x, int y);
-    Square                  &getSquare(Coordinates position, Facing::Direction direction);
-    Square                  &getSquare(int x, int y, Facing::Direction direction);
+    Square&                 getSquare(Coordinates position);
+    Square&                 getSquare(int x, int y);
+    Square&                 getSquare(Coordinates position, Facing::Direction direction);
+    Square&                 getSquare(int x, int y, Facing::Direction direction);
     std::string             getString(Coordinates position);
     std::string             getString(int x, int y);
     
@@ -47,9 +47,9 @@ private:
     int                     height_;
     std::vector<Square>     grid_;
 
-    const int               DEFAULT_WIDTH = 10;
-    const int               DEFAULT_HEIGHT = 10;
-    static const Square           ERROR_SQUARE;
+    static const int        DEFAULT_WIDTH = 10;
+    static const int        DEFAULT_HEIGHT = 10;
+    static const Square     ERROR_SQUARE;
 
     void                    setSquare(SquareType type, Coordinates position);
     void                    setSquare(SquareType type, int x, int y);
