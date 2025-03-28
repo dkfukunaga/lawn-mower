@@ -26,6 +26,13 @@ public:
         resetStats();
         lawn_.mowSquare(position);
     };
+    Mower(Lawn& lawn, Facing::Direction facing):
+        lawn_(lawn),
+        position_(Coordinates{1,1}),
+        facing_(facing) {
+        resetStats();
+        lawn_.mowSquare(position_);
+    };
     Mower(Lawn& lawn):
     lawn_(lawn) {
         position_ = Coordinates{1, 1};
