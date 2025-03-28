@@ -20,8 +20,10 @@ std::string     Square::getString() {
         switch (rand() % 2) {
         case 0:
             str = "\",";
+            break;
         default:
             str = ",\"";
+            break;
         }
         break;
     case SquareType::mowed:
