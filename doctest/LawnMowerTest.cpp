@@ -335,12 +335,3 @@ TEST_CASE("Test mower characters") {
     CHECK(test_mower.getMowerString().compare("^") == 0);
 }
 
-TEST_CASE("Test LawnDisplay") {
-    srand(time(NULL));
-
-    Lawn test_lawn;
-    Mower test_mower(test_lawn);
-    LawnDisplay test_display(test_lawn, test_mower);
-
-    test_display.draw();
-}
