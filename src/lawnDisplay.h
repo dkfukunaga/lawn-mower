@@ -22,7 +22,7 @@ namespace ANSI {
 
     inline const std::string    reset = csi + "0m";
     inline const std::string    wall = csi + "37;41m";      // white on red
-    inline const std::string    grass = csi + "93;41m";     // bright yellow on green
+    inline const std::string    grass = csi + "93;42m";     // bright yellow on green
     inline const std::string    mower = csi + "30;42m";     // black on green
     inline const std::string    error = csi + "31;103m";    // red on bright yellow
 };
@@ -41,6 +41,7 @@ public:
     void                        update();
     void                        drawLawn();
     void                        drawStats();
+    void                        drawSquare();
     void                        drawSquare(Square square);
     void                        drawSquare(Square square, LawnPos lawn_pos);
     void                        drawMower();
@@ -48,7 +49,7 @@ public:
 private:
     Lawn&                       lawn_;
     Mower&                      mower_;
-    LawnPos                     last_pos_;
+    LawnPos                     current_pos_;
     bool                        cursor_hidden_;
     int                         margins_[2];
 
@@ -56,7 +57,9 @@ private:
 
     void                        init();
     void                        moveCursor(Coordinates position);
+    void                        moveCursor(int x, int y);
     void                        moveLawnCursor(LawnPos lawn_pos);
+    void                        moveLawnCursor(int x, int y);
     void                        savePosition();
     void                        restorePosition();
 
