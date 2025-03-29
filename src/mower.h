@@ -16,14 +16,15 @@ public:
         lawn_(lawn),
         position_(position),
         facing_(facing) {
+        last_position_ = position_;
         resetStats();
         lawn_.mowSquare(position);
     };
     Mower(Lawn& lawn, Coordinates position):
-    lawn_(lawn),
-    position_(position) {
+        lawn_(lawn),
+        position_(position) {
         facing_ = getRandomDirection();
-        last_position_ = Coordinates{-1, -1};
+        last_position_ = position_;
         resetStats();
         lawn_.mowSquare(position);
     };
@@ -31,14 +32,14 @@ public:
         lawn_(lawn),
         position_(Coordinates{1,1}),
         facing_(facing) {
-            last_position_ = Coordinates{-1, -1};
+            last_position_ = position_;
         resetStats();
         lawn_.mowSquare(position_);
     };
     Mower(Lawn& lawn):
     lawn_(lawn) {
         position_ = Coordinates{1, 1};
-        last_position_ = Coordinates{-1, -1};
+        last_position_ = position_;
         facing_ = getRandomDirection();
         resetStats();
         lawn_.mowSquare(position_);
