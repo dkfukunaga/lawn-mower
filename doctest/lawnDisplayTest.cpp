@@ -19,25 +19,68 @@ int main() {
     LawnDisplay* test_display = new LawnDisplay(test_lawn, test_mower);
 
     test_display->draw();
+
+    int delay = 250;
     
-    Sleep(100);
+    Sleep(delay);
+    test_mower.peek();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
     test_mower.forward();
-    test_display->update();
+    test_display->updateLawn();
+    test_display->updateStats();
     
-    Sleep(100);
+    Sleep(delay);
+    test_mower.forward();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
     test_mower.turnRight();
-    test_mower.forward();
-    test_display->update();
+    test_display->updateLawn();
+    test_display->updateStats();
     
-    Sleep(100);
-    test_mower.turnRight();
+    Sleep(delay);
     test_mower.forward();
-    test_display->update();
+    test_display->updateLawn();
+    test_display->updateStats();
     
-    Sleep(100);
-    test_mower.turnRight();
+    Sleep(delay);
     test_mower.forward();
-    test_display->update();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
+    test_mower.turnRight();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
+    test_mower.forward();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
+    test_mower.forward();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
+    test_mower.turnRight();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
+    test_mower.forward();
+    test_display->updateLawn();
+    test_display->updateStats();
+    
+    Sleep(delay);
+    test_mower.forward();
+    test_display->updateLawn();
+    test_display->updateStats();
 
     delete test_display;
 
