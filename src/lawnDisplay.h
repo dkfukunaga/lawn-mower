@@ -8,6 +8,7 @@
 #include "lawn.h"
 #include "mower.h"
 #include <iostream>
+#include <iomanip>
 #include <windows.h>
 
 using LawnPos = Coordinates;
@@ -25,6 +26,8 @@ namespace ANSI {
     inline const std::string    grass = csi + "93;42m";     // bright yellow on green
     inline const std::string    mower = csi + "30;42m";     // black on green
     inline const std::string    error = csi + "31;103m";    // red on bright yellow
+
+    inline const std::string    erase_line = csi + "2K";    // erase entire line
 };
 
 
@@ -38,7 +41,8 @@ public:
     ~LawnDisplay();
 
     void                        draw();
-    void                        update();
+    void                        updateLawn();
+    void                        updateStats();
     void                        drawLawn();
     void                        drawStats();
     void                        drawSquare();
@@ -50,6 +54,14 @@ private:
     Lawn&                       lawn_;
     Mower&                      mower_;
     LawnPos                     current_pos_;
+    Coordinates                 stat_block_pos_;
+    Coordinates                 stat_mower_pos_;
+    Coordinates                 stat_peeks_pos_;
+    Coordinates                 stat_turns_pos_;
+    Coordinates                 stat_steps_pos_;
+    int                         stat_mower_pos_width_;
+    int                         stat_mower_stats_width_;
+    bool                        cursor_pos_saved_;
     bool                        cursor_hidden_;
     int                         margins_[2];
 
@@ -64,6 +76,7 @@ private:
     void                        restorePosition();
 
     Coordinates                 toCoordinates(LawnPos lawn_pos);
+    std::string                 positionString();
 
     void                        hideCursor();
     void                        showCursor();
