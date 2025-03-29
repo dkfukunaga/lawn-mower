@@ -23,6 +23,7 @@ public:
     lawn_(lawn),
     position_(position) {
         facing_ = getRandomDirection();
+        last_position_ = Coordinates{-1, -1};
         resetStats();
         lawn_.mowSquare(position);
     };
@@ -30,12 +31,14 @@ public:
         lawn_(lawn),
         position_(Coordinates{1,1}),
         facing_(facing) {
+            last_position_ = Coordinates{-1, -1};
         resetStats();
         lawn_.mowSquare(position_);
     };
     Mower(Lawn& lawn):
     lawn_(lawn) {
         position_ = Coordinates{1, 1};
+        last_position_ = Coordinates{-1, -1};
         facing_ = getRandomDirection();
         resetStats();
         lawn_.mowSquare(position_);
@@ -51,6 +54,7 @@ public:
     void                setFacing(Facing::Direction facing);
 
     Coordinates         getPosition() const;
+    Coordinates         getLastPosition() const;
     Facing::Direction   getFacing() const;
     int                 getPeeks() const;
     int                 getSteps() const;
@@ -60,6 +64,7 @@ public:
 private:
     Lawn&               lawn_;
     Coordinates         position_;
+    Coordinates         last_position_;
     Facing::Direction   facing_;
     int                 peeks_;
     int                 steps_;
