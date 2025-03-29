@@ -17,6 +17,7 @@ bool                Mower::forward() {
 
     // Check if the square is valid and not a wall or error
     if (nextSquareType != SquareType::error && nextSquareType != SquareType::wall) {
+        last_position_ = position_;
         position_ = position_.getNext(facing_);
         lawn_.mowSquare(position_);
         return true;
@@ -56,6 +57,7 @@ void                Mower::resetStats() {
 bool                Mower::setPosition(Coordinates position) {
     if (lawn_.isValidPosition(position)) {
         position_ = position;
+        last_position_ = Coordinates{-1, -1};
         return true;
     }
     return false;
@@ -66,6 +68,8 @@ void                Mower::setFacing(Facing::Direction facing) { facing_ = facin
 // getters
 
 Coordinates         Mower::getPosition() const { return position_; }
+
+Coordinates         Mower::getLastPosition() const { return last_position_; }
 
 Facing::Direction   Mower::getFacing() const { return facing_; }
 

@@ -5,9 +5,10 @@
 #include "..\src\facing.h"
 #include "..\src\lawn.h"
 #include "..\src\mower.h"
+#include "..\src\lawnDisplay.h"
 #include <string>
 #include <random>
-
+#include <time.h>
 
 
 TEST_CASE("Square Test") {
@@ -44,8 +45,8 @@ TEST_CASE("Square Test") {
         std::string wallString = "  ";
 
         CHECK(mowedSquare->getString().compare(mowedString) == 0);
-        CHECK(unmowedSquare->getString().find('\"') != std::string::npos);
-        CHECK(unmowedSquare->getString().find(',') != std::string::npos);
+        // CHECK(unmowedSquare->getString().find('\"') != std::string::npos);
+        // CHECK(unmowedSquare->getString().find(',') != std::string::npos);
         CHECK(wallSquare->getString().compare(wallString) == 0);
     }
 
@@ -246,7 +247,9 @@ TEST_CASE("Mower control tests") {
         test_mower.forward();        // y++ (2, 4)   steps = 4
 
         // check current position
-        REQUIRE(test_mower.getPosition() == Coordinates{2, 4});
+        CHECK(test_mower.getPosition() == Coordinates{2, 4});
+        // check last position
+        CHECK(test_mower.getLastPosition() == Coordinates{2, 3});
 
         // check squares that were mowed
         CHECK(test_lawn.getSquare(Coordinates{2, 4}).getType() == SquareType::mowed);
@@ -331,3 +334,4 @@ TEST_CASE("Test mower characters") {
     test_mower.turnLeft();
     CHECK(test_mower.getMowerString().compare("^") == 0);
 }
+

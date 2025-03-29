@@ -17,11 +17,19 @@ std::string     Square::getString() {
 
     switch (type_) {
     case SquareType::unmowed:
-        switch (rand() % 2) {
+        switch (rand() % 4) {
         case 0:
             str = "\",";
-        default:
+            break;
+        case 1:
             str = ",\"";
+            break;
+        case 2:
+            str = ";'";
+            break;
+        case 3:
+            str = "';";
+            break;
         }
         break;
     case SquareType::mowed:
