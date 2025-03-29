@@ -21,6 +21,10 @@ Coordinates     Coordinates::getNext(Facing::Direction direction) {
     return Coordinates{-1, -1};
 }
 
+Coordinates     Coordinates::delta(int x_delta, int y_delta) {
+    return Coordinates{x + x_delta, y + y_delta};
+}
+
 
 bool            Coordinates::operator==(const Coordinates& other) const {
     return (this->x == other.x && this->y == other.y);
