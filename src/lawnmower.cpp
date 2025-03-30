@@ -108,17 +108,19 @@ int main(int argc, char* argv[]) {
     //     driver->turnLeft();
     // }
 
-    height_count++;     // adding one to ensure we go the entire height on the first loop
+    // height_count++;     // adding one to ensure we go the entire height on the first loop
 
-    while (--height_count > 0 && --width_count > 0) {
-        driver->turnRight();
+    while (height_count > 0 && width_count > 0) {
+        width_count--;
+        if (height_count > 0) driver->turnRight();
         for (int i = 0; i < height_count; ++i) {
             driver->forward();
         }
-        driver->turnRight();
+        if (width_count > 0) driver->turnRight();
         for (int i = 0; i < width_count; ++i) {
             driver->forward();
         }
+        height_count--;
     }
 
     // int leftover = (height_count > 0 ? height_count : width_count);
