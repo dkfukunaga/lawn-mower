@@ -10,6 +10,7 @@ struct Coordinates {
     int             y;
 
     Coordinates     getNext(Facing::Direction direction);
+    Coordinates     delta(int x_delta, int y_delta);
 
     bool            operator==(const Coordinates& other) const;
     bool            operator!=(const Coordinates& other) const;
