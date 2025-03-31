@@ -43,12 +43,6 @@ public:
     void                        draw();
     void                        updateLawn();
     void                        updateStats();
-    void                        drawLawn();
-    void                        drawStats();
-    void                        drawSquare();
-    void                        drawSquare(Square square);
-    void                        drawSquare(Square square, LawnPos lawn_pos);
-    void                        drawMower();
 
 private:
     Lawn&                       lawn_;
@@ -74,6 +68,13 @@ private:
     void                        moveLawnCursor(int x, int y);
     void                        savePosition();
     void                        restorePosition();
+    
+    void                        drawLawn();
+    void                        drawStats();
+    void                        drawSquare();
+    void                        drawSquare(Square square);
+    void                        drawSquare(Square square, LawnPos lawn_pos);
+    void                        drawMower();
 
     Coordinates                 toCoordinates(LawnPos lawn_pos);
     std::string                 positionString();

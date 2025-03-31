@@ -88,43 +88,6 @@ void LawnDisplay::drawStats() {
     restorePosition();
 }
 
-void LawnDisplay::drawSquare() {
-    if (current_pos_ == Coordinates{-1, -1})
-        return;
-    
-    drawSquare(lawn_.getSquare(current_pos_));
-}
-
-void LawnDisplay::drawSquare(Square square) {
-    switch (square.getType()) {
-        case SquareType::wall:
-            std::cout << ANSI::wall;
-            break;
-        case SquareType::unmowed:
-            std::cout << ANSI::grass;
-            break;
-        case SquareType::mowed:
-            std::cout << ANSI::grass;
-            break;
-        case SquareType::error:
-        default:
-            std::cout << ANSI::error;
-            break;
-    }
-    std::cout << square.getString();
-}
-
-void LawnDisplay::drawSquare(Square square, LawnPos lawn_pos) {
-    moveLawnCursor(lawn_pos);
-    drawSquare(square);
-}
-
-void LawnDisplay::drawMower() {
-    moveLawnCursor(mower_.getPosition());
-    // draw mower character in first char of square, skipping over the second char
-    std::cout << ANSI::mower << mower_.getMowerString() << ANSI::advance;
-}
-
 void LawnDisplay::init() {
     hideCursor();
     cursor_hidden_ = true;
@@ -175,6 +138,43 @@ void LawnDisplay::savePosition() {
 void LawnDisplay::restorePosition() {
     std::cout << ANSI::restorePos;
     cursor_pos_saved_ = false;
+}
+
+void LawnDisplay::drawSquare() {
+    if (current_pos_ == Coordinates{-1, -1})
+        return;
+    
+    drawSquare(lawn_.getSquare(current_pos_));
+}
+
+void LawnDisplay::drawSquare(Square square) {
+    switch (square.getType()) {
+        case SquareType::wall:
+            std::cout << ANSI::wall;
+            break;
+        case SquareType::unmowed:
+            std::cout << ANSI::grass;
+            break;
+        case SquareType::mowed:
+            std::cout << ANSI::grass;
+            break;
+        case SquareType::error:
+        default:
+            std::cout << ANSI::error;
+            break;
+    }
+    std::cout << square.getString();
+}
+
+void LawnDisplay::drawSquare(Square square, LawnPos lawn_pos) {
+    moveLawnCursor(lawn_pos);
+    drawSquare(square);
+}
+
+void LawnDisplay::drawMower() {
+    moveLawnCursor(mower_.getPosition());
+    // draw mower character in first char of square, skipping over the second char
+    std::cout << ANSI::mower << mower_.getMowerString() << ANSI::advance;
 }
 
 Coordinates                 LawnDisplay::toCoordinates(LawnPos lawn_pos) {
